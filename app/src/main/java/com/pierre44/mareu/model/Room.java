@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class Room {
 
-    private long id;
+    private int id;
     private String roomName;
 
     /**
@@ -16,7 +16,7 @@ public class Room {
      * @param id       the id
      * @param roomName the room name
      */
-    public Room(Long id, String roomName) {
+    public Room(int id, String roomName) {
         this.id = id;
         this.roomName = roomName;
     }
@@ -26,7 +26,7 @@ public class Room {
      *
      * @return the id
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class Room {
      *
      * @param id the id
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

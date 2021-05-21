@@ -1,6 +1,6 @@
 package com.pierre44.mareu.model;
 
-import java.security.PrivateKey;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +13,7 @@ public class Meeting {
     /**
      * The id of meeting
      */
-    private long id;
+    private int id;
 
     /**
      * The topic of meeting
@@ -21,14 +21,14 @@ public class Meeting {
     private String meetingTopic;
 
     /**
-     * The hour time of meeting
+     * The meeting start time in ms form 01/01/1970
      */
-    private Date meetingTime;
+    private String meetingStartTime;
 
     /**
-     * The date of meeting
+     * The meeting end time in ms form 01/01/1970
      */
-    private Date meetingDate;
+    private String meetingEndTime;
 
     /**
      * The room of meeting
@@ -38,75 +38,146 @@ public class Meeting {
     /**
      * The user host of meeting
      */
-    private User host;
+    private String host;
 
     /**
      * The list of users of meeting
      */
     private List<User> guests;
 
-    public Meeting(long id, String meetingTopic, Date meetingTime, Date meetingDate, Room meetingRoom, User host, List<User> guests) {
+
+    public Meeting(int id, String meetingTopic, String meetingStartTime, String meetingEndTime, Room meetingRoom, String host, List<User> guests) {
         this.id = id;
         this.meetingTopic = meetingTopic;
-        this.meetingTime = meetingTime;
-        this.meetingDate = meetingDate;
+        this.meetingStartTime = meetingStartTime;
+        this.meetingEndTime = meetingEndTime;
         this.meetingRoom = meetingRoom;
         this.host = host;
         this.guests = guests;
     }
 
-    public long getId() {
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets meeting topic.
+     *
+     * @return the meeting topic
+     */
     public String getMeetingTopic() {
         return meetingTopic;
     }
 
+    /**
+     * Sets meeting topic.
+     *
+     * @param meetingTopic the meeting topic
+     */
     public void setMeetingTopic(String meetingTopic) {
         this.meetingTopic = meetingTopic;
     }
 
-    public Date getMeetingTime() {
-        return meetingTime;
+    /**
+     * Gets meeting time.
+     *
+     * @return the meeting time
+     */
+    public String getMeetingEndTime() {
+        return meetingEndTime;
     }
 
-    public void setMeetingTime(Date meetingTime) {
-        this.meetingTime = meetingTime;
+    /**
+     * Sets meeting time.
+     *
+     * @param meetingEndTime the meeting time
+     */
+    public void setMeetingEndTime(String meetingEndTime) {
+        this.meetingEndTime = meetingEndTime;
     }
 
-    public Date getMeetingDate() {
-        return meetingDate;
+    /**
+     * Gets meeting date.
+     *
+     * @return the meeting date
+     */
+    public String getMeetingStartTime() {
+        return meetingStartTime;
     }
 
-    public void setMeetingDate(Date meetingDate) {
-        this.meetingDate = meetingDate;
+    /**
+     * Sets meeting date.
+     *
+     * @param meetingStartTime the meeting date
+     */
+    public void setMeetingStartTime(String meetingStartTime) {
+        this.meetingStartTime = meetingStartTime;
     }
 
+    /**
+     * Gets meeting room.
+     *
+     * @return the meeting room
+     */
     public Room getMeetingRoom() {
         return meetingRoom;
     }
 
+    /**
+     * Sets meeting room.
+     *
+     * @param meetingRoom the meeting room
+     */
     public void setMeetingRoom(Room meetingRoom) {
         this.meetingRoom = meetingRoom;
     }
 
-    public User getHost() {
+    /**
+     * Gets host.
+     *
+     * @return the host
+     */
+    public String getHost() {
         return host;
     }
 
-    public void setHost(User host) {
+    /**
+     * Sets host.
+     *
+     * @param host the host
+     */
+    public void setHost(String host) {
         this.host = host;
     }
 
+    /**
+     * Gets guests.
+     *
+     * @return the guests
+     */
     public List<User> getGuests() {
         return guests;
     }
 
+    /**
+     * Sets guests.
+     *
+     * @param guests the guests
+     */
     public void setGuests(List<User> guests) {
         this.guests = guests;
     }

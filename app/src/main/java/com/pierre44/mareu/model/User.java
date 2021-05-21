@@ -5,16 +5,29 @@ package com.pierre44.mareu.model;
  */
 public class User {
 
-    private long id;
+    private int id;
     private String name;
     private String email;
+
+    /**
+     * Instantiates a new User.
+     *
+     * @param id    the id
+     * @param name  the name
+     * @param email the email
+     */
+    public User(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 
     /**
      * Gets id.
      *
      * @return the id
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -23,7 +36,7 @@ public class User {
      *
      * @param id the id
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -70,7 +83,7 @@ public class User {
      * @param name  the name
      * @param email the email
      */
-    public void user (long id, String name, String email){
+    public void user (int id, String name, String email){
         this.id = id;
         this.name = name;
         this.email = email;
