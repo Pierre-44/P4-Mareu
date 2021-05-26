@@ -13,13 +13,6 @@
         <activity
             android:name=".ui_meeting_list.AddMeetingActivity"
             android:label="@string/title_activity_add_meeting" />
-        <activity android:name=".ui_meeting_list.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

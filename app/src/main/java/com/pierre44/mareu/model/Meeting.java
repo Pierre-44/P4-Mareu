@@ -1,19 +1,18 @@
 package com.pierre44.mareu.model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by pmeignen on 18/05/2021.
  */
-public class Meeting {
+public class Meeting implements Serializable {
 
     /**
      * The id of meeting
      */
-    private int id;
+    private Integer id;
 
     /**
      * The topic of meeting
@@ -21,14 +20,14 @@ public class Meeting {
     private String meetingTopic;
 
     /**
-     * The meeting start time in ms form 01/01/1970
+     * The meeting start time
      */
     private String meetingStartTime;
 
     /**
-     * The meeting end time in ms form 01/01/1970
+     * The meeting duration
      */
-    private String meetingEndTime;
+    private String meetingDuration;
 
     /**
      * The room of meeting
@@ -36,32 +35,51 @@ public class Meeting {
     private Room meetingRoom;
 
     /**
-     * The user host of meeting
+     * The String host of meeting
      */
     private String host;
 
     /**
-     * The list of users of meeting
+     * The list of Strings of meeting
      */
-    private List<User> guests;
+    private List<String> guests;
 
 
-    public Meeting(int id, String meetingTopic, String meetingStartTime, String meetingEndTime, Room meetingRoom, String host, List<User> guests) {
+    /**
+     * Instantiates a new Meeting.
+     *
+     * @param id               the id
+     * @param meetingTopic     the meeting topic
+     * @param meetingStartTime the meeting start time
+     * @param meetingDuration  the meeting duration
+     * @param meetingRoom      the meeting room
+     * @param meetingHost      the meeting host
+     * @param guestsList       the guests list
+     */
+    public Meeting(
+            int id,
+            String meetingTopic,
+            String meetingStartTime,
+            String meetingDuration,
+            Room meetingRoom,
+            int meetingHost,
+            List<String> guestsList) {
         this.id = id;
         this.meetingTopic = meetingTopic;
         this.meetingStartTime = meetingStartTime;
-        this.meetingEndTime = meetingEndTime;
+        this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
         this.host = host;
         this.guests = guests;
     }
+
 
     /**
      * Gets id.
      *
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -70,7 +88,7 @@ public class Meeting {
      *
      * @param id the id
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -93,39 +111,39 @@ public class Meeting {
     }
 
     /**
-     * Gets meeting time.
+     * Gets meeting start time.
      *
-     * @return the meeting time
-     */
-    public String getMeetingEndTime() {
-        return meetingEndTime;
-    }
-
-    /**
-     * Sets meeting time.
-     *
-     * @param meetingEndTime the meeting time
-     */
-    public void setMeetingEndTime(String meetingEndTime) {
-        this.meetingEndTime = meetingEndTime;
-    }
-
-    /**
-     * Gets meeting date.
-     *
-     * @return the meeting date
+     * @return the meeting start time
      */
     public String getMeetingStartTime() {
         return meetingStartTime;
     }
 
     /**
-     * Sets meeting date.
+     * Sets meeting start time.
      *
-     * @param meetingStartTime the meeting date
+     * @param meetingStartTime the meeting start time
      */
     public void setMeetingStartTime(String meetingStartTime) {
         this.meetingStartTime = meetingStartTime;
+    }
+
+    /**
+     * Gets meeting duration.
+     *
+     * @return the meeting duration
+     */
+    public String getMeetingDuration() {
+        return meetingDuration;
+    }
+
+    /**
+     * Sets meeting duration.
+     *
+     * @param meetingDuration the meeting duration
+     */
+    public void setMeetingDuration(String meetingDuration) {
+        this.meetingDuration = meetingDuration;
     }
 
     /**
@@ -169,7 +187,7 @@ public class Meeting {
      *
      * @return the guests
      */
-    public List<User> getGuests() {
+    public List<String> getGuests() {
         return guests;
     }
 
@@ -178,7 +196,7 @@ public class Meeting {
      *
      * @param guests the guests
      */
-    public void setGuests(List<User> guests) {
+    public void setGuests(List<String> guests) {
         this.guests = guests;
     }
 

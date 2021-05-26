@@ -14,7 +14,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     Context mContext;
 
-
 public static class Viewholder extends RecyclerView.ViewHolder{
 
 
