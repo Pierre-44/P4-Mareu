@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mareu</string>
     <string name="room_image">room_image</string>
-    <string name="title_activity_add_meeting">AddMeetingActivity</string>
+    <string name="title_activity_add_meeting">Ajouter une Réunion</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -17,4 +17,5 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="activity_add_meeting_topic">Sujet de la Réunion</string>
 </resources>

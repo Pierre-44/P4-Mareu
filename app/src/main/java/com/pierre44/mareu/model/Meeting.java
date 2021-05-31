@@ -35,11 +35,6 @@ public class Meeting implements Serializable {
     private Room meetingRoom;
 
     /**
-     * The String host of meeting
-     */
-    private String host;
-
-    /**
      * The list of Strings of meeting
      */
     private List<String> guests;
@@ -47,31 +42,23 @@ public class Meeting implements Serializable {
 
     /**
      * Instantiates a new Meeting.
-     *
      * @param id               the id
      * @param meetingTopic     the meeting topic
      * @param meetingStartTime the meeting start time
      * @param meetingDuration  the meeting duration
      * @param meetingRoom      the meeting room
-     * @param meetingHost      the meeting host
      * @param guestsList       the guests list
      */
-    public Meeting(
-            int id,
-            String meetingTopic,
-            String meetingStartTime,
-            String meetingDuration,
-            Room meetingRoom,
-            int meetingHost,
-            List<String> guestsList) {
+    // Constructor
+    public Meeting(int id,String meetingTopic,String meetingStartTime, String meetingDuration, Room meetingRoom, List<String> guestsList) {
         this.id = id;
         this.meetingTopic = meetingTopic;
         this.meetingStartTime = meetingStartTime;
         this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
-        this.host = host;
         this.guests = guests;
     }
+
 
 
     /**
@@ -162,24 +149,6 @@ public class Meeting implements Serializable {
      */
     public void setMeetingRoom(Room meetingRoom) {
         this.meetingRoom = meetingRoom;
-    }
-
-    /**
-     * Gets host.
-     *
-     * @return the host
-     */
-    public String getHost() {
-        return host;
-    }
-
-    /**
-     * Sets host.
-     *
-     * @param host the host
-     */
-    public void setHost(String host) {
-        this.host = host;
     }
 
     /**
