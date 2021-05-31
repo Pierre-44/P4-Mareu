@@ -10,12 +10,13 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="primaryColor">#e53935</color>
-    <color name="primaryLightColor">#ff6f60</color>
-    <color name="primaryDarkColor">#ab000d</color>
-    <color name="secondaryColor">#757575</color>
-    <color name="secondaryLightColor">#a4a4a4</color>
-    <color name="secondaryDarkColor">#494949</color>
+    <color name="red_500">#e53935</color>
+    <color name="red_200">#ff6f60</color>
+    <color name="red_700">#ab000d</color>
+    <color name="red_900">#760009</color>
+    <color name="grey_500">#757575</color>
+    <color name="grey_200">#a4a4a4</color>
+    <color name="grey_700">#494949</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
 </resources>
