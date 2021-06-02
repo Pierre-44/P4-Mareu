@@ -39,7 +39,7 @@ public class UnitTest {
 
     // Check that the deleteMeeting method removes Meeting from the list of Meetings
     @Test
-    public void deleteNeighbourWithSuccess() {
+    public void deleteMeetingWithSuccess() {
         Meeting meetingToDelete = mMeetingRepository.getMeeting().get(0);
         mMeetingRepository.deleteMeeting(meetingToDelete);
         assertFalse(mMeetingRepository.getMeeting().contains(meetingToDelete));
@@ -47,11 +47,11 @@ public class UnitTest {
 
     // Check that the addMeeting method creates a new neighbor
     @Test
-    public void createNeighboursWithSuccess() {
-        int nbNeighbours = serviceApi.getNeighbours().size();
-        Neighbour neighbourToAdd = serviceApi.getNeighbours().get(0);
-        serviceApi.createNeighbour(neighbourToAdd);
-        assertEquals(serviceApi.getNeighbours().size(), nbNeighbours + 1);
-
+    public void createMeetingsWithSuccess() {
+        int nbMeeting = mMeetingRepository.getMeeting().size();
+        Meeting meetingToAdd = mMeetingRepository.getMeeting().get(0);
+        mMeetingRepository.createMeeting(meetingToAdd);
+        assertEquals(mMeetingRepository.getMeeting().size(), nbMeeting + 1);
+    }
 
 }
