@@ -17,5 +17,13 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="activity_add_meeting_topic">Sujet de la Réunion</string>
+    <string name="activity_add_meeting_topic">Sujet de la réunion</string>
+    <string name="add_meeting_date">Date</string>
+    <string name="add_meeting_topic">Sujet de la réunion</string>
+    <string name="add_meeting_room">Salle</string>
+    <string name="add_meeting_duration">Durée</string>
+    <string name="add_meeting_email">Adresse email participants</string>
+    <string name="add_meeting_date_picker">01/01/2020</string>
+    <string name="add_meeting_timepicker">08:00</string>
+    <string name="add_meeting_validate_button">VALIDER</string>
 </resources>

@@ -17,7 +17,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        //viewBinding = true
     }
 
     buildTypes {
@@ -40,7 +40,10 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
-    implementation 'androidx.room:room-runtime:2.2.5'
+
+    // BINDING
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     // UNIT TEST
     testImplementation 'junit:junit:4.13.2'

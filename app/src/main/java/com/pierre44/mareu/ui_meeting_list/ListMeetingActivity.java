@@ -1,21 +1,39 @@
 package com.pierre44.mareu.ui_meeting_list;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.ViewBinding;
-
 import android.os.Bundle;
 
-import com.pierre44.mareu.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.pierre44.mareu.R;
+import com.pierre44.mareu.di.DI;
+import com.pierre44.mareu.model.Meeting;
+import com.pierre44.mareu.repository.MeetingRepository;
+
+import java.util.List;
 
 public class ListMeetingActivity extends AppCompatActivity {
+
+    private MeetingRepository mMeetingRepository;
+    private List<Meeting> mMeetings;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_list_activity);
 
+        mMeetingRepository = DI.getMeetingRepository();
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_meeting);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        mMeetings = mMeetingRepository.getMeeting();
+        mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
     }
+
+
 }
