@@ -9,6 +9,7 @@ import java.util.Objects;
  */
 public class Meeting implements Serializable {
 
+
     /**
      * The id of meeting
      */
@@ -18,6 +19,11 @@ public class Meeting implements Serializable {
      * The topic of meeting
      */
     private String meetingTopic;
+
+    /**
+     * The meeting start date
+     */
+    private String meetingStartDate;
 
     /**
      * The meeting start time
@@ -44,21 +50,26 @@ public class Meeting implements Serializable {
      * Instantiates a new Meeting.
      * @param id               the id
      * @param meetingTopic     the meeting topic
+     * @param meetingStartDate the meeting start date
      * @param meetingStartTime the meeting start time
      * @param meetingDuration  the meeting duration
      * @param meetingRoom      the meeting room
      * @param guestsList       the guests list
      */
     // Constructor
-    public Meeting(int id,String meetingTopic,String meetingStartTime, String meetingDuration, Room meetingRoom, List<String> guestsList) {
+    public Meeting(int id,String meetingTopic,String meetingStartDate,String meetingStartTime, String meetingDuration, Room meetingRoom, List<String> guestsList) {
         this.id = id;
         this.meetingTopic = meetingTopic;
+        this.meetingStartDate = meetingStartDate;
         this.meetingStartTime = meetingStartTime;
         this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
         this.guests = guests;
     }
 
+    public Meeting() {
+
+    }
 
 
     /**
@@ -95,6 +106,25 @@ public class Meeting implements Serializable {
      */
     public void setMeetingTopic(String meetingTopic) {
         this.meetingTopic = meetingTopic;
+    }
+
+
+    /**
+     * Gets meeting start date.
+     *
+     * @return the meeting start date
+     */
+    public String getMeetingStartDate() {
+        return meetingStartDate;
+    }
+
+    /**
+     * Sets meeting start date.
+     *
+     * @param meetingStartDate the meeting start date
+     */
+    public void setMeetingStartDate(String meetingStartDate) {
+        this.meetingStartDate = meetingStartDate;
     }
 
     /**

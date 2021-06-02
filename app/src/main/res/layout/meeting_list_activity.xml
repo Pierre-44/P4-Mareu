@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
+    android:background="@color/lamzone_900"
     tools:context=".ui_meeting_list.ListMeetingActivity">
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_meeting"
@@ -15,18 +14,20 @@
         android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addMeetingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginBottom="@dimen/margin_default"
         android:clickable="true"
+        android:focusable="true"
         android:tintMode="@color/white"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        android:contentDescription="Add_meeting_button"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

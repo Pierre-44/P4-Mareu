@@ -2,18 +2,18 @@
     <!-- Base application theme. -->
     <style name="Theme.Mareu" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_200</item>
-        <item name="colorPrimaryVariant">@color/red_700</item>
+        <item name="colorPrimary">@color/lamzone_200</item>
+        <item name="colorPrimaryVariant">@color/lamzone_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red_700</item>
-        <item name="colorSecondaryVariant">@color/red_700</item>
+        <item name="colorSecondary">@color/lamzone_700</item>
+        <item name="colorSecondaryVariant">@color/lamzone_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/red_700</item>
+        <item name="android:textColorPrimary">@color/lamzone_700</item>
     </style>
 </resources>

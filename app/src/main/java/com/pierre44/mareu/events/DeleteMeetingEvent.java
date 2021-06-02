@@ -7,10 +7,18 @@ import com.pierre44.mareu.model.Meeting;
  */
 public class DeleteMeetingEvent {
 
-    public Meeting mMeeting;
+    /**
+     * The Meeting to delete
+     */
+    public Meeting meeting;
 
+    /**
+     * Instantiates a new Delete meeting event.
+     *
+     * @param meeting the meeting
+     */
     public DeleteMeetingEvent(Meeting meeting) {
-        this.mMeeting = meeting;
+        this.meeting = meeting;
     }
 
 

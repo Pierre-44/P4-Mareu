@@ -36,26 +36,26 @@ public abstract class DummyMeetingGenerator {
     );
 
     public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-            new Meeting(1, "Meeting 1", "01/06/21 08:00", "00H45", DUMMY_ROOMS.get(0), DUMMY_USERS_LIST),
-            new Meeting(2, "Meeting 2", "01/06/21 10:00", "01H00", DUMMY_ROOMS.get(1), DUMMY_USERS_LIST),
-            new Meeting(3, "Meeting 3 ", "01/06/21 14:00", "00H45", DUMMY_ROOMS.get(2), DUMMY_USERS_LIST),
-            new Meeting(4, "Meeting 4 and a very long description ", "02/06/21 16:00", "01H00", DUMMY_ROOMS.get(3), DUMMY_USERS_LIST),
-            new Meeting(5, "Meeting 5 and a very long description", "02/06/21 08:00", "00H45", DUMMY_ROOMS.get(4), DUMMY_USERS_LIST),
-            new Meeting(6, "Meeting 6 and a very long description", "02/06/21 10:00", "01H00", DUMMY_ROOMS.get(5), DUMMY_USERS_LIST),
-            new Meeting(7, "Meeting 7", "02/06/21 14:00", "00H45", DUMMY_ROOMS.get(6), DUMMY_USERS_LIST),
-            new Meeting(8, "Meeting 8", "03/06/21 16:00", "01H00", DUMMY_ROOMS.get(7), DUMMY_USERS_LIST),
-            new Meeting(9, "Meeting 9", "03/06/21 08:00", "00H45", DUMMY_ROOMS.get(8), DUMMY_USERS_LIST),
-            new Meeting(10, "Meeting 10 and a very long description", "03/06/21 10:00", "01H00", DUMMY_ROOMS.get(9), DUMMY_USERS_LIST),
-            new Meeting(11, "Meeting 11 and a very long description", "04/06/21 08:00", "00H45", DUMMY_ROOMS.get(0), DUMMY_USERS_LIST),
-            new Meeting(12, "Meeting 12 and a very long description", "04/06/21 08:00", "00H45", DUMMY_ROOMS.get(1), DUMMY_USERS_LIST),
-            new Meeting(13, "Meeting 13", "04/06/21 08:00", "00H45", DUMMY_ROOMS.get(2), DUMMY_USERS_LIST),
-            new Meeting(14, "Meeting 14", "07/06/21 08:00", "00H45", DUMMY_ROOMS.get(3), DUMMY_USERS_LIST),
-            new Meeting(15, "Meeting 15", "07/06/21 08:00", "00H45", DUMMY_ROOMS.get(4), DUMMY_USERS_LIST),
-            new Meeting(16, "Meeting 16 and a very long description", "07/06/21 08:00", "00H45", DUMMY_ROOMS.get(5), DUMMY_USERS_LIST),
-            new Meeting(17, "Meeting 17 and a very long description", "08/06/21 08:00", "00H45", DUMMY_ROOMS.get(6), DUMMY_USERS_LIST),
-            new Meeting(18, "Meeting 18 and a very long description", "08/06/21 08:00", "00H45", DUMMY_ROOMS.get(7), DUMMY_USERS_LIST),
-            new Meeting(19, "Meeting 19", "09/06/21 08:00", "00H45", DUMMY_ROOMS.get(8), DUMMY_USERS_LIST),
-            new Meeting(20, "Meeting 20", "09/06/21 10:00", "01H00", DUMMY_ROOMS.get(9), DUMMY_USERS_LIST)
+            new Meeting(1, "Meeting 1", "01/06/21", "08:00", "00H45", DUMMY_ROOMS.get(0), DUMMY_USERS_LIST),
+            new Meeting(2, "Meeting 2", "01/06/21", "10:00", "01H00", DUMMY_ROOMS.get(1), DUMMY_USERS_LIST),
+            new Meeting(3, "Meeting 3 ", "01/06/21"," 14:00", "00H45", DUMMY_ROOMS.get(2), DUMMY_USERS_LIST),
+            new Meeting(4, "Meeting 4 and a very long description ", "02/06/21"," 16:00", "01H00", DUMMY_ROOMS.get(3), DUMMY_USERS_LIST),
+            new Meeting(5, "Meeting 5 and a very long description", "02/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(4), DUMMY_USERS_LIST),
+            new Meeting(6, "Meeting 6 and a very long description", "02/06/21",  "10:00", "01H00", DUMMY_ROOMS.get(5), DUMMY_USERS_LIST),
+            new Meeting(7, "Meeting 7", "02/06/21",  "14:00", "00H45", DUMMY_ROOMS.get(6), DUMMY_USERS_LIST),
+            new Meeting(8, "Meeting 8", "03/06/21",  "16:00", "01H00", DUMMY_ROOMS.get(7), DUMMY_USERS_LIST),
+            new Meeting(9, "Meeting 9", "03/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(8), DUMMY_USERS_LIST),
+            new Meeting(10, "Meeting 10 and a very long description", "03/06/21",  "10:00", "01H00", DUMMY_ROOMS.get(9), DUMMY_USERS_LIST),
+            new Meeting(11, "Meeting 11 and a very long description", "04/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(0), DUMMY_USERS_LIST),
+            new Meeting(12, "Meeting 12 and a very long description", "04/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(1), DUMMY_USERS_LIST),
+            new Meeting(13, "Meeting 13", "04/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(2), DUMMY_USERS_LIST),
+            new Meeting(14, "Meeting 14", "07/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(3), DUMMY_USERS_LIST),
+            new Meeting(15, "Meeting 15", "07/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(4), DUMMY_USERS_LIST),
+            new Meeting(16, "Meeting 16 and a very long description", "07/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(5), DUMMY_USERS_LIST),
+            new Meeting(17, "Meeting 17 and a very long description", "08/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(6), DUMMY_USERS_LIST),
+            new Meeting(18, "Meeting 18 and a very long description", "08/06/21", "08:00", "00H45", DUMMY_ROOMS.get(7), DUMMY_USERS_LIST),
+            new Meeting(19, "Meeting 19", "09/06/21",  "08:00", "00H45", DUMMY_ROOMS.get(8), DUMMY_USERS_LIST),
+            new Meeting(20, "Meeting 20", "09/06/21",  "10:00", "01H00", DUMMY_ROOMS.get(9), DUMMY_USERS_LIST)
 
     );
 
