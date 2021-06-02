@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginTop="4dp"
+                android:padding="@dimen/cardview_default_padding"
+                app:cardCornerRadius="@dimen/dimens_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_meeting_topic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/cardview_default_margin"
+                        android:layout_marginTop="@dimen/cardview_default_margin"
+                        android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:hint="@string/add_meeting_topic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/info_text_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:text="@string/add_meeting_date"
+                        app:layout_constraintBottom_toTopOf="@+id/date_picker_actions"
+                        app:layout_constraintEnd_toEndOf="@+id/date_picker_actions"
+                        app:layout_constraintStart_toStartOf="@+id/date_picker_actions" />
+
+                    <Button
+                        android:id="@+id/date_picker_actions"
+                        android:layout_width="@dimen/button_default_width"
+                        android:layout_height="@dimen/button_default_height"
+                        android:layout_marginStart="@dimen/cardview_default_margin"
+                        android:layout_marginTop="64dp"
+                        android:layout_marginBottom="32dp"
+                        android:text="@string/add_meeting_date_picker"
+                        app:cornerRadius="@dimen/button_default_radius"
+                        app:layout_constraintBottom_toTopOf="@+id/info_text_room"
+                        app:layout_constraintEnd_toStartOf="@+id/time_picker_action"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_input_meeting_topic" />
+
+                    <TextView
+                        android:id="@+id/info_text_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:text="@string/add_meeting_time"
+                        app:layout_constraintBottom_toTopOf="@+id/time_picker_action"
+                        app:layout_constraintEnd_toEndOf="@+id/time_picker_action"
+                        app:layout_constraintStart_toStartOf="@+id/time_picker_action" />
+
+                    <Button
+                        android:id="@+id/time_picker_action"
+                        android:layout_width="@dimen/button_default_width"
+                        android:layout_height="@dimen/button_default_height"
+                        android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:text="@string/add_meeting_timepicker"
+                        app:cornerRadius="@dimen/button_default_radius"
+                        app:layout_constraintBottom_toBottomOf="@+id/date_picker_actions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/date_picker_actions"
+                        app:layout_constraintTop_toTopOf="@+id/date_picker_actions" />
+
+                    <TextView
+                        android:id="@+id/info_text_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:text="@string/add_meeting_room"
+                        app:layout_constraintBottom_toTopOf="@+id/spinner_room"
+                        app:layout_constraintEnd_toEndOf="@+id/spinner_room"
+                        app:layout_constraintStart_toStartOf="@+id/spinner_room" />
+
+                    <Spinner
+                        android:id="@+id/spinner_room"
+                        android:layout_width="@dimen/button_default_width"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="@dimen/cardview_default_margin"
+                        android:layout_marginBottom="32dp"
+                        app:layout_constraintEnd_toStartOf="@+id/spinner_duration"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/spinner_duration" />
+
+                    <TextView
+                        android:id="@+id/info_text_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_default"
+                        android:text="@string/add_meeting_duration"
+                        app:layout_constraintBottom_toTopOf="@+id/spinner_duration"
+                        app:layout_constraintEnd_toEndOf="@+id/spinner_duration"
+                        app:layout_constraintStart_toStartOf="@+id/spinner_duration" />
+
+                    <Spinner
+                        android:id="@+id/spinner_duration"
+                        android:layout_width="@dimen/button_default_width"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="@dimen/cardview_default_margin"
+                        app:layout_constraintBottom_toBottomOf="@+id/spinner_room"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/spinner_room"
+                        app:layout_constraintTop_toTopOf="@+id/spinner_room" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="@dimen/cardview_default_margin"
+                        android:layout_marginTop="@dimen/cardview_default_margin"
+                        android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:hint="@string/add_meeting_email"
+                        android:inputType="textEmailAddress"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/spinner_room" />
+
+                    <ScrollView
+                        android:id="@+id/guests_email_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="@dimen/cardview_default_margin"
+                        android:layout_marginStart="@dimen/cardview_default_margin"
+                        android:layout_marginTop="@dimen/cardview_default_margin"
+                        android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:ems="10"
+                        android:lines="5"
+                        android:minLines="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_input_email">
+
+                    </ScrollView>
+
+                    <Button
+                        android:id="@+id/buttonValidate"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/button_default_height"
+                        android:layout_marginTop="@dimen/cardview_default_margin"
+                        android:layout_marginBottom="@dimen/cardview_default_margin"
+                        android:text="@string/add_meeting_validate_button"
+                        app:cornerRadius="@dimen/button_default_radius"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/guests_email_list" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

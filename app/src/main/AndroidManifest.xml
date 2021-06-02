@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".events.AddMeetingActivity"
+            android:name=".events.CreateMeetingActivity"
             android:label="@string/title_activity_add_meeting" />
 
     </application>

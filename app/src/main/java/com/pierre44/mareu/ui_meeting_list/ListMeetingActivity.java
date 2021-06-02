@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
-import com.pierre44.mareu.events.AddMeetingActivity;
+import com.pierre44.mareu.events.CreateMeetingActivity;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.repository.MeetingRepository;
 
@@ -40,6 +40,6 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     @OnClick(R.id.addMeetingButton)
     void addMeeting() {
-        AddMeetingActivity.navigate(this);
+        CreateMeetingActivity.navigate(this);
     }
 }
