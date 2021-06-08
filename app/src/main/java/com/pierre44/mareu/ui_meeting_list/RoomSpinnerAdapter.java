@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.pierre44.mareu.R;
+import com.pierre44.mareu.model.Room;
 
 import java.util.List;
 
@@ -23,11 +24,11 @@ import java.util.List;
 public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
 
     Context context;
-    List<String> roomsList;
+    List<Room> roomsList;
 
     // Constructor accepts Context and a list of rooms
-    public RoomSpinnerAdapter(Context context, int room_dropdown_item, List<String> rooms) {
-        super(context, R.layout.create_meeting_activity, rooms);
+    public RoomSpinnerAdapter(Context context, int room_dropdown_item, List<Room> rooms) {
+        super(context, R.layout.create_meeting_activity);
         this.context = context;
         this.roomsList = rooms;
     }
@@ -44,7 +45,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
     }
 
     // Function to return custom View (View with an image and text)
-    public View getSpinnerRoomView(int position, View convertview, ViewGroup parent) {
+    public View getSpinnerRoomView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.room_dropdown_item, parent, false);
 
@@ -54,12 +55,11 @@ public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
 
         // Get room icon from drawables folder
         Resources res = context.getResources();
-        String drawableName = roomsList.get(position);
-        int resId = res.getIdentifier(drawableName, "drawable", context.getPackageName());
-        Drawable drawable = res.getDrawable(resId);
+        Room mRoom = roomsList.get(position);
+        Drawable drawable = context.getDrawable(mRoom.getRoomImage());
 
         //Set room text and room icon
-        room.setText(roomsList.get(position));
+        room.setText(roomsList.get(position).getRoomName());
         icon.setImageDrawable(drawable);
 
         return row;

@@ -3,10 +3,10 @@ package com.pierre44.mareu.ui_meeting_list;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Meeting;
@@ -23,18 +23,16 @@ public class ListMeetingActivity extends AppCompatActivity {
     private MeetingRepository mMeetingRepository;
     private List<Meeting> mMeetings;
 
-    @BindView(R.id.container)
+    @BindView(R.id.recycler_view_meeting)
     RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.collapsingToolbarMenu)
+    CollapsingToolbarLayout mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_list_activity);
         ButterKnife.bind(this);
-
-        setSupportActionBar(mToolbar);
 
         mMeetingRepository = DI.getMeetingRepository();
 

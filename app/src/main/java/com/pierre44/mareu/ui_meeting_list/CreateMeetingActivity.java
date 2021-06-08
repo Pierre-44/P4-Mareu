@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -17,10 +18,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textfield.TextInputEditText;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
+import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.DummyMeetingGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 
@@ -35,19 +36,19 @@ import butterknife.ButterKnife;
 public class CreateMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.text_input_meeting_topic)
-    TextInputLayout mMeetingTopicInput;
+    TextInputEditText mMeetingTopicInput;
     @BindView(R.id.date_picker_actions)
-    DatePicker mMeetingDatePicker;
+    Button mMeetingDatePicker;
     @BindView(R.id.time_picker_action)
-    TimePicker mMeetingTimePicker;
+    Button mMeetingTimePicker;
     @BindView(R.id.spinner_room_action)
     Spinner mMeetingRoomSpinner;
     @BindView(R.id.spinner_duration_action)
     Spinner mMeetingDurationSpinner;
     @BindView(R.id.text_input_email)
-    TextInputLayout mMeetingEmailInput;
+    TextInputEditText mMeetingEmailInput;
     @BindView(R.id.guests_email_list)
-    ChipGroup mMeetingGuestList;
+    ScrollView mMeetingGuestList;
     @BindView(R.id.buttonValidate)
     MaterialButton mMeetingValidate;
 
@@ -58,13 +59,12 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_meeting_activity);
         ButterKnife.bind(this);
-        mMeetingRepository = DI.getMeetingRepository();
 
         // TODO : implement init();
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mMeetingRepository = DI.getMeetingRepository();
-        final List<String> roomList = Arrays.asList(DummyMeetingGenerator.DUMMY_USERS_LIST.toArray(new String[0]));
+        final List<Room> roomList = DummyMeetingGenerator.DUMMY_ROOMS;
         final List<String> durationList = Arrays.asList("00:15","00:30","00:45","00:00","01:00","01:15","01:30","01:45","02:00");
 
         // meetingDatePicker
