@@ -6,6 +6,7 @@ import com.pierre44.mareu.repository.DummyMeetingGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -34,7 +34,7 @@ public class UnitTest {
     public void getMeetingsWithSuccess() {
         List<Meeting> meetings = mMeetingRepository.getMeeting();
         List<Meeting> expectedNeighbours = DummyMeetingGenerator.DUMMY_MEETINGS;
-        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        Assert.assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
     }
 
     // Check that the deleteMeeting method removes Meeting from the list of Meetings
@@ -53,5 +53,9 @@ public class UnitTest {
         mMeetingRepository.createMeeting(meetingToAdd);
         assertEquals(mMeetingRepository.getMeeting().size(), nbMeeting + 1);
     }
+    
+    //TODO : Check that the filterByDate method is working correctly
+
+    //TODO : Check that the filterByRoom method is working correctly
 
 }

@@ -1,5 +1,6 @@
 package com.pierre44.mareu.ui_meeting_list;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.pierre44.mareu.repository.MeetingRepository;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,9 +47,10 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     @Override
     public void onBindViewHolder(MeetingRecyclerViewAdapter.ViewHolder holder, int position) {
+        // ViewHolder
         Meeting meeting = mMeetings.get(position);
         holder.meetingTopic.setText(meeting.getMeetingTopic());
-        holder.meetingRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(meeting.getMeetingRoom().getRoomImage()));
+        holder.meetingRoomImage.setImageDrawable(Objects.requireNonNull(holder.itemView).getContext().getDrawable(meeting.getMeetingRoom().getRoomImage()));
         holder.meetingRoomText.setText(meeting.getMeetingRoom().getRoomName());
         holder.meetingTime.setText(meeting.getMeetingStartTime());
         holder.meetingGuestsList.setText((CharSequence) meeting.getGuests());
@@ -59,6 +62,16 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
+
+        // go to DetailNeighbourActivity
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToDetailNeighbourActivity = new Intent(holder.itemView.getContext(), CreateMeetingActivity.class);
+                goToDetailNeighbourActivity.putExtra("Neighbour", mMeetings.get(position));
+                holder.itemView.getContext().startActivity(goToDetailNeighbourActivity);
+            }
+        });
     }
 
     @Override
@@ -66,7 +79,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         return mMeetings.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.meeting_topic)
         public TextView meetingTopic;
@@ -85,6 +98,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             super(view);
             ButterKnife.bind(this, view);
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            // TODO : implement methode
         }
     }
 }

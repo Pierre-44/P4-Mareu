@@ -1,5 +1,6 @@
 package com.pierre44.mareu;
 
+
 import android.content.Context;
 
 import androidx.test.core.app.ActivityScenario;
@@ -37,6 +38,8 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
 
+
+    private static final int ITEMS_COUNT = 20;
     private List<Meeting> meetings = DummyMeetingGenerator.DUMMY_MEETINGS;
     public ActivityScenario mActivity;
     MeetingRepository service;
@@ -55,12 +58,12 @@ public class InstrumentedTest {
     //TODO : instrumental test
 
 
-      @Test public void useAppContext() {
-      // Context of the app under test.
-      Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-      assertEquals("com.pierre44.mareu", appContext.getPackageName());
-      }
-
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("com.pierre44.mareu", appContext.getPackageName());
+    }
 
     @Test
     public void myMeetingList_shouldNotBeEmpty() {
@@ -68,4 +71,20 @@ public class InstrumentedTest {
         onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
                 .check(matches(hasMinimumChildCount(1)));
     }
+/**
+    @Test
+    public void myMeetingsList_deleteAction_shouldRemoveItem() {
+        // Given : We remove the element at position 0
+        onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
+                .check((ViewAssertion) withItemCount(ITEMS_COUNT));
+        // When perform a click on a delete icon
+        onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, (ViewAction) new DeleteViewAction()));
+        // Then : the number of element is 19
+        onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
+                .check((ViewAssertion) withItemCount(ITEMS_COUNT - 1));
+    }
+**/
+
+
 }

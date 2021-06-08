@@ -15,8 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".events.CreateMeetingActivity"
+            android:name=".ui_meeting_list.CreateMeetingActivity"
             android:label="@string/title_activity_add_meeting" />
 
     </application>

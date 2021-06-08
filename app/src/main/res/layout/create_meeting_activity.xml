@@ -4,18 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lamzone_500">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/title_activity_add_meeting"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal_toolbar"
+                app:layout_collapseMode="parallax"
+                app:subtitleTextColor="@color/lamzone_500" />
+
+            <ImageView
+                android:id="@+id/lamzone_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_margin="@dimen/margin_default"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_logo_lamzone"
+                app:layout_collapseMode="parallax" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview01"
@@ -25,13 +68,14 @@
                 android:layout_marginTop="4dp"
                 android:padding="@dimen/cardview_default_padding"
                 app:cardCornerRadius="@dimen/dimens_radius"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_meeting_topic"
@@ -41,6 +85,7 @@
                         android:layout_marginTop="@dimen/cardview_default_margin"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
                         android:hint="@string/add_meeting_topic"
+                        android:textSize="@dimen/text_size_normal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -51,6 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_default"
                         android:text="@string/add_meeting_date"
+                        android:textSize="@dimen/text_size_normal"
                         app:layout_constraintBottom_toTopOf="@+id/date_picker_actions"
                         app:layout_constraintEnd_toEndOf="@+id/date_picker_actions"
                         app:layout_constraintStart_toStartOf="@+id/date_picker_actions" />
@@ -76,6 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_default"
                         android:text="@string/add_meeting_time"
+                        android:textSize="@dimen/text_size_normal"
                         app:layout_constraintBottom_toTopOf="@+id/time_picker_action"
                         app:layout_constraintEnd_toEndOf="@+id/time_picker_action"
                         app:layout_constraintStart_toStartOf="@+id/time_picker_action" />
@@ -91,7 +138,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/date_picker_actions"
-                        app:layout_constraintTop_toTopOf="@+id/date_picker_actions" />
+                        app:layout_constraintTop_toTopOf="@+id/date_picker_actions"
+                        android:textSize="@dimen/text_size_spinner"/>
 
                     <TextView
                         android:id="@+id/info_text_room"
@@ -99,20 +147,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_default"
                         android:text="@string/add_meeting_room"
-                        app:layout_constraintBottom_toTopOf="@+id/spinner_room"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_room"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_room" />
+                        android:textSize="@dimen/text_size_normal"
+                        app:layout_constraintBottom_toTopOf="@+id/spinner_room_action"
+                        app:layout_constraintEnd_toEndOf="@+id/spinner_room_action"
+                        app:layout_constraintStart_toStartOf="@+id/spinner_room_action" />
 
                     <Spinner
-                        android:id="@+id/spinner_room"
+                        android:id="@+id/spinner_room_action"
                         android:layout_width="@dimen/button_default_width"
                         android:layout_height="45dp"
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginBottom="32dp"
-                        app:layout_constraintEnd_toStartOf="@+id/spinner_duration"
+                        app:layout_constraintEnd_toStartOf="@+id/spinner_duration_action"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/spinner_duration" />
+                        app:layout_constraintTop_toTopOf="@+id/spinner_duration_action" />
 
                     <TextView
                         android:id="@+id/info_text_duration"
@@ -120,20 +169,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_default"
                         android:text="@string/add_meeting_duration"
-                        app:layout_constraintBottom_toTopOf="@+id/spinner_duration"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_duration"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_duration" />
+                        android:textSize="@dimen/text_size_normal"
+                        app:layout_constraintBottom_toTopOf="@+id/spinner_duration_action"
+                        app:layout_constraintEnd_toEndOf="@+id/spinner_duration_action"
+                        app:layout_constraintStart_toStartOf="@+id/spinner_duration_action" />
 
                     <Spinner
-                        android:id="@+id/spinner_duration"
+                        android:id="@+id/spinner_duration_action"
                         android:layout_width="@dimen/button_default_width"
                         android:layout_height="45dp"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
-                        app:layout_constraintBottom_toBottomOf="@+id/spinner_room"
+                        app:layout_constraintBottom_toBottomOf="@+id/spinner_room_action"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/spinner_room"
-                        app:layout_constraintTop_toTopOf="@+id/spinner_room" />
+                        app:layout_constraintStart_toEndOf="@+id/spinner_room_action"
+                        app:layout_constraintTop_toTopOf="@+id/spinner_room_action" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_email"
@@ -144,14 +194,15 @@
                         android:layout_marginEnd="@dimen/cardview_default_margin"
                         android:hint="@string/add_meeting_email"
                         android:inputType="textEmailAddress"
+                        android:textSize="@dimen/text_size_normal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_room" />
+                        app:layout_constraintTop_toBottomOf="@+id/spinner_room_action" />
 
                     <ScrollView
                         android:id="@+id/guests_email_list"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="150dp"
                         android:layout_margin="@dimen/cardview_default_margin"
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginTop="@dimen/cardview_default_margin"

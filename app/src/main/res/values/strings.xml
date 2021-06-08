@@ -25,6 +25,7 @@
     <string name="add_meeting_email">Adresse email participants</string>
     <string name="add_meeting_date_picker">01/01/2020</string>
     <string name="add_meeting_timepicker">08:00</string>
-    <string name="add_meeting_validate_button">VALIDER</string>
-    <string name="add_meeting_time">HEURE</string>
+    <string name="add_meeting_validate_button">Valider</string>
+    <string name="add_meeting_time">Heure</string>
+    <string name="lamzone_logo">lamzone logo</string>
 </resources>

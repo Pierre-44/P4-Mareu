@@ -3,43 +3,51 @@ package com.pierre44.mareu.ui_meeting_list;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
-import com.pierre44.mareu.events.CreateMeetingActivity;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.repository.MeetingRepository;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ListMeetingActivity extends AppCompatActivity {
 
     private MeetingRepository mMeetingRepository;
     private List<Meeting> mMeetings;
-    private RecyclerView mRecyclerView;
+
+    @BindView(R.id.container)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_list_activity);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
 
         mMeetingRepository = DI.getMeetingRepository();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_meeting);
+        mRecyclerView = findViewById(R.id.recycler_view_meeting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         mMeetings = mMeetingRepository.getMeeting();
         mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
     }
 
-    @OnClick(R.id.addMeetingButton)
-    void addMeeting() {
+    @OnClick(R.id.CreateMeetingButton)
+    void createMeeting() {
         CreateMeetingActivity.navigate(this);
     }
 }

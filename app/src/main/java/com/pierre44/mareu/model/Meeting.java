@@ -56,6 +56,7 @@ public class Meeting implements Serializable {
      * @param meetingRoom      the meeting room
      * @param guestsList       the guests list
      */
+
     // Constructor
     public Meeting(int id,String meetingTopic,String meetingStartDate,String meetingStartTime, String meetingDuration, Room meetingRoom, List<String> guestsList) {
         this.id = id;
@@ -65,10 +66,6 @@ public class Meeting implements Serializable {
         this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
         this.guests = guests;
-    }
-
-    public Meeting() {
-
     }
 
 
