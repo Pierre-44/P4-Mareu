@@ -39,24 +39,24 @@
                 android:layout_margin="@dimen/margin_default"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_logo_lamzone"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:contentDescription="@string/lamzone_logo" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/collapsing_toolbar"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collapsing_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/collapsing_toolbar"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -109,6 +109,7 @@
                         android:layout_marginTop="64dp"
                         android:layout_marginBottom="32dp"
                         android:text="@string/add_meeting_date_picker"
+                        android:textSize="@dimen/text_size_normal"
                         app:cornerRadius="@dimen/button_default_radius"
                         app:layout_constraintBottom_toTopOf="@+id/info_text_room"
                         app:layout_constraintEnd_toStartOf="@+id/time_picker_action"
@@ -133,13 +134,13 @@
                         android:layout_height="@dimen/button_default_height"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
                         android:text="@string/add_meeting_timepicker"
+                        android:textSize="@dimen/text_size_normal"
                         app:cornerRadius="@dimen/button_default_radius"
                         app:layout_constraintBottom_toBottomOf="@+id/date_picker_actions"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/date_picker_actions"
-                        app:layout_constraintTop_toTopOf="@+id/date_picker_actions"
-                        android:textSize="@dimen/text_size_spinner"/>
+                        app:layout_constraintTop_toTopOf="@+id/date_picker_actions" />
 
                     <TextView
                         android:id="@+id/info_text_room"
@@ -159,7 +160,6 @@
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginBottom="32dp"
                         app:layout_constraintEnd_toStartOf="@+id/spinner_duration_action"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/spinner_duration_action" />
 
@@ -182,7 +182,6 @@
                         android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="@+id/spinner_room_action"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/spinner_room_action"
                         app:layout_constraintTop_toTopOf="@+id/spinner_room_action" />
 
@@ -213,6 +212,7 @@
                         android:minLines="2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintTp_toBottomOf="@id/text_input_email"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_input_email">
 
@@ -226,6 +226,7 @@
                         android:layout_marginTop="@dimen/cardview_default_margin"
                         android:layout_marginBottom="@dimen/cardview_default_margin"
                         android:text="@string/add_meeting_validate_button"
+                        android:textSize="@dimen/text_size_normal"
                         app:cornerRadius="@dimen/button_default_radius"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

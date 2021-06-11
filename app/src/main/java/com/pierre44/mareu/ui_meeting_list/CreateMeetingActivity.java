@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,7 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Room;
-import com.pierre44.mareu.repository.DummyMeetingGenerator;
+import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 
 import java.text.DateFormat;
@@ -54,73 +55,86 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
 
     private MeetingRepository mMeetingRepository;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_meeting_activity);
         ButterKnife.bind(this);
 
-        // TODO : implement init();
-
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mMeetingRepository = DI.getMeetingRepository();
-        final List<Room> roomList = DummyMeetingGenerator.DUMMY_ROOMS;
-        final List<String> durationList = Arrays.asList("00:15","00:30","00:45","00:00","01:00","01:15","01:30","01:45","02:00");
+
+        // init Pickers And Spinners methode
+        initPickersAndSpinners();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // init Pickers And Spinners methode
+    private void initPickersAndSpinners() {
+        //init roomList & durationList
+        final List<Room> roomList = DummyGenerator.DUMMY_ROOMS;
+        final List<String> durationList = Arrays.asList("00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
 
         // meetingDatePicker
         Button dateButton = (Button) findViewById(R.id.date_picker_actions);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View vd) {
                 DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker" );
+                datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
-
         // meetingTimePicker
         Button timeButton = (Button) findViewById(R.id.time_picker_action);
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new DatePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker" );
+            public void onClick(View vt) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
-
-        // TODO : implement Spinners to be finished
-
         // meetingRoomSpinner
         final Spinner roomSpinner = findViewById(R.id.spinner_room_action);
-
-        RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(getApplicationContext(),R.layout.room_dropdown_item, roomList);
+        RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(getApplicationContext(), R.layout.room_dropdown_item, roomList);
         roomSpinnerAdapter.setDropDownViewResource(R.layout.room_dropdown_item);
         roomSpinner.setAdapter(roomSpinnerAdapter);
-
         // meetingDurationSpinner
         final Spinner durationSpinner = findViewById(R.id.spinner_duration_action);
-
-        TimeSpinnerAdapter timeSpinnerAdapter = new TimeSpinnerAdapter(getApplicationContext(),R.layout.time_dropdown_item, durationList);
-        timeSpinnerAdapter.setDropDownViewResource(R.layout.time_dropdown_item);
-        durationSpinner.setAdapter(timeSpinnerAdapter);
+        DurationSpinnerAdapter durationSpinnerAdapter = new DurationSpinnerAdapter(getApplicationContext(), R.layout.time_dropdown_item, durationList);
+        durationSpinnerAdapter.setDropDownViewResource(R.layout.time_dropdown_item);
+        durationSpinner.setAdapter(durationSpinnerAdapter);
     }
 
     // TODO : methode a completer
+
 /**
     @OnClick(R.id.CreateMeetingButton)
-    void addNeighbour() {
+    public void addMeeting() {
         Meeting meeting = new Meeting(
                 System.currentTimeMillis(),
-                mMeetingTopicInput.getEditText().getText().toString(),
-                mMeetingDatePicker.getDate(),
-                mMeetingTimePicker.getTime(),
+                mMeetingTopicInput.getEditableText().toString(),
+                mMeetingDatePicker,
+                mMeetingTimePicker,
                 mMeetingDurationSpinner.getSelectedItem(),
                 mMeetingRoomSpinner.getSelectedItem(),
-                mMeetingGuestList.getChipSpacingHorizontal()
+                mMeetingGuestList
         );
         mMeetingRepository.createMeeting(meeting);
         finish();
     }
 **/
+
     // Set meetingDatePicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -130,20 +144,26 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance().format(c.getTime());
 
-        TextView textViewDate = (TextView) findViewById(R.id.date_picker_actions); // Todo : set text instate of text button ?
+        // set text instate of text button
+        TextView textViewDate = (TextView) findViewById(R.id.date_picker_actions);
         textViewDate.setText(currentDateString);
     }
 
     // Set meetingTimePicker
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Calendar t = Calendar.getInstance();
+        t.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        t.set(Calendar.MINUTE, minute);
+
+        // set Time instate of text button
         TextView textViewTime = (TextView) findViewById(R.id.time_picker_action);
         textViewTime.setText(hourOfDay + ":" + minute);
     }
+
 
     public static void navigate(Context context) {
         Intent intent = new Intent(context, CreateMeetingActivity.class);
         ActivityCompat.startActivity(context, intent, null);
     }
-
 }

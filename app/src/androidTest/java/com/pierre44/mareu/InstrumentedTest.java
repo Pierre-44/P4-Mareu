@@ -11,7 +11,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Meeting;
-import com.pierre44.mareu.repository.DummyMeetingGenerator;
+import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 import com.pierre44.mareu.ui_meeting_list.ListMeetingActivity;
 
@@ -40,7 +40,7 @@ public class InstrumentedTest {
 
 
     private static final int ITEMS_COUNT = 20;
-    private List<Meeting> meetings = DummyMeetingGenerator.DUMMY_MEETINGS;
+    private List<Meeting> meetings = DummyGenerator.DUMMY_MEETINGS;
     public ActivityScenario mActivity;
     MeetingRepository service;
 
@@ -52,7 +52,7 @@ public class InstrumentedTest {
         mActivity = mActivityRule.getScenario();
         assertThat(mActivity, notNullValue());
         service = DI.getMeetingRepository();
-        meetings = DummyMeetingGenerator.DUMMY_MEETINGS;
+        meetings = DummyGenerator.DUMMY_MEETINGS;
     }
 
     //TODO : instrumental test
@@ -85,6 +85,5 @@ public class InstrumentedTest {
                 .check((ViewAssertion) withItemCount(ITEMS_COUNT - 1));
     }
 **/
-
 
 }

@@ -8,10 +8,7 @@
     <color name="lamzone_500">#ffab91</color>
     <color name="lamzone_700">#c97b63</color>
     <color name="lamzone_900">#a1887f</color>
-    <color name="grey_200">#a4a4a4</color>
-    <color name="grey_500">#757575</color>
-    <color name="grey_700">#494949</color>
 
-    <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#ffffff</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>

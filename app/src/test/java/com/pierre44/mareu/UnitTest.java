@@ -2,18 +2,19 @@ package com.pierre44.mareu;
 
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Meeting;
-import com.pierre44.mareu.repository.DummyMeetingGenerator;
+import com.pierre44.mareu.model.Room;
+import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -33,8 +34,8 @@ public class UnitTest {
     @Test
     public void getMeetingsWithSuccess() {
         List<Meeting> meetings = mMeetingRepository.getMeeting();
-        List<Meeting> expectedNeighbours = DummyMeetingGenerator.DUMMY_MEETINGS;
-        Assert.assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        List<Meeting> expectedNeighbours = DummyGenerator.DUMMY_MEETINGS;
+        assertTrue(meetings.containsAll(expectedNeighbours));
     }
 
     // Check that the deleteMeeting method removes Meeting from the list of Meetings
@@ -54,8 +55,25 @@ public class UnitTest {
         assertEquals(mMeetingRepository.getMeeting().size(), nbMeeting + 1);
     }
     
-    //TODO : Check that the filterByDate method is working correctly
+    //Check that the filterByDate method is working correctly
+    @Test
+    public void filterMeetingByDateWithSuccess() {
+        List<Meeting> meetings = new ArrayList<>();
+        String filterDate = "01/06/2021";
+        meetings.addAll(mMeetingRepository.filterByDate(filterDate));
+        for (Meeting m : meetings){
+            assertTrue(m.getMeetingStartDate().equals(filterDate));
+        }
+    }
 
-    //TODO : Check that the filterByRoom method is working correctly
-
+    //Check that the filterByRoom method is working correctly
+    @Test
+    public void filterMeetingByRoomWithSuccess() {
+        List<Meeting> meetings = new ArrayList<>();
+        Room filterRoom = mMeetingRepository.getRooms().get(1);
+        meetings.addAll(mMeetingRepository.filterByRoom(filterRoom));
+        for (Meeting m : meetings){
+            assertTrue(m.getMeetingRoom() == filterRoom.getRoomId());
+        }
+    }
 }

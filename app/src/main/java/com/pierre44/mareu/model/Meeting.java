@@ -13,7 +13,7 @@ public class Meeting implements Serializable {
     /**
      * The id of meeting
      */
-    private Integer id;
+    private long id;
 
     /**
      * The topic of meeting
@@ -43,7 +43,7 @@ public class Meeting implements Serializable {
     /**
      * The list of Strings of meeting
      */
-    private List<String> guests;
+    private List<User> guests;
 
 
     /**
@@ -58,14 +58,14 @@ public class Meeting implements Serializable {
      */
 
     // Constructor
-    public Meeting(int id,String meetingTopic,String meetingStartDate,String meetingStartTime, String meetingDuration, Room meetingRoom, List<String> guestsList) {
+    public Meeting(long id, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {
         this.id = id;
         this.meetingTopic = meetingTopic;
         this.meetingStartDate = meetingStartDate;
         this.meetingStartTime = meetingStartTime;
         this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
-        this.guests = guests;
+        this.guests = guestsList;
     }
 
 
@@ -74,7 +74,7 @@ public class Meeting implements Serializable {
      *
      * @return the id
      */
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -83,7 +83,7 @@ public class Meeting implements Serializable {
      *
      * @param id the id
      */
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -165,8 +165,8 @@ public class Meeting implements Serializable {
      *
      * @return the meeting room
      */
-    public Room getMeetingRoom() {
-        return meetingRoom;
+    public long getMeetingRoom() {
+        return meetingRoom.getRoomId();
     }
 
     /**
@@ -183,7 +183,7 @@ public class Meeting implements Serializable {
      *
      * @return the guests
      */
-    public List<String> getGuests() {
+    public List<User> getGuests() {
         return guests;
     }
 
@@ -192,7 +192,7 @@ public class Meeting implements Serializable {
      *
      * @param guests the guests
      */
-    public void setGuests(List<String> guests) {
+    public void setGuests(List<User> guests) {
         this.guests = guests;
     }
 

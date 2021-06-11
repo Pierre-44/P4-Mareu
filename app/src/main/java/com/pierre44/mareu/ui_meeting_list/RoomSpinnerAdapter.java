@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by pmeignen on 04/06/2021.
  */
-public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
+public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAdapter {
 
     Context context;
     List<Room> roomsList;
@@ -47,11 +47,11 @@ public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
     // Function to return custom View (View with an image and text)
     public View getSpinnerRoomView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(R.layout.room_dropdown_item, parent, false);
+        View row = inflater.inflate(R.layout.room_dropdown_item, parent, true);
 
         // Image and TextViews
-        TextView room = row.findViewById(R.id.meeting_duration_text);
-        ImageView icon = row.findViewById(R.id.meeting_room_icon);
+        TextView roomText = row.findViewById(R.id.meeting_room_text);
+        ImageView roomIcon = row.findViewById(R.id.meeting_room_icon);
 
         // Get room icon from drawables folder
         Resources res = context.getResources();
@@ -59,8 +59,8 @@ public class RoomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
         Drawable drawable = context.getDrawable(mRoom.getRoomImage());
 
         //Set room text and room icon
-        room.setText(roomsList.get(position).getRoomName());
-        icon.setImageDrawable(drawable);
+        roomText.setText(roomsList.get(position).getRoomName());
+        roomIcon.setImageDrawable(drawable);
 
         return row;
     }

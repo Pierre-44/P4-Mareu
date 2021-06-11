@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.pierre44.mareu.R;
 
 import java.util.List;
@@ -15,14 +17,16 @@ import java.util.List;
 /**
  * Created by pmeignen on 04/06/2021.
  */
-public class TimeSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
+public class DurationSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
 
     Context context;
     List<String> durationsList;
-
+    private int mPosition;
+    private View mConvertView;
+    private ViewGroup mParent;
 
     // Constructor accepts Context and a list of rooms
-    public TimeSpinnerAdapter(Context context, int time_dropdown_item, List<String> durations) {
+    public DurationSpinnerAdapter(Context context, int time_dropdown_item, List<String> durations) {
         super(context, R.layout.create_meeting_activity, durations);
         this.context = context;
         this.durationsList = durations;
@@ -30,11 +34,18 @@ public class TimeSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        mPosition = position;
+        mConvertView = convertView;
+        mParent = parent;
         return getSpinnerTimeView(position, convertView, parent);
     }
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        mPosition = position;
+        mConvertView = convertView;
+        mParent = parent;
         return getSpinnerTimeView(position, convertView, parent);
     }
 
@@ -43,7 +54,7 @@ public class TimeSpinnerAdapter extends ArrayAdapter<String> implements SpinnerA
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.time_dropdown_item, parent, false);
 
-        TextView durations = row.findViewById(R.id.meeting_duration_text);
+        TextView durations = row.findViewById(R.id.meeting_room_text);
 
         durations.setText(durationsList.get(position));
 

@@ -1,23 +1,13 @@
 <resources>
-    <string name="app_name">Mareu</string>
+    <string name="app_name">Maréu</string>
     <string name="room_image">room_image</string>
-    <string name="title_activity_add_meeting">Ajouter une Réunion</string>
+    <string name="title_activity_add_meeting">Ajouter une réunion</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="activity_add_meeting_topic">Sujet de la réunion</string>
     <string name="add_meeting_date">Date</string>
     <string name="add_meeting_topic">Sujet de la réunion</string>
     <string name="add_meeting_room">Salle</string>
@@ -27,5 +17,12 @@
     <string name="add_meeting_timepicker">08:00</string>
     <string name="add_meeting_validate_button">Valider</string>
     <string name="add_meeting_time">Heure</string>
+    <string name="time_spinner_duration">01:00</string>
     <string name="lamzone_logo">lamzone logo</string>
+    <string name="filterByRoom">Salle</string>
+    <string name="filterByDate">Date</string>
+    <string name="filter">filtre</string>
+    <string name="spinner_meeting_icon">meeting_icon</string>
+    <string name="spinner_meeting_room">Konkqueror</string>
+
 </resources>

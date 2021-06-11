@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class Room implements Serializable {
 
-    private int id;
+    private long id;
     private String roomName;
     private int roomImage;
 
@@ -30,7 +30,7 @@ public class Room implements Serializable {
      *
      * @return the id
      */
-    public int getId() {
+    public long getRoomId() {
         return id;
     }
 
@@ -39,7 +39,7 @@ public class Room implements Serializable {
      *
      * @param id the id
      */
-    public void setId(int id) {
+    public void setRoomId(long id) {
         this.id = id;
     }
 
@@ -78,6 +78,10 @@ public class Room implements Serializable {
     public void setRoomImage(int roomImage) {
         this.roomImage = roomImage;
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
