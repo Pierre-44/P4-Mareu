@@ -8,22 +8,24 @@ import java.util.Objects;
  */
 public class User implements Serializable {
 
-    private long id;
+    private long userId;
     private String name;
     private String email;
+
 
     /**
      * Instantiates a new User.
      *
-     * @param id    the id
-     * @param name  the name
-     * @param email the email
+     * @param userId the user id
+     * @param name   the name
+     * @param email  the email
      */
-    public User(long id, String name, String email) {
-        this.id = id;
+    public User(long userId, String name, String email) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
     }
+
 
     /**
      * Gets id.
@@ -31,16 +33,17 @@ public class User implements Serializable {
      * @return the id
      */
     public long getId() {
-        return id;
+        return userId;
     }
+
 
     /**
      * Sets id.
      *
-     * @param id the id
+     * @param userId the user id
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long userId) {
+        this.userId = userId;
     }
 
     /**
@@ -84,11 +87,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(userId);
     }
 }

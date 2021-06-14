@@ -10,10 +10,7 @@ import java.util.Objects;
 public class Meeting implements Serializable {
 
 
-    /**
-     * The id of meeting
-     */
-    private long id;
+    private long meetingId;
 
     /**
      * The topic of meeting
@@ -48,7 +45,8 @@ public class Meeting implements Serializable {
 
     /**
      * Instantiates a new Meeting.
-     * @param id               the id
+     *
+     * @param meetingId        the meeting id
      * @param meetingTopic     the meeting topic
      * @param meetingStartDate the meeting start date
      * @param meetingStartTime the meeting start time
@@ -56,10 +54,9 @@ public class Meeting implements Serializable {
      * @param meetingRoom      the meeting room
      * @param guestsList       the guests list
      */
-
-    // Constructor
-    public Meeting(long id, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {
-        this.id = id;
+// Constructor
+    public Meeting(long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {
+        this.meetingId = meetingId;
         this.meetingTopic = meetingTopic;
         this.meetingStartDate = meetingStartDate;
         this.meetingStartTime = meetingStartTime;
@@ -70,21 +67,22 @@ public class Meeting implements Serializable {
 
 
     /**
-     * Gets id.
+     * Gets meeting id.
      *
-     * @return the id
+     * @return the meeting id
      */
-    public long getId() {
-        return id;
+    public long getMeetingId() {
+        return meetingId;
     }
 
+
     /**
-     * Sets id.
+     * Sets meeting id.
      *
-     * @param id the id
+     * @param meetingId the meeting id
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setMeetingId(long meetingId) {
+        this.meetingId = meetingId;
     }
 
     /**
@@ -165,8 +163,8 @@ public class Meeting implements Serializable {
      *
      * @return the meeting room
      */
-    public long getMeetingRoom() {
-        return meetingRoom.getRoomId();
+    public Room getMeetingRoom() {
+        return meetingRoom;
     }
 
     /**
@@ -201,11 +199,12 @@ public class Meeting implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meeting meeting = (Meeting) o;
-        return Objects.equals(id, meeting.id);
+        return Objects.equals(meetingId, meeting.meetingId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(meetingId);
     }
+
 }

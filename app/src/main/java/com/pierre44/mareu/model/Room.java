@@ -8,39 +8,42 @@ import java.util.Objects;
  */
 public class Room implements Serializable {
 
-    private long id;
+    private long roomId;
     private String roomName;
     private int roomImage;
+
 
     /**
      * Instantiates a new Room.
      *
-     * @param id       the id
-     * @param roomName the room name
-     *
+     * @param roomId    the room id
+     * @param roomName  the room name
+     * @param roomImage the room image
      */
-    public Room(int id, String roomName,int roomImage) {
-        this.id = id;
+    public Room(int roomId, String roomName,int roomImage) {
+        this.roomId = roomId;
         this.roomName = roomName;
         this.roomImage = roomImage;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
-    public long getRoomId() {
-        return id;
-    }
 
     /**
-     * Sets id.
+     * Gets room id.
      *
-     * @param id the id
+     * @return the room id
      */
-    public void setRoomId(long id) {
-        this.id = id;
+    public long getRoomId() {
+        return roomId;
+    }
+
+
+    /**
+     * Sets room id.
+     *
+     * @param roomId the room id
+     */
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
     }
 
     /**
@@ -88,11 +91,11 @@ public class Room implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id;
+        return roomId == room.roomId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(roomId);
     }
 }

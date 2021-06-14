@@ -207,16 +207,10 @@
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginTop="@dimen/cardview_default_margin"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
-                        android:ems="10"
-                        android:lines="5"
-                        android:minLines="2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTp_toBottomOf="@id/text_input_email"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_input_email">
-
-                    </ScrollView>
+                        app:layout_constraintTop_toBottomOf="@+id/text_input_email"/>
 
                     <Button
                         android:id="@+id/buttonValidate"

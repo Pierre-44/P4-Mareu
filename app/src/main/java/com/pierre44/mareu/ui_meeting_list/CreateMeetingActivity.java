@@ -117,10 +117,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     }
 
     // TODO : methode a completer
+    // Recuperé Room sélectioné dans spinner
+    // Recuperé Durée sélectioné dans spinner
+    // Recuperé string sur title button date
+    // Recuperé string sur title button time
 
 /**
     @OnClick(R.id.CreateMeetingButton)
-    public void addMeeting() {
+    public void createMeeting() {
         Meeting meeting = new Meeting(
                 System.currentTimeMillis(),
                 mMeetingTopicInput.getEditableText().toString(),
@@ -134,6 +138,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         finish();
     }
 **/
+
+
 
     // Set meetingDatePicker
     @Override
@@ -160,7 +166,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         TextView textViewTime = (TextView) findViewById(R.id.time_picker_action);
         textViewTime.setText(hourOfDay + ":" + minute);
     }
-
 
     public static void navigate(Context context) {
         Intent intent = new Intent(context, CreateMeetingActivity.class);

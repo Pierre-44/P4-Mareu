@@ -55,8 +55,6 @@ public class InstrumentedTest {
         meetings = DummyGenerator.DUMMY_MEETINGS;
     }
 
-    //TODO : instrumental test
-
 
     @Test
     public void useAppContext() {
@@ -71,6 +69,8 @@ public class InstrumentedTest {
         onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
                 .check(matches(hasMinimumChildCount(1)));
     }
+
+    //TODO : MeetingsList delete action button should remove item
 /**
     @Test
     public void myMeetingsList_deleteAction_shouldRemoveItem() {

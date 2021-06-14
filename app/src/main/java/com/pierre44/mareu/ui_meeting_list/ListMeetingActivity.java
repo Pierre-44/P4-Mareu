@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
+import com.pierre44.mareu.events.DeleteMeetingEvent;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.repository.MeetingRepository;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -25,9 +29,13 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     private MeetingRepository mMeetingRepository;
     private List<Meeting> mMeetings;
+    private MeetingRecyclerViewAdapter meetingRecyclerViewAdapter;
+
+    Toolbar toolbar;
 
     @BindView(R.id.recycler_view_meeting)
     RecyclerView mRecyclerView;
+
 
 
     @Override
@@ -45,7 +53,11 @@ public class ListMeetingActivity extends AppCompatActivity {
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         mMeetings = mMeetingRepository.getMeeting();
-        mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings, mMeetingRepository.getRooms()));
+
+        meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings,mMeetingRepository.getRooms());
+
+        mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
+
     }
 
     // Create Menu
@@ -54,6 +66,18 @@ public class ListMeetingActivity extends AppCompatActivity {
         // Inflate the menu and add it to the toolbar
         getMenuInflater().inflate(R.menu.menu_meeting_list, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        EventBus.getDefault().register(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     // Configure menu click
@@ -75,13 +99,22 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     private void configureToolbar() {
         // Get the toolbar view inside the activity layout
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         // Set the Toolbar
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
     }
 
     @OnClick(R.id.CreateMeetingButton)
     void createMeeting() {
         CreateMeetingActivity.navigate(this);
+    }
+
+    @Subscribe
+    public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
+        mMeetings.remove(deleteMeetingEvent.meeting);
+        meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

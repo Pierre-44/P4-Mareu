@@ -26,8 +26,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     private final List<Meeting> mMeetings;
     private final List<Room> mRooms;
-    Meeting meeting;
-    Room room;
 
     public MeetingRecyclerViewAdapter(List<Meeting> meetings, List<Room> rooms) {
         mMeetings = meetings;
@@ -41,24 +39,29 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 .inflate(R.layout.item_meeting, parent, false);
         return new MeetingViewHolder(view);
     }
-    // TODO : comment bind le viewholder ?
 
     @Override
     public void onBindViewHolder(MeetingViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
         holder.meetingTopic.setText(meeting.getMeetingTopic());
-        //holder.meetingRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(meeting.getMeetingRoom(meeting.getRoomImage())));
-        //holder.meetingRoomText.setText(meeting.getMeetingRoom().getRoomName());
+        holder.meetingRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(meeting.getMeetingRoom().getRoomImage()));
+        holder.meetingRoomText.setText(meeting.getMeetingRoom().getRoomName());
         holder.meetingTime.setText(meeting.getMeetingStartTime());
-        //holder.meetingGuestsList.setText(meeting.getGuests());
+        String meetingGuestsList = "";
+        for (int i = 0; i < meeting.getGuests().size(); i++) {
+            meetingGuestsList += "" + meeting.getGuests().get(i);
+        }
+        holder.meetingGuestsList.setText(meetingGuestsList);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.meetingDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+                EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position)));
+
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

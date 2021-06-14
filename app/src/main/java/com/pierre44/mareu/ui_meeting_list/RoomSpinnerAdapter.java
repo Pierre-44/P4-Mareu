@@ -28,7 +28,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
 
     // Constructor accepts Context and a list of rooms
     public RoomSpinnerAdapter(Context context, int room_dropdown_item, List<Room> rooms) {
-        super(context, R.layout.create_meeting_activity);
+        super(context, R.layout.create_meeting_activity, rooms);
         this.context = context;
         this.roomsList = rooms;
     }
@@ -47,7 +47,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
     // Function to return custom View (View with an image and text)
     public View getSpinnerRoomView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(R.layout.room_dropdown_item, parent, true);
+        View row = inflater.inflate(R.layout.room_dropdown_item, parent, false);
 
         // Image and TextViews
         TextView roomText = row.findViewById(R.id.meeting_room_text);
@@ -56,11 +56,11 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
         // Get room icon from drawables folder
         Resources res = context.getResources();
         Room mRoom = roomsList.get(position);
-        Drawable drawable = context.getDrawable(mRoom.getRoomImage());
+        Drawable drawableIcon = context.getDrawable(mRoom.getRoomImage());
 
         //Set room text and room icon
         roomText.setText(roomsList.get(position).getRoomName());
-        roomIcon.setImageDrawable(drawable);
+        roomIcon.setImageDrawable(drawableIcon);
 
         return row;
     }
