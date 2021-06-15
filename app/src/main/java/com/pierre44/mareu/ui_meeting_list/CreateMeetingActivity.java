@@ -117,10 +117,10 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     }
 
     // TODO : methode a completer
-    // Recuperé Room sélectioné dans spinner
-    // Recuperé Durée sélectioné dans spinner
-    // Recuperé string sur title button date
-    // Recuperé string sur title button time
+    // Recuperé la Room sélectioné dans spinner
+    // Recuperé la Durée sélectioné dans spinner
+    // Recuperé la string afficher sur le title button date
+    // Recuperé string afficher sur le title button time
 
 /**
     @OnClick(R.id.CreateMeetingButton)
@@ -138,8 +138,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         finish();
     }
 **/
-
-
 
     // Set meetingDatePicker
     @Override

@@ -36,8 +36,7 @@ public class ListMeetingActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view_meeting)
     RecyclerView mRecyclerView;
 
-
-
+    // On create
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +48,14 @@ public class ListMeetingActivity extends AppCompatActivity {
         mMeetingRepository = DI.getMeetingRepository();
 
         mRecyclerView = findViewById(R.id.recycler_view_meeting);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         mMeetings = mMeetingRepository.getMeeting();
 
-        meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings,mMeetingRepository.getRooms());
+        meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings, mMeetingRepository.getRooms());
 
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
-
     }
 
     // Create Menu
@@ -68,12 +66,14 @@ public class ListMeetingActivity extends AppCompatActivity {
         return true;
     }
 
+    // onResume to register subscriber
     @Override
     protected void onResume() {
         EventBus.getDefault().register(this);
         super.onResume();
     }
 
+    // onStop to unregister subscriber
     @Override
     protected void onStop() {
         super.onStop();
@@ -96,7 +96,6 @@ public class ListMeetingActivity extends AppCompatActivity {
     }
 
     // Configure Toolbar
-
     private void configureToolbar() {
         // Get the toolbar view inside the activity layout
         toolbar = findViewById(R.id.toolbar);
@@ -112,6 +111,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         CreateMeetingActivity.navigate(this);
     }
 
+    // Subscribe delete meeting event and notifyDataSetChanged
     @Subscribe
     public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
         mMeetings.remove(deleteMeetingEvent.meeting);

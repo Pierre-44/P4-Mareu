@@ -27,6 +27,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     private final List<Meeting> mMeetings;
     private final List<Room> mRooms;
 
+
     public MeetingRecyclerViewAdapter(List<Meeting> meetings, List<Room> rooms) {
         mMeetings = meetings;
         mRooms = rooms;
@@ -48,7 +49,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.meetingRoomText.setText(meeting.getMeetingRoom().getRoomName());
         holder.meetingTime.setText(meeting.getMeetingStartTime());
         String meetingGuestsList = "";
-        for (int i = 0; i < meeting.getGuests().size(); i++) {
+        for (int i = 0 ; i < meeting.getGuests().size(); i++){
             meetingGuestsList += "" + meeting.getGuests().get(i);
         }
         holder.meetingGuestsList.setText(meetingGuestsList);
@@ -61,7 +62,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

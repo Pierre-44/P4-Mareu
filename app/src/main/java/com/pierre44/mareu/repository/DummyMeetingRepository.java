@@ -4,6 +4,7 @@ import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,16 +36,6 @@ public class DummyMeetingRepository implements MeetingRepository {
     }
 
     @Override
-    public List<Meeting> filterByRoom(Room room) {
-        return null;
-    }
-
-    @Override
-    public List<Meeting> filterByDate(String date) {
-        return null;
-    }
-
-    @Override
     public void createMeeting(Meeting meeting) {
         meetings.add(meeting);
     }
@@ -58,12 +49,12 @@ public class DummyMeetingRepository implements MeetingRepository {
     public List<Room> getRooms() {
         return rooms;
     }
-/**
+
     @Override
     public List<Meeting> filterByRoom(Room room) {
         filteredMeeting = new ArrayList<>();
         for (Meeting m : getMeeting()) {
-            if (m.getMeetingRoom(room.getRoomImage()) == room.getRoomId()) {
+            if (m.getMeetingRoom() == room) {
                 filteredMeeting.add(m);
             }
         }
@@ -74,12 +65,11 @@ public class DummyMeetingRepository implements MeetingRepository {
     public List<Meeting> filterByDate(String date) {
         filteredMeeting = new ArrayList<>();
         for (Meeting m : getMeeting()) {
-            if (m.getMeetingStartDate().equals(date)){
-            filteredMeeting.add(m);
+            if (m.getMeetingStartDate().equals(date)) {
+                filteredMeeting.add(m);
             }
         }
         return filteredMeeting;
     }
-**/
-
 }
+
