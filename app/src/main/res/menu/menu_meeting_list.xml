@@ -1,22 +1,29 @@
 <!-- Création du menu -->
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/menu_meeting_list_activity"
         android:icon="@drawable/ic_action_filter"
         android:title="@string/filter"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom">
 
-    <item
-        android:id="@+id/filterRoom"
-        android:title="@string/filterByRoom"
-        app:showAsAction="never" />
+        <menu>
 
-    <item
-        android:id="@+id/filterDate"
-        android:title="@string/filterByDate"
-        app:showAsAction="never" />
+            <item
+                android:id="@+id/filterRoom"
+                android:title="@string/filterByRoom"
+                app:showAsAction="never" />
 
+            <item
+                android:id="@+id/filterDate"
+                android:title="@string/filterByDate"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/resetFilter"
+                android:title="@string/resetFilter"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

@@ -22,6 +22,9 @@ public class DummyMeetingRepository implements MeetingRepository {
     private final List<User> users = DummyGenerator.generateUsers();
     private final List<Room> rooms = DummyGenerator.generateRooms();
 
+    /**
+     * The Filtered meeting.
+     */
     public List<Meeting> filteredMeeting;
 
     @Override

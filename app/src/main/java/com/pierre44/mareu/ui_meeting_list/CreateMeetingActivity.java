@@ -83,7 +83,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     // init Pickers And Spinners methode
     private void initPickersAndSpinners() {
         //init roomList & durationList
-        final List<Room> roomList = DummyGenerator.DUMMY_ROOMS;
+        final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
         final List<String> durationList = Arrays.asList("00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
 
         // meetingDatePicker
@@ -117,28 +117,22 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     }
 
     // TODO : methode a completer
-    // Recuperé la Room sélectioné dans spinner
-    // Recuperé la Durée sélectioné dans spinner
-    // Recuperé la string afficher sur le title button date
-    // Recuperé string afficher sur le title button time
-
 /**
     @OnClick(R.id.CreateMeetingButton)
     public void createMeeting() {
         Meeting meeting = new Meeting(
                 System.currentTimeMillis(),
                 mMeetingTopicInput.getEditableText().toString(),
-                mMeetingDatePicker,
-                mMeetingTimePicker,
-                mMeetingDurationSpinner.getSelectedItem(),
+                mMeetingDatePicker.getEditableText().toString(),
+                mMeetingTimePicker.getEditableText().toString(),
+                mMeetingDurationSpinner.getSelectedItem().toString(),
                 mMeetingRoomSpinner.getSelectedItem(),
-                mMeetingGuestList
-        );
+                mMeetingGuestList.
+                );
         mMeetingRepository.createMeeting(meeting);
         finish();
     }
 **/
-
     // Set meetingDatePicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

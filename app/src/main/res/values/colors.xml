@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="dark_grey">#2A2A2A</color>
+    <color name="dark_grey">#282828</color>
+    <color name="mid_grey">#646464</color>
+    <color name="light_grey">#969696</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="lamzone_200">#ffddc1</color>
     <color name="lamzone_500">#ffab91</color>
     <color name="lamzone_700">#c97b63</color>
     <color name="lamzone_900">#a1887f</color>
-
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColor">#FFF0E6</color>
     <color name="secondaryTextColor">#000000</color>
 </resources>

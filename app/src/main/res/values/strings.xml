@@ -19,10 +19,21 @@
     <string name="add_meeting_time">Heure</string>
     <string name="time_spinner_duration">01:00</string>
     <string name="lamzone_logo">lamzone logo</string>
-    <string name="filterByRoom">Salle</string>
-    <string name="filterByDate">Date</string>
+    <string name="filterByRoom">Filtrer par salle</string>
+    <string name="filterByDate">Filtrer par date</string>
     <string name="filter">filtre</string>
     <string name="spinner_meeting_icon">meeting_icon</string>
     <string name="spinner_meeting_room">Konkqueror</string>
+    <string name="email">email</string>
+    <string name="default_email_list">defaut@lamzone.com defaut@lamzone.com</string>
+    <string name="filterByRoomToastMessage">Filtre par salle activé</string>
+    <string name="filterByDateToastMessage">Filtre par date activé</string>
+    <string name="filterDisable">Filtres désactivés</string>
+    <string name="reunion_item">Reunion 1 topic</string>
+    <string name="hour_item">15h00</string>
+    <string name="date_item">30/06/2021</string>
+    <string name="hyphen">-</string>
+    <string name="delete_button">delete_button</string>
+    <string name="resetFilter">Défiltrer</string>
 
 </resources>

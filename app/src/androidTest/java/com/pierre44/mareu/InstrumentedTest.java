@@ -38,9 +38,8 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
 
-
     private static final int ITEMS_COUNT = 20;
-    private List<Meeting> meetings = DummyGenerator.DUMMY_MEETINGS;
+    private List<Meeting> meetings = DummyGenerator.DUMMY_MEETINGS_LIST;
     public ActivityScenario mActivity;
     MeetingRepository service;
 
@@ -52,9 +51,8 @@ public class InstrumentedTest {
         mActivity = mActivityRule.getScenario();
         assertThat(mActivity, notNullValue());
         service = DI.getMeetingRepository();
-        meetings = DummyGenerator.DUMMY_MEETINGS;
+        meetings = DummyGenerator.DUMMY_MEETINGS_LIST;
     }
-
 
     @Test
     public void useAppContext() {

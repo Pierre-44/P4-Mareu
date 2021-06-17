@@ -56,6 +56,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings, mMeetingRepository.getRooms());
 
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
+
+
     }
 
     // Create Menu
@@ -85,13 +87,14 @@ public class ListMeetingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filterRoom:
-                Toast.makeText(this, "R.string.filterByRoomToastMessage", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.filterByRoomToastMessage, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.filterDate:
-                Toast.makeText(this, "R.string.filterByDateToastMessage", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.filterByDateToastMessage, Toast.LENGTH_SHORT).show();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                Toast.makeText(this, R.string.filterDisable, Toast.LENGTH_SHORT).show();
+                return false;
         }
     }
 

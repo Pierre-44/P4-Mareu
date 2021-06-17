@@ -34,7 +34,7 @@ public class UnitTest {
     @Test
     public void getMeetingsWithSuccess() {
         List<Meeting> meetings = mMeetingRepository.getMeeting();
-        List<Meeting> expectedNeighbours = DummyGenerator.DUMMY_MEETINGS;
+        List<Meeting> expectedNeighbours = DummyGenerator.DUMMY_MEETINGS_LIST;
         assertTrue(meetings.containsAll(expectedNeighbours));
     }
 
@@ -75,7 +75,5 @@ public class UnitTest {
         for (Meeting m : meetings){
             assertTrue(m.getMeetingRoom() == filterRoom);
         }
-
     }
-
 }
