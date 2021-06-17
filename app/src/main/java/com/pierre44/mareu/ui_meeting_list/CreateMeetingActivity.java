@@ -116,6 +116,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         durationSpinner.setAdapter(durationSpinnerAdapter);
     }
 
+
+
+
     // TODO : methode a completer
 /**
     @OnClick(R.id.CreateMeetingButton)

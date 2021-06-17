@@ -29,7 +29,7 @@
     <string name="filterByRoomToastMessage">Filtre par salle activé</string>
     <string name="filterByDateToastMessage">Filtre par date activé</string>
     <string name="filterDisable">Filtres désactivés</string>
-    <string name="reunion_item">Reunion 1 topic</string>
+    <string name="reunion_item">Reunion 1 sujet</string>
     <string name="hour_item">15h00</string>
     <string name="date_item">30/06/2021</string>
     <string name="hyphen">-</string>

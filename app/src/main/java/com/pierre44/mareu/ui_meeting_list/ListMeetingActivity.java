@@ -3,6 +3,7 @@ package com.pierre44.mareu.ui_meeting_list;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.events.DeleteMeetingEvent;
@@ -57,7 +60,6 @@ public class ListMeetingActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
 
-
     }
 
     // Create Menu
@@ -94,7 +96,7 @@ public class ListMeetingActivity extends AppCompatActivity {
                 return true;
             default:
                 Toast.makeText(this, R.string.filterDisable, Toast.LENGTH_SHORT).show();
-                return false;
+                return true;
         }
     }
 
@@ -119,5 +121,13 @@ public class ListMeetingActivity extends AppCompatActivity {
     public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
         mMeetings.remove(deleteMeetingEvent.meeting);
         meetingRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void snackBarThis(String toastThis, View v){
+        Snackbar.make(v, toastThis, Snackbar.LENGTH_SHORT)
+                .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+                .setBackgroundTint(getResources().getColor(R.color.lamzone_500))
+                .setTextColor(getResources().getColor(R.color.primaryTextColor))
+                .show();
     }
 }
