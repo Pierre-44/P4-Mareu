@@ -6,6 +6,7 @@ import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +29,11 @@ public class UnitTest {
     @Before
     public void setup() {
         mMeetingRepository = DI.getNewInstanceMeetingRepository();
+    }
+
+    @After
+    public void reset() {
+        mMeetingRepository.getMeeting().clear();
     }
 
     // Check that the getMeetings method give the expected list of Meetings
@@ -76,4 +82,8 @@ public class UnitTest {
             assertTrue(m.getMeetingRoom() == filterRoom);
         }
     }
+
+
+
+
 }

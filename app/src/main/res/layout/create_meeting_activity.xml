@@ -201,21 +201,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/spinner_room_action" />
 
-                    <ScrollView
-                        android:id="@+id/guests_email_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/guests_email_chip_group"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="@dimen/cardview_default_margin"
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginTop="@dimen/cardview_default_margin"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:flow_horizontalAlign="start"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_input_email"
                         tools:ignore="NestedScrolling" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonValidate"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
@@ -228,7 +231,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/guests_email_list" />
+                        app:layout_constraintTop_toBottomOf="@+id/guests_email_chip_group" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

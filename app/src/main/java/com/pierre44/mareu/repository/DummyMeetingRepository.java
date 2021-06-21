@@ -21,11 +21,8 @@ public class DummyMeetingRepository implements MeetingRepository {
     private final List<Meeting> meetings = DummyGenerator.generateMeetings();
     private final List<User> users = DummyGenerator.generateUsers();
     private final List<Room> rooms = DummyGenerator.generateRooms();
-
-    /**
-     * The Filtered meeting.
-     */
     public List<Meeting> filteredMeeting;
+
 
     @Override
     public long getNewId() {
@@ -74,5 +71,25 @@ public class DummyMeetingRepository implements MeetingRepository {
         }
         return filteredMeeting;
     }
-}
 
+    @Override
+    public void organizeMeeting(Meeting meeting) {
+        long meetingId = meeting.getMeetingId();
+        String meetingTopic = meeting.getMeetingTopic();
+        String meetingStartDate = meeting.getMeetingStartDate();
+        String meetingStartTime = meeting.getMeetingStartTime();
+        String meetingDuration = meeting.getMeetingDuration();
+        Room meetingRoom = meeting.getMeetingRoom();
+        List<User> guestsList = meeting.getMeetingGuests();
+        this.organizeMeeting(meetingId,meetingTopic,meetingStartDate,meetingStartTime,meetingDuration,meetingRoom,guestsList);
+    }
+
+    @Override
+    public void organizeMeeting(
+            long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {
+        Meeting newMeeting = new Meeting(meetingId, meetingTopic, meetingStartDate, meetingStartTime, meetingDuration, meetingRoom, guestsList);
+        meetings.add(newMeeting);
+    }
+
+
+}

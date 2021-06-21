@@ -2,6 +2,7 @@ package com.pierre44.mareu.repository;
 
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
+import com.pierre44.mareu.model.User;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface MeetingRepository {
     /**
      * Gets meeting.
      *
-     * @return the meeting to get
+     * @return the meeting List
      */
     List <Meeting> getMeeting();
 
@@ -47,7 +48,32 @@ public interface MeetingRepository {
      */
     void deleteMeeting(Meeting meeting);
 
+    /**
+     * Gets rooms.
+     *
+     * @return the List of rooms
+     */
     List<Room> getRooms();
+
+    /**
+     * organized meeting
+     *
+     * @param meeting to organized
+     */
+    void organizeMeeting(Meeting meeting);
+
+    /**
+     * organize a meeting with :
+     *
+     * @param meetingId         The Id of meeting
+     * @param meetingTopic      The topic of meeting
+     * @param meetingStartDate  The meeting start date
+     * @param meetingStartTime  The meeting start time
+     * @param meetingDuration   The meeting duration
+     * @param meetingRoom       The Room Object
+     * @param guestsList        The guests List
+     */
+    void organizeMeeting(long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList);
 
     long getNewId();
 

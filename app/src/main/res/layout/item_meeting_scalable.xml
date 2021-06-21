@@ -99,10 +99,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/constraint_layout_meeting"
                 app:layout_constraintEnd_toEndOf="@id/constraint_layout_meeting"
-                app:layout_constraintStart_toEndOf="@+id/guests_email_list" />
+                app:layout_constraintStart_toEndOf="@+id/guests_email_chip_group" />
 
             <TextView
-                android:id="@+id/guests_email_list"
+                android:id="@+id/guests_email_chip_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"

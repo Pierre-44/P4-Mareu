@@ -27,7 +27,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     private final List<Meeting> mMeetings;
     private final List<Room> mRooms;
 
-
     public MeetingRecyclerViewAdapter(List<Meeting> meetings, List<Room> rooms) {
         mMeetings = meetings;
         mRooms = rooms;
@@ -58,8 +57,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.meetingTime.setText(meeting.getMeetingStartTime());
         //meetingGuestsList
         String meetingGuestsList = "";
-        for (int i = 0 ; i < meeting.getGuests().size(); i++){
-            meetingGuestsList += "" + meeting.getGuests().get(i);
+        for (int i = 0; i < meeting.getMeetingGuests().size(); i++){
+            meetingGuestsList += "" + meeting.getMeetingGuests().get(i);
         }
         holder.meetingGuestsList.setText(meetingGuestsList);
         holder.meetingGuestsList.setNestedScrollingEnabled(true);
@@ -92,7 +91,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         TextView meetingTime;
         @BindView(R.id.meeting_date)
         TextView meetingDate;
-        @BindView(R.id.guests_email_list)
+        @BindView(R.id.guests_email_chip_group)
         TextView meetingGuestsList;
         @BindView(R.id.delete_button)
         ImageButton meetingDeleteButton;

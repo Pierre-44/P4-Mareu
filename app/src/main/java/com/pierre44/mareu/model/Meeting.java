@@ -40,7 +40,7 @@ public class Meeting implements Serializable {
     /**
      * The list of Strings of meeting
      */
-    private List<User> guests;
+    private List<User> meetingGuests;
 
 
     /**
@@ -62,9 +62,8 @@ public class Meeting implements Serializable {
         this.meetingStartTime = meetingStartTime;
         this.meetingDuration = meetingDuration;
         this.meetingRoom = meetingRoom;
-        this.guests = guestsList;
+        this.meetingGuests = guestsList;
     }
-
 
     /**
      * Gets meeting id.
@@ -181,25 +180,31 @@ public class Meeting implements Serializable {
      *
      * @return the guests
      */
-    public List<User> getGuests() {
-        return guests;
+    public List<User> getMeetingGuests() {
+        return meetingGuests;
     }
 
     /**
      * Sets guests.
      *
-     * @param guests the guests
+     * @param meetingGuests the guests
      */
-    public void setGuests(List<User> guests) {
-        this.guests = guests;
+    public void setMeetingGuests(List<User> meetingGuests) {
+        this.meetingGuests = meetingGuests;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Meeting)) return false;
         Meeting meeting = (Meeting) o;
-        return Objects.equals(meetingId, meeting.meetingId);
+        return meetingId == meeting.meetingId &&
+                Objects.equals(meetingTopic, meeting.meetingTopic) &&
+                Objects.equals(meetingStartDate, meeting.meetingStartDate) &&
+                Objects.equals(meetingStartTime, meeting.meetingStartTime) &&
+                Objects.equals(meetingDuration, meeting.meetingDuration) &&
+                Objects.equals(meetingRoom, meeting.meetingRoom) &&
+                Objects.equals(meetingGuests, meeting.meetingGuests);
     }
 
     @Override

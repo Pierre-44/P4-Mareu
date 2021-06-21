@@ -35,5 +35,6 @@
     <string name="hyphen">-</string>
     <string name="delete_button">delete_button</string>
     <string name="resetFilter">Défiltrer</string>
+    <string name="Erreur_email">Reseignez un email valide</string>
 
 </resources>
