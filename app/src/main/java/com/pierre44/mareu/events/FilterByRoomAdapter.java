@@ -26,7 +26,6 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
 
     private final List<Room> mRooms;
 
-
     public FilterByRoomAdapter(List<Room> rooms) {
         mRooms = rooms;
     }
@@ -44,10 +43,8 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
         Room room = mRooms.get(position);
 
         holder.mRoom.setText(room.getRoomName());
-
         holder.mRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(room.getRoomImage()));
 
-        //meetingDeleteButton
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
