@@ -83,5 +83,4 @@ public class InstrumentedTest {
                 .check((ViewAssertion) withItemCount(ITEMS_COUNT - 1));
     }
 **/
-
 }

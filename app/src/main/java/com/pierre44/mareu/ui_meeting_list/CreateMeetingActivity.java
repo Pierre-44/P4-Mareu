@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
+import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.model.User;
 import com.pierre44.mareu.repository.DummyGenerator;
@@ -68,7 +69,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     private List<User> mMeetingGuestList;
     private int idChip;
     private Room selectedRoom;
-
+    private Meeting meeting;
 
 
     @Override
@@ -91,7 +92,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         initPickersAndSpinners();
 
         onMeetingGuestSet();
-
     }
 
     @Override
@@ -105,7 +105,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mMeetingRoomSpinner.setOnItemSelectedListener(this);
@@ -116,7 +115,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    //TODO regrouper les methodes onClick dans un switch ?
     @Override
     public void onClick(View v) {
         final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
@@ -141,27 +139,12 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                         selectedRoom = (Room) mMeetingRoomSpinner.getSelectedItem(),
                         mMeetingGuestList
                 );
+                mMeetingRepository.organizeMeeting(meeting);
                 finish();
                 break;
-            default:
         }
     }
 
-    /**
-     * @OnClick(R.id.buttonValidate) public void createMeeting() {
-     * Meeting meeting = new Meeting(
-     * System.currentTimeMillis(),
-     * mMeetingTopicInput.getEditableText().toString(),
-     * mMeetingDatePicker.getText().toString(),
-     * mMeetingTimePicker.getText().toString(),
-     * mMeetingDurationSpinner.getSelectedItem().toString(),
-     * (Room) mMeetingRoomSpinner.getSelectedItem(),
-     * mMeetingGuestList
-     * );
-     * mMeetingRepository.createMeeting(meeting);
-     * finish();
-     * }
-     **/
     // Set meetingDatePicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -222,10 +205,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         DurationSpinnerAdapter durationSpinnerAdapter = new DurationSpinnerAdapter(getApplicationContext(), R.layout.time_dropdown_item, durationList);
         durationSpinnerAdapter.setDropDownViewResource(R.layout.time_dropdown_item);
         durationSpinner.setAdapter(durationSpinnerAdapter);
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
     }
 
     private void onMeetingGuestSet() {

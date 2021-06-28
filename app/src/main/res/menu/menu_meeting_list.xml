@@ -21,8 +21,8 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/resetFilter"
-                android:title="@string/resetFilter"
+                android:id="@+id/filterReset"
+                android:title="@string/filterReset"
                 app:showAsAction="never" />
         </menu>
     </item>

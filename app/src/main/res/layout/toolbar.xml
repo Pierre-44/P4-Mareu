@@ -1,15 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Déclaration de la Toolbar -->
-<androidx.appcompat.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- Déclaration de la Toolbar -->
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-    android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
     android:theme="@style/ToolbarTheme"
-    app:titleTextAppearance="@style/ToolbarTheme"/>
+    app:titleTextAppearance="@style/ToolbarTheme">
+
+    <ImageView
+        android:id="@+id/lamzone_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_default"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/lamzone_logo"
+        android:src="@drawable/ic_logo_lamzone" />
+
+</androidx.appcompat.widget.Toolbar>
 
 
 

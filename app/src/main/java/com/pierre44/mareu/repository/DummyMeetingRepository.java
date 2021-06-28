@@ -1,17 +1,24 @@
 package com.pierre44.mareu.repository;
 
+import com.pierre44.mareu.events.FilterByDateListner;
+import com.pierre44.mareu.events.FilterByRoomListner;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Created by pmeignen on 19/05/2021.
  */
-public class DummyMeetingRepository implements MeetingRepository {
+public class DummyMeetingRepository implements
+        MeetingRepository,
+        FilterByRoomListner,
+        FilterByDateListner
+{
 
     /**
      * Generate a new ID
@@ -91,5 +98,13 @@ public class DummyMeetingRepository implements MeetingRepository {
         meetings.add(newMeeting);
     }
 
+    @Override
+    public void filterByDateListner(Date date) {
 
+    }
+
+    @Override
+    public void filterByRoomListner(Room room) {
+
+    }
 }

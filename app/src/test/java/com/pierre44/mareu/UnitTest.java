@@ -82,8 +82,4 @@ public class UnitTest {
             assertTrue(m.getMeetingRoom() == filterRoom);
         }
     }
-
-
-
-
 }

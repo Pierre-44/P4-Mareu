@@ -26,15 +26,19 @@
     <string name="spinner_meeting_room">Konkqueror</string>
     <string name="email">email</string>
     <string name="default_email_list">defaut@lamzone.com defaut@lamzone.com</string>
-    <string name="filterByRoomToastMessage">Filtre par salle activé</string>
-    <string name="filterByDateToastMessage">Filtre par date activé</string>
-    <string name="filterDisable">Filtres désactivés</string>
-    <string name="reunion_item">Reunion 1 sujet</string>
+    <string name="filterByRoomMessage">Filtre par salle activé</string>
+    <string name="filterByDateMessage">Filtre par date activé</string>
+    <string name="filterDisableMessage">Filtres désactivés</string>
+    <string name="meeting_topic">Reunion 1 sujet</string>
     <string name="hour_item">15h00</string>
     <string name="date_item">30/06/2021</string>
     <string name="hyphen">-</string>
     <string name="delete_button">delete_button</string>
-    <string name="resetFilter">Défiltrer</string>
+    <string name="filterReset">Défiltrer</string>
     <string name="Erreur_email">Reseignez un email valide</string>
+    <string name="guest_list">Liste des Invités :</string>
+    <string name="filterByRoomToastMessage">filtrer par salle</string>
+    <string name="filterByDateToastMessage">filtrer par date</string>
+    <string name="filterDisable">filtre desactiver</string>
 
 </resources>

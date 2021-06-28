@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ListMeetingActivity extends AppCompatActivity {
+public class ListMeetingActivity extends AppCompatActivity
+{
 
     private MeetingRepository mMeetingRepository;
     private List<Meeting> mMeetings;
@@ -89,12 +91,20 @@ public class ListMeetingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filterRoom:
+                // créer le fragment dialog de la liste des Room pour le filtre Room
+                FragmentManager fm = getSupportFragmentManager();
+                RoomDialogFragment editNameDialogFragment = RoomDialogFragment.newInstance();
+                editNameDialogFragment.show(fm,"");
                 Toast.makeText(this, R.string.filterByRoomToastMessage, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.filterDate:
+                // créer le date picker pour le filtre date
+                //...
                 Toast.makeText(this, R.string.filterByDateToastMessage, Toast.LENGTH_SHORT).show();
                 return true;
             default:
+                // Reinitialiser filtres
+                //...
                 Toast.makeText(this, R.string.filterDisable, Toast.LENGTH_SHORT).show();
                 return true;
         }
@@ -123,7 +133,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
-    private void snackBarThis(String toastThis, View v){
+    private void snackBarThis(String toastThis, View v) {
         Snackbar.make(v, toastThis, Snackbar.LENGTH_SHORT)
                 .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
                 .setBackgroundTint(getResources().getColor(R.color.lamzone_500))
