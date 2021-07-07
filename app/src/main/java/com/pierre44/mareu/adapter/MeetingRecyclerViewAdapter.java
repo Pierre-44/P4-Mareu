@@ -1,5 +1,7 @@
-package com.pierre44.mareu.ui_meeting_list;
+package com.pierre44.mareu.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
+import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.events.DeleteMeetingEvent;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
+import com.pierre44.mareu.repository.MeetingRepository;
+import com.pierre44.mareu.ui_meeting_list.MeetingDetailsDialogFragment;
+import com.pierre44.mareu.utils.UtilsTools;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -24,8 +30,13 @@ import butterknife.ButterKnife;
 
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.MeetingViewHolder> {
 
-    private final List<Meeting> mMeetings;
+    private MeetingRepository mMeetingRepository = DI.getMeetingRepository();
+    private List<Meeting> mMeetings;
     private final List<Room> mRooms;
+    static final String CLICKED_MEETING = "CLICKED_MEETING";
+
+    private UtilsTools.FilterType mFilterType = UtilsTools.FilterType.NONE;
+    private long mFilterValue;
 
     public List<Room> getRooms() {
         return mRooms;
@@ -61,18 +72,29 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.meetingTime.setText(meeting.getMeetingStartTime());
         //meetingGuestsList
         String meetingGuestsList = "";
-        for (int i = 0 ; i < meeting.getMeetingGuests().size(); i++) {
-            meetingGuestsList += meeting.getMeetingGuests().get(i).getEmail();
+        for (int i = 0; i < meeting.getMeetingGuests().size(); i++) {
+            meetingGuestsList += meeting.getMeetingGuests().get(i).getEmail() + " - ";
         }
         holder.meetingGuestsList.setText(meetingGuestsList);
         holder.meetingGuestsList.setNestedScrollingEnabled(true);
         holder.meetingGuestsList.setSelected(true);
 
-        //meetingDeleteButton
+        //meeting Delete & detail event
         holder.meetingDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position)));
+            }
+        });
+        // go to Detail meeting dialog fragment
+        // TODO : resolve error : android.content.ActivityNotFoundException: Unable to find explicit activity class {com.pierre44.mareu/com.pierre44.mareu.ui_meeting_list.MeetingDetailsDialogFragment}; have you declared this activity in your AndroidManifest.xml?
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToDetailMeetingDialogFragment = new Intent(holder.itemView.getContext(), MeetingDetailsDialogFragment.class);
+                goToDetailMeetingDialogFragment.putExtra(CLICKED_MEETING, mMeetings.get(position));
+                holder.itemView.getContext().startActivity(goToDetailMeetingDialogFragment);
             }
         });
     }
@@ -82,7 +104,29 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         return mMeetings.size();
     }
 
-    public class MeetingViewHolder extends RecyclerView.ViewHolder {
+    public void refreshList(UtilsTools.FilterType filterType, long filterValue) {
+        mFilterType = filterType;
+        mFilterValue = filterValue;
+        switch (filterType) {
+            case NONE:
+                mMeetings = mMeetingRepository.getMeetings();
+                break;
+            case BY_DATE:
+                mMeetings = mMeetingRepository.getMeetingsForFilterMeetingDate(filterValue);
+                break;
+            case BY_ROOM:
+                mMeetings = mMeetingRepository.getMeetingsForFilterMeetingRoom(filterValue);
+                break;
+        }
+    }
+
+
+    public void refresh(UtilsTools.FilterType none, long filterValue) {
+        this.refresh(mFilterType, mFilterValue);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    public static class MeetingViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.meeting_topic)
         TextView meetingTopic;

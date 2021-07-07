@@ -1,4 +1,4 @@
-package com.pierre44.mareu.ui_meeting_list;
+package com.pierre44.mareu.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;

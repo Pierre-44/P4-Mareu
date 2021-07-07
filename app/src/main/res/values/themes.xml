@@ -16,7 +16,7 @@
     <!-- TOOLBAR THEME -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar  -->
-        <item name="android:textColorPrimary">@color/dark_grey</item>
+        <item name="android:textColorPrimary">@color/grey</item>
     </style>
     <style name="Theme.Mareu.NoActionBar">
         <item name="windowActionBar">false</item>

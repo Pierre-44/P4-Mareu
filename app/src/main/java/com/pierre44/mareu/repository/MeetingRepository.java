@@ -16,7 +16,7 @@ public interface MeetingRepository {
      *
      * @return the meeting List
      */
-    List <Meeting> getMeeting();
+    List <Meeting> getMeetings();
 
     /**
      * Filter by room list.
@@ -55,6 +55,34 @@ public interface MeetingRepository {
      */
     List<Room> getRooms();
 
+
+    /**
+     * Get meeting room with id
+     *
+     * @param id of meeting room
+     * @return the meeting room
+     */
+    Room getRoomById(long id);
+
+
+
+    /**
+     * Gets meetings for filter meeting room.
+     *
+     * @param meetingRoomId the meeting room id
+     * @return a list of meetings
+     */
+    List<Meeting> getMeetingsForFilterMeetingRoom(long meetingRoomId);
+
+
+    /**
+     * Gets meetings for filter meeting date.
+     *
+     * @param dayTimeStamp the day time stamp in ms
+     * @return a list of meetings
+     */
+    List<Meeting> getMeetingsForFilterMeetingDate(long dayTimeStamp);
+
     /**
      * organized meeting
      *
@@ -62,19 +90,25 @@ public interface MeetingRepository {
      */
     void organizeMeeting(Meeting meeting);
 
+
     /**
      * organize a meeting with :
      *
-     * @param meetingId         The Id of meeting
-     * @param meetingTopic      The topic of meeting
-     * @param meetingStartDate  The meeting start date
-     * @param meetingStartTime  The meeting start time
-     * @param meetingDuration   The meeting duration
-     * @param meetingRoom       The Room Object
-     * @param guestsList        The guests List
+     * @param meetingId        The Id of meeting
+     * @param meetingTopic     The topic of meeting
+     * @param meetingStartDate The meeting start date
+     * @param meetingStartTime The meeting start time
+     * @param meetingDuration  The meeting duration
+     * @param meetingRoom      The Room Object
+     * @param guestsList       The guests List
      */
     void organizeMeeting(long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList);
 
+    /**
+     * Gets new id.
+     *
+     * @return the new id
+     */
     long getNewId();
 
 }

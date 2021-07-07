@@ -20,7 +20,6 @@
             android:name=".ui_meeting_list.CreateMeetingActivity"
             android:label="@string/title_activity_add_meeting"
             android:theme="@style/Theme.Mareu.NoActionBar"/>
-
     </application>
 
 </manifest>

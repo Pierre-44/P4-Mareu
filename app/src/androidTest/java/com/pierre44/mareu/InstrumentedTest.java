@@ -1,34 +1,44 @@
 package com.pierre44.mareu;
 
 
-import android.content.Context;
+import android.view.View;
 
 import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 import com.pierre44.mareu.ui_meeting_list.ListMeetingActivity;
+import com.pierre44.mareu.utils.DeleteViewAction;
+import com.pierre44.mareu.utils.UtilsTools;
 
+import org.hamcrest.Matcher;
+import org.hamcrest.core.AllOf;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Calendar;
 import java.util.List;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
+import static androidx.test.espresso.action.ViewActions.typeTextIntoFocusedView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
-import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.assertEquals;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withParentIndex;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.pierre44.mareu.utils.RecyclerViewItemCountAssertion.withItemCount;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -38,138 +48,157 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class InstrumentedTest {
 
-    private static final int ITEMS_COUNT = 20;
-    private List<Meeting> meetings = DummyGenerator.DUMMY_MEETINGS_LIST;
+
+    private static final int TEST_ITEMS_COUNT = 20;
+    public static final String TEST_LONG_TOPIC = "description de sujet de la réunion plus long";
+    public static final int TEST_FIRST_POSITION = 0;
+    public static final String TEST_DURATION_SPINNER_1H = "01:00";
+    public static final String TEST_DATE_PICKER_MEETING = "01/07/2021";
+    public static final String TEST_ROOM_SELECTED_ON_SPINNER = DummyGenerator.DUMMY_ROOMS_LIST.get(0).toString();
+    public static final int TEST_EXPECTED_COUNT_FOR_FILTER_BY_ROOM = 2;
+    public static final int TEST_EXPECTED_COUNT_FOR_FILTER_BY_DATE = 3;
+    public static final String TEST_MEETING_TOPIC = "sujet de la réunion";
+    public static final String TEST_MEETING_GUEST_0 = DummyGenerator.DUMMY_USERS_LIST.get(0).toString();
+    public static final String TEST_MEETING_GUEST_1 = DummyGenerator.DUMMY_USERS_LIST.get(1).toString();
+    private static final List<Meeting> TEST_MEETINGS = DummyGenerator.DUMMY_MEETINGS_LIST;
     public ActivityScenario mActivity;
     MeetingRepository mMeetingRepository;
+    private Calendar mCalendar;
 
     @Rule
-    public ActivityScenarioRule mActivityRule = new ActivityScenarioRule(ListMeetingActivity.class);
+    public ActivityScenarioRule<ListMeetingActivity> myActivityScenarioRule = new ActivityScenarioRule<>(ListMeetingActivity.class);
 
     @Before
     public void setUp() {
-        mActivity = mActivityRule.getScenario();
-        assertThat(mActivity, notNullValue());
-        mMeetingRepository = DI.getMeetingRepository();
-        meetings = DummyGenerator.DUMMY_MEETINGS_LIST;
-    }
-
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.pierre44.mareu", appContext.getPackageName());
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::doMeetingListEmpty);
     }
 
     @Test
     public void myMeetingList_shouldNotBeEmpty() {
-        // First scroll to the position that needs to be matched and click on it.
-        onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
-                .check(matches(hasMinimumChildCount(1)));
+        //Given : we have 20 meetings scheduled
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        //When : we have the list displayed
+        onView(withId(R.id.meeting_list_activity)).check(matches(isDisplayed()));
+        //Then : the 20 meetings appear
+        onView(withId(R.id.meeting_list_activity)).check(withItemCount(TEST_MEETINGS.size()));
     }
 
-    //TODO : MeetingsList delete action button should remove item
-
-    /**
-     * @Test public void myMeetingsList_deleteAction_shouldRemoveItem() {
-     * // Given : We remove the element at position 0
-     * onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
-     * .check((ViewAssertion) withItemCount(ITEMS_COUNT));
-     * // When perform a click on a delete icon
-     * onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
-     * .perform(RecyclerViewActions.actionOnItemAtPosition(0, (ViewAction) new DeleteViewAction()));
-     * // Then : the number of element is 19
-     * onView(allOf(ViewMatchers.withId(R.id.recycler_view_meeting)))
-     * .check((ViewAssertion) withItemCount(ITEMS_COUNT - 1));
-     * }
-     **/
-
-
-    //TODO : Create Meetings action button should open activity
     @Test
-    public void MyMeetingListActivity_ClickOnCreateMeetingsFloatingActionButton_ShouldOpenCreateMeetingActivity() {
-
-        /**
-         // Given : We are on meeting list activity
-
-         // When :  Click on createMeetingButton FAB
-
-         // Then : Create meeting activity to be open
-         **/
+    public void myNeighboursList_deleteAction_shouldRemoveItem() {
+        //Given : we have 20 meetings scheduled
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        //When : we delete the first one in list by clicking the delete button
+        onView(allOf(withParent(withId(R.id.meeting_list_activity)), withParentIndex(TEST_FIRST_POSITION)));
+        onView(withId(R.id.meeting_list_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(TEST_FIRST_POSITION, new DeleteViewAction()));
+        //Then : the list counts meeting size less one
+        onView(withId(R.id.meeting_list_activity)).check(withItemCount(TEST_MEETINGS.size() - 1));
     }
 
-    //TODO : Complete Meetings action form and Validate should add meeting on list
+    @Test
+    public void myMeetingListActivity_ClickOnCreateMeetingsFloatingActionButton_ShouldOpenCreateMeetingActivity() {
+        // Given : We are on meeting list activity
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        // When :  Click on createMeetingButton FAB
+        onView(withId(R.id.create_meeting_button)).perform(click());
+        // Then : Create meeting activity to be open
+        onView(withId(R.id.create_meeting_activity)).check(matches(isDisplayed()));
+    }
 
     @Test
-    public void MyCreateMeetingActivity_CompleteForm_ShouldAddMeetingOnMeetingListActivity() {
-
-
-        /**
-         // Given : We had the element at position 0
-
-         // When : complete id/text_input_meeting_topic
-
-         // When : complete id/date_picker_actions
-
-         // When : complete id/time_picker_action
-
-         // When : complete id/spinner_room_action
-
-         // When : complete id/spinner_duration_action
-
-         // When : complete id/text_input_email
-
-         // When : click on id/buttonValidate"
-
-         // Then : the number of element is ist size + 1
-         **/
-
+    public void myCreateMeetingActivity_CompleteForm_ShouldAddMeetingOnMeetingListActivity() {
+        // Given : We are on CreateMeeting Activity
+        onView(withId(R.id.create_meeting_activity)).perform(click());
+        // When : complete text_input_meeting_topic
+        onView(withId(R.id.meeting_topic)).perform(click());
+        onView(withId(R.id.meeting_topic)).perform(typeTextIntoFocusedView(TEST_MEETING_TOPIC), closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_topic)).check(matches(withText(TEST_MEETING_TOPIC)));
+        // When : complete date_picker_actions
+        mCalendar = Calendar.getInstance();
+        onView(withId(R.id.date_picker_actions)).perform(click());
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.date_picker_actions)).check(matches(withText(TEST_DATE_PICKER_MEETING)));
+        // When : complete time_picker_action
+        onView(withId(R.id.time_picker_action)).perform(click());
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.time_picker_action)).check(matches(withText(UtilsTools.dateFormat(mCalendar, UtilsTools.TIME_FORMAT_HH_MM))));
+        // When : complete spinner_room_action
+        onView(withId(R.id.meeting_room)).perform(click());
+        onView(withText(TEST_ROOM_SELECTED_ON_SPINNER)).check(matches(isDisplayed()));
+        onView(withText(TEST_ROOM_SELECTED_ON_SPINNER)).perform(click());
+        onView(withId(R.id.meeting_room)).check(matches(withText(TEST_ROOM_SELECTED_ON_SPINNER)));
+        // When : complete spinner_duration_action
+        onView(withId(R.id.detail_meeting_duration)).perform(click());
+        onView(withText(TEST_DURATION_SPINNER_1H)).check(matches(isDisplayed()));
+        onView(withText(TEST_DURATION_SPINNER_1H)).perform(click());
+        onView(withId(R.id.detail_meeting_duration)).check(matches(withText(TEST_DURATION_SPINNER_1H)));
+        // When : complete text_input_email with 2 emails
+        onView(withId(R.id.text_input_email)).perform(click());
+        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_0), closeSoftKeyboard());
+        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_1), closeSoftKeyboard());
+        // When : click on buttonValidate
+        onView(withId(R.id.create_meeting_validate_button)).perform(click());
+        // Then : On List Meeting Activity the number of element is List size + 1
+        onView(withId(R.id.meeting_list_activity)).check(withItemCount(TEST_MEETINGS.size() + 1));
     }
 
     //TODO : Filtering By Room show the correct meeting
 
     @Test
-    public void MyMeetingListActivity_ApplyFilterByRoom_DisplaysTheCorrectMeetings() {
+    public void myMeetingListActivity_ApplyFilterByRoom_DisplaysTheCorrectMeetings() {
 
-        /**
-         // Given : set meeting with specified Room
-
-         // When : perform click on filter by Room and select the Room
-
-         // Then : check that the meeting displayed the specified meeting
-         **/
+        // Given : we have 20 meetings scheduled
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        // When : perform click on filter by Room and select the Room
+        onView(withContentDescription(R.string.filter_menu)).perform(click());
+        onView(withText(R.string.filter_by_room)).perform(click());
+        onView(allOf(withParent(withId(R.id.list_room))));
+        onView(withText(TEST_ROOM_SELECTED_ON_SPINNER)).check(matches(isDisplayed()));
+        // Then : check that the meeting displayed the specified meeting
+        onView(withId(R.id.meeting_list_activity)).check(withItemCount(TEST_EXPECTED_COUNT_FOR_FILTER_BY_ROOM));
+        onView(withId(R.id.meeting_list_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(TEST_FIRST_POSITION, click()));
     }
+
     //TODO : Filtering By Date show the correct meeting
-
     @Test
-    public void MyMeetingListActivity_ApplyFilterByDate_DisplaysTheCorrectMeetings() {
+    public void myMeetingListActivity_ApplyFilterByDate_DisplaysTheCorrectMeetings() {
+
+        // Given : we have 20 meetings scheduled
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        // When : perform click on filter by date
+        onView(withContentDescription(R.string.filter_menu)).perform(click());
+        onView(withText(R.string.filter_by_date)).perform(click());
+        // When : complete date picker and select date 01/07/2021
+        mCalendar = Calendar.getInstance();
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.date_picker_actions)).check(matches(withText(TEST_DATE_PICKER_MEETING)));
+        // Then : check that the meeting displayed and that the 01/07/2021 date
+
 
     }
-    /**
-     // Given : set meeting on today's date
-
-     // When : perform click on filter by date
-
-     // When : complete date picker and select today's date
-
-     // Then : check that the meeting displayed and that the today's date
-     **/
-
+/**
     //TODO : Filtering Reset correctly init meeting List
-
     @Test
-    public void MyMeetingListActivity_DisableFilter_DisplaysTheCorrectMeetings() {
+    public void MyMeetingListActivity_DisableFilter_DisplaysTheListMeetings() {
 
-    /**
-     // Given : set meetings on today's date and with specified Room
+        // Given : we have 20 meetings scheduled
+        myActivityScenarioRule.getScenario().onActivity(ListMeetingActivity::addAllTestMeetings);
+        // When : perform click on filter by Room and select the Room
+        onView(withContentDescription(R.string.filter_menu)).perform(click());
+        onView(withText(R.string.filter_by_room)).perform(click());
+        onView(allOf(withParent(withId(R.id.list_room)))).perform(RecyclerViewActions.actionOnItemAtPosition(TEST_FIRST_POSITION, click()));;
+        onView(withText(TEST_ROOM_SELECTED_ON_SPINNER)).check(matches(isDisplayed()));
+        // When : perform click on filter reset
+        onView(withContentDescription(R.string.filter_menu)).perform(click());
+        onView(withText(R.string.)).perform(click());
 
-     // When : perform click on filter by date
+        // When : complete date picker and select today's date
 
-     // When : perform click on filter by Room and select the Room
+        // Then : check that the meeting displayed and
 
-     // When : complete date picker and select today's date
+    }
+**/
 
-     // Then : check that the meeting displayed and that the today's date
-     **/
+    private static Matcher<View> getViewByContentDescription(int contentDescription) {
+        return AllOf.allOf(withId(R.id.recycler_view_meeting), withContentDescription(String.valueOf(contentDescription)));
     }
 }

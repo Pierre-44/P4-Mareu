@@ -27,12 +27,15 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.pierre44.mareu.R;
+import com.pierre44.mareu.adapter.DurationSpinnerAdapter;
+import com.pierre44.mareu.adapter.RoomSpinnerAdapter;
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.model.User;
 import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
+import com.pierre44.mareu.utils.UtilsTools;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -42,8 +45,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static java.lang.System.currentTimeMillis;
+import butterknife.OnClick;
 
 public class CreateMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -55,13 +57,13 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     Button mMeetingTimePicker;
     @BindView(R.id.spinner_room_action)
     Spinner mMeetingRoomSpinner;
-    @BindView(R.id.spinner_duration_action)
+    @BindView(R.id.detail_meeting_duration)
     Spinner mMeetingDurationSpinner;
     @BindView(R.id.text_input_email)
     TextInputEditText mMeetingEmailInput;
-    @BindView(R.id.guests_email_chip_group)
+    @BindView(R.id.detail_guests_email_recyclerview)
     ChipGroup mMeetingGuestChipGroup;
-    @BindView(R.id.buttonValidate)
+    @BindView(R.id.create_meeting_validate_button)
     MaterialButton mMeetingValidateButton;
 
     private MeetingRepository mMeetingRepository;
@@ -115,6 +117,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+
     @Override
     public void onClick(View v) {
         final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
@@ -129,23 +132,36 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
                 break;
-            case R.id.buttonValidate:
-                mMeetingRepository.organizeMeeting(
-                        currentTimeMillis(),
-                        mMeetingTopicInput.getEditableText().toString(),
-                        mMeetingDatePicker.getText().toString(),
-                        mMeetingTimePicker.getText().toString(),
-                        mMeetingDurationSpinner.getSelectedItem().toString(),
-                        selectedRoom = (Room) mMeetingRoomSpinner.getSelectedItem(),
-                        mMeetingGuestList
-                );
-                mMeetingRepository.organizeMeeting(meeting);
-                finish();
-                break;
+            case R.id.create_meeting_validate_button:
+                createMeeting();
         }
     }
 
-    // Set meetingDatePicker
+    // Create meeting methode
+    @OnClick(R.id.create_meeting_validate_button)
+    public void createMeeting() {
+        Meeting meeting = new Meeting(
+                System.currentTimeMillis(),
+                mMeetingTopicInput.getText().toString(),
+                mMeetingDatePicker.getText().toString(),
+                mMeetingTimePicker.getText().toString(),
+                mMeetingDurationSpinner.getSelectedItem().toString(),
+                (Room) mMeetingRoomSpinner.getSelectedItem(),
+                mMeetingGuestList
+        );
+        mMeetingRepository.createMeeting(meeting);
+        finish();
+    }
+
+
+
+    /**
+     * Set meetingDatePicker
+     * @param view
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -154,7 +170,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance().format(c.getTime());
 
-        // set text instate of text button
         TextView textViewDate = (TextView) findViewById(R.id.date_picker_actions);
         textViewDate.setText(currentDateString);
     }
@@ -168,8 +183,9 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
 
         // set Time instate of text button
         TextView textViewTime = (TextView) findViewById(R.id.time_picker_action);
-        textViewTime.setText(hourOfDay + ":" + minute);
+        textViewTime.setText(UtilsTools.timeFormat(hourOfDay) + ":" + UtilsTools.timeFormat(minute));
     }
+
 
     // init Pickers And Spinners methode
     private void initPickersAndSpinners() {
@@ -195,13 +211,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
+
         // meetingRoomSpinner
         final Spinner roomSpinner = findViewById(R.id.spinner_room_action);
         RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(getApplicationContext(), R.layout.room_dropdown_item, roomList);
         roomSpinnerAdapter.setDropDownViewResource(R.layout.room_dropdown_item);
         roomSpinner.setAdapter(roomSpinnerAdapter);
         // meetingDurationSpinner
-        final Spinner durationSpinner = findViewById(R.id.spinner_duration_action);
+        final Spinner durationSpinner = findViewById(R.id.detail_meeting_duration);
         DurationSpinnerAdapter durationSpinnerAdapter = new DurationSpinnerAdapter(getApplicationContext(), R.layout.time_dropdown_item, durationList);
         durationSpinnerAdapter.setDropDownViewResource(R.layout.time_dropdown_item);
         durationSpinner.setAdapter(durationSpinnerAdapter);
@@ -213,6 +230,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // nothing before
             }
+
             // perform IME_ACTION_DONE action when use " " , ";" or "," character on mMeetingEmailInput
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -220,6 +238,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                     mMeetingEmailInput.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 // nothing after

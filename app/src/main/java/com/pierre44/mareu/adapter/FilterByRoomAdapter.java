@@ -1,4 +1,4 @@
-package com.pierre44.mareu.events;
+package com.pierre44.mareu.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
+import com.pierre44.mareu.events.FilterByRoomEvent;
 import com.pierre44.mareu.model.Room;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * Created by pmeignen on 28/06/2021.
  */
-public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapter.MeetingViewHolder> {
+public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapter.FilterRoomViewHolder> {
 
     private final List<Room> mRooms;
 
@@ -32,14 +33,14 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
 
     @NonNull
     @Override
-    public FilterByRoomAdapter.MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FilterRoomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_meeting_scalable, parent, false);
-        return new FilterByRoomAdapter.MeetingViewHolder(view);
+                .inflate(R.layout.room_dropdown_item, parent, false);
+        return new FilterByRoomAdapter.FilterRoomViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FilterByRoomAdapter.MeetingViewHolder holder, int position) {
+    public void onBindViewHolder(FilterRoomViewHolder holder, int position) {
         Room room = mRooms.get(position);
 
         holder.mRoom.setText(room.getRoomName());
@@ -58,15 +59,14 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
         return mRooms.size();
     }
 
-    public class MeetingViewHolder extends RecyclerView.ViewHolder {
+    public class FilterRoomViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.meeting_room_text)
         TextView mRoom;
         @BindView(R.id.meeting_room_icon)
         ImageView mRoomImage;
 
-
-        public MeetingViewHolder(View view) {
+        public FilterRoomViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
+import com.pierre44.mareu.adapter.FilterByRoomAdapter;
 import com.pierre44.mareu.di.DI;
-import com.pierre44.mareu.events.FilterByRoomAdapter;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.MeetingRepository;
 
@@ -43,17 +44,16 @@ public class RoomDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_room_fragment, container);
         mListRoom = view.findViewById(R.id.list_room);
-
-        mMeetingRepository = DI.getMeetingRepository();
-        mRooms = mMeetingRepository.getRooms();
-
+        mListRoom.setLayoutManager(new LinearLayoutManager(view.getContext()));
         return view;
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mMeetingRepository = DI.getMeetingRepository();
+        mRooms = mMeetingRepository.getRooms();
         mFilterByRoomAdapter = new FilterByRoomAdapter(mRooms);
         mListRoom.setAdapter(mFilterByRoomAdapter);
     }

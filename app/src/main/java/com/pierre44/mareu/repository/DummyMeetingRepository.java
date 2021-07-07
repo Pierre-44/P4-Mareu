@@ -1,35 +1,27 @@
 package com.pierre44.mareu.repository;
 
-import com.pierre44.mareu.events.FilterByDateListner;
-import com.pierre44.mareu.events.FilterByRoomListner;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.model.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Created by pmeignen on 19/05/2021.
  */
-public class DummyMeetingRepository implements
-        MeetingRepository,
-        FilterByRoomListner,
-        FilterByDateListner
-{
+public class DummyMeetingRepository implements MeetingRepository{
 
     /**
      * Generate a new ID
      */
     long newId;
 
-    private final List<Meeting> meetings = DummyGenerator.generateMeetings();
-    private final List<User> users = DummyGenerator.generateUsers();
-    private final List<Room> rooms = DummyGenerator.generateRooms();
+    private final List<Meeting> mMeetings = DummyGenerator.generateMeetings();
+    private final List<User> mUsers = DummyGenerator.generateUsers();
+    private final List<Room> mRooms = DummyGenerator.generateRooms();
     public List<Meeting> filteredMeeting;
-
 
     @Override
     public long getNewId() {
@@ -38,29 +30,60 @@ public class DummyMeetingRepository implements
     }
 
     @Override
-    public List<Meeting> getMeeting() {
-        return meetings;
+    public List<Meeting> getMeetings() {
+        return mMeetings;
     }
 
     @Override
     public void createMeeting(Meeting meeting) {
-        meetings.add(meeting);
+        mMeetings.add(meeting);
     }
 
     @Override
     public void deleteMeeting(Meeting meeting) {
-        meetings.remove(meeting);
+        mMeetings.remove(meeting);
     }
 
     @Override
     public List<Room> getRooms() {
-        return rooms;
+        return mRooms;
+    }
+
+    /**
+     * Get meeting room from its id
+     *
+     * @param id of room
+     * @return the room
+     */
+    @Override
+    public Room getRoomById(long id) {
+        for (int i = 0; i < mRooms.size(); i++) {
+            if (mRooms.get(i).getRoomId() == id) return mRooms.get(i);
+        }
+        return null;
+    }
+
+
+    @Override
+    public List<Meeting> getMeetingsForFilterMeetingRoom(long meetingRoomId) {
+        List<Meeting> meetings = new ArrayList<>();
+        for (int i = 0; i < mMeetings.size(); i++) {
+            if (mRooms.get(i).getRoomId() == meetingRoomId) {
+                meetings.add(mMeetings.get(i));
+            }
+        }
+        return meetings;
+    }
+
+    @Override
+    public List<Meeting> getMeetingsForFilterMeetingDate(long dayTimeStamp) {
+        return null;
     }
 
     @Override
     public List<Meeting> filterByRoom(Room room) {
         filteredMeeting = new ArrayList<>();
-        for (Meeting m : getMeeting()) {
+        for (Meeting m : getMeetings()) {
             if (m.getMeetingRoom() == room) {
                 filteredMeeting.add(m);
             }
@@ -71,7 +94,7 @@ public class DummyMeetingRepository implements
     @Override
     public List<Meeting> filterByDate(String date) {
         filteredMeeting = new ArrayList<>();
-        for (Meeting m : getMeeting()) {
+        for (Meeting m : getMeetings()) {
             if (m.getMeetingStartDate().equals(date)) {
                 filteredMeeting.add(m);
             }
@@ -95,16 +118,6 @@ public class DummyMeetingRepository implements
     public void organizeMeeting(
             long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {
         Meeting newMeeting = new Meeting(meetingId, meetingTopic, meetingStartDate, meetingStartTime, meetingDuration, meetingRoom, guestsList);
-        meetings.add(newMeeting);
-    }
-
-    @Override
-    public void filterByDateListner(Date date) {
-
-    }
-
-    @Override
-    public void filterByRoomListner(Room room) {
-
+        mMeetings.add(newMeeting);
     }
 }

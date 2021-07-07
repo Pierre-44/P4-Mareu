@@ -9,9 +9,7 @@ import com.pierre44.mareu.model.Room;
  */
 public class FilterByRoomEvent {
 
-
-    private final Room room;
-
+    public Room room;
 
     public FilterByRoomEvent(@NonNull Room room) {
         this.room = room;

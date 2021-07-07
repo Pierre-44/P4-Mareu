@@ -19,26 +19,23 @@
     <string name="add_meeting_time">Heure</string>
     <string name="time_spinner_duration">01:00</string>
     <string name="lamzone_logo">lamzone logo</string>
-    <string name="filterByRoom">Filtrer par salle</string>
-    <string name="filterByDate">Filtrer par date</string>
-    <string name="filter">filtre</string>
+    <string name="filter_by_room">Filtrer par salle</string>
+    <string name="filter_by_date">Filtrer par date</string>
+    <string name="filter_menu">filtre</string>
     <string name="spinner_meeting_icon">meeting_icon</string>
     <string name="spinner_meeting_room">Konkqueror</string>
     <string name="email">email</string>
-    <string name="default_email_list">defaut@lamzone.com defaut@lamzone.com</string>
-    <string name="filterByRoomMessage">Filtre par salle activé</string>
-    <string name="filterByDateMessage">Filtre par date activé</string>
-    <string name="filterDisableMessage">Filtres désactivés</string>
+    <string name="default_email_list">defaut@lamzone.com - defaut@lamzone.com - defaut@lamzone.com </string>
+    <string name="filter_by_room_message">Filtre par salle activé</string>
+    <string name="filter_by_date_message">Filtre par date activé</string>
+    <string name="filter_disable_message">Filtres désactivés</string>
     <string name="meeting_topic">Reunion 1 sujet</string>
     <string name="hour_item">15h00</string>
     <string name="date_item">30/06/2021</string>
     <string name="hyphen">-</string>
     <string name="delete_button">delete_button</string>
-    <string name="filterReset">Défiltrer</string>
+    <string name="filter_reset">Défiltrer</string>
     <string name="Erreur_email">Reseignez un email valide</string>
-    <string name="guest_list">Liste des Invités :</string>
-    <string name="filterByRoomToastMessage">filtrer par salle</string>
-    <string name="filterByDateToastMessage">filtrer par date</string>
-    <string name="filterDisable">filtre desactiver</string>
+    <string name="guest_list">Liste des invités :</string>
 
 </resources>

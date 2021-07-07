@@ -33,13 +33,13 @@ public class UnitTest {
 
     @After
     public void reset() {
-        mMeetingRepository.getMeeting().clear();
+        mMeetingRepository.getMeetings().clear();
     }
 
     // Check that the getMeetings method give the expected list of Meetings
     @Test
     public void getMeetingsWithSuccess() {
-        List<Meeting> meetings = mMeetingRepository.getMeeting();
+        List<Meeting> meetings = mMeetingRepository.getMeetings();
         List<Meeting> expectedNeighbours = DummyGenerator.DUMMY_MEETINGS_LIST;
         assertTrue(meetings.containsAll(expectedNeighbours));
     }
@@ -47,18 +47,18 @@ public class UnitTest {
     // Check that the deleteMeeting method removes Meeting from the list of Meetings
     @Test
     public void deleteMeetingWithSuccess() {
-        Meeting meetingToDelete = mMeetingRepository.getMeeting().get(0);
+        Meeting meetingToDelete = mMeetingRepository.getMeetings().get(0);
         mMeetingRepository.deleteMeeting(meetingToDelete);
-        assertFalse(mMeetingRepository.getMeeting().contains(meetingToDelete));
+        assertFalse(mMeetingRepository.getMeetings().contains(meetingToDelete));
     }
 
     // Check that the addMeeting method creates a new neighbor
     @Test
     public void createMeetingsWithSuccess() {
-        int nbMeeting = mMeetingRepository.getMeeting().size();
-        Meeting meetingToAdd = mMeetingRepository.getMeeting().get(0);
+        int nbMeeting = mMeetingRepository.getMeetings().size();
+        Meeting meetingToAdd = mMeetingRepository.getMeetings().get(0);
         mMeetingRepository.createMeeting(meetingToAdd);
-        assertEquals(mMeetingRepository.getMeeting().size(), nbMeeting + 1);
+        assertEquals(mMeetingRepository.getMeetings().size(), nbMeeting + 1);
     }
 
     //Check that the filterByDate method is working correctly

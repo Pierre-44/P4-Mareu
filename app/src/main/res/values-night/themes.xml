@@ -4,11 +4,11 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/lamzone_500</item>
         <item name="colorPrimaryVariant">@color/lamzone_700</item>
-        <item name="colorOnPrimary">@color/dark_grey</item>
+        <item name="colorOnPrimary">@color/grey</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lamzone_500</item>
         <item name="colorSecondaryVariant">@color/mid_grey</item>
-        <item name="colorOnSecondary">@color/dark_grey</item>
+        <item name="colorOnSecondary">@color/grey</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -16,7 +16,7 @@
     <!-- TOOLBAR THEME -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar  -->
-        <item name="android:textColorPrimary">@color/dark_grey</item>
+        <item name="android:textColorPrimary">@color/grey</item>
     </style>
     <style name="Theme.Mareu.NoActionBar">
         <item name="windowActionBar">false</item>
