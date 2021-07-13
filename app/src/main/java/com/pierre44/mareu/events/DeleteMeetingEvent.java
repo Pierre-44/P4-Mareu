@@ -20,6 +20,4 @@ public class DeleteMeetingEvent {
     public DeleteMeetingEvent(Meeting meeting) {
         this.meeting = meeting;
     }
-
-
 }

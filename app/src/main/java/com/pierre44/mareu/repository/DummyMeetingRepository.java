@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Created by pmeignen on 19/05/2021.
  */
-public class DummyMeetingRepository implements MeetingRepository{
+public class DummyMeetingRepository implements MeetingRepository {
 
     /**
      * Generate a new ID
@@ -21,7 +21,6 @@ public class DummyMeetingRepository implements MeetingRepository{
     private final List<Meeting> mMeetings = DummyGenerator.generateMeetings();
     private final List<User> mUsers = DummyGenerator.generateUsers();
     private final List<Room> mRooms = DummyGenerator.generateRooms();
-    public List<Meeting> filteredMeeting;
 
     @Override
     public long getNewId() {
@@ -63,45 +62,34 @@ public class DummyMeetingRepository implements MeetingRepository{
         return null;
     }
 
-
-    @Override
-    public List<Meeting> getMeetingsForFilterMeetingRoom(long meetingRoomId) {
-        List<Meeting> meetings = new ArrayList<>();
-        for (int i = 0; i < mMeetings.size(); i++) {
-            if (mRooms.get(i).getRoomId() == meetingRoomId) {
-                meetings.add(mMeetings.get(i));
-            }
-        }
-        return meetings;
-    }
-
-    @Override
-    public List<Meeting> getMeetingsForFilterMeetingDate(long dayTimeStamp) {
-        return null;
-    }
-
     @Override
     public List<Meeting> filterByRoom(Room room) {
-        filteredMeeting = new ArrayList<>();
-        for (Meeting m : getMeetings()) {
+        List<Meeting> filteredMeetings = new ArrayList<>();
+        for (int i = 0; i < mMeetings.size(); i++) {
+            Meeting m = mMeetings.get(i);
             if (m.getMeetingRoom() == room) {
-                filteredMeeting.add(m);
+                filteredMeetings.add(m);
             }
         }
-        return filteredMeeting;
+        return filteredMeetings;
     }
 
     @Override
     public List<Meeting> filterByDate(String date) {
-        filteredMeeting = new ArrayList<>();
-        for (Meeting m : getMeetings()) {
-            if (m.getMeetingStartDate().equals(date)) {
-                filteredMeeting.add(m);
+        List<Meeting> filteredMeetings = new ArrayList<>();
+        for (int i = 0; i < mMeetings.size(); i++) {
+            Meeting m = mMeetings.get(i);
+            if (m.getMeetingStartDate().contentEquals(date)) {
+                filteredMeetings.add(m);
             }
         }
-        return filteredMeeting;
+        return filteredMeetings;
     }
 
+    /**
+     *
+     * @param meeting to organized
+     */
     @Override
     public void organizeMeeting(Meeting meeting) {
         long meetingId = meeting.getMeetingId();
@@ -111,9 +99,19 @@ public class DummyMeetingRepository implements MeetingRepository{
         String meetingDuration = meeting.getMeetingDuration();
         Room meetingRoom = meeting.getMeetingRoom();
         List<User> guestsList = meeting.getMeetingGuests();
-        this.organizeMeeting(meetingId,meetingTopic,meetingStartDate,meetingStartTime,meetingDuration,meetingRoom,guestsList);
+        this.organizeMeeting(meetingId, meetingTopic, meetingStartDate, meetingStartTime, meetingDuration, meetingRoom, guestsList);
     }
 
+    /**
+     *
+     * @param meetingId        The Id of meeting
+     * @param meetingTopic     The topic of meeting
+     * @param meetingStartDate The meeting start date
+     * @param meetingStartTime The meeting start time
+     * @param meetingDuration  The meeting duration
+     * @param meetingRoom      The Room Object of meeting
+     * @param guestsList       The guests List of meeting
+     */
     @Override
     public void organizeMeeting(
             long meetingId, String meetingTopic, String meetingStartDate, String meetingStartTime, String meetingDuration, Room meetingRoom, List<User> guestsList) {

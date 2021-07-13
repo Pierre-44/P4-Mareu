@@ -48,11 +48,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_meeting_validate_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/collapsing_toolbar">
 
@@ -67,9 +67,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:elevation="1dp"
                 android:padding="@dimen/cardview_default_padding"
                 app:cardCornerRadius="@dimen/dimens_radius"
-                android:elevation="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -211,33 +211,33 @@
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginTop="@dimen/cardview_default_margin"
                         android:layout_marginEnd="@dimen/cardview_default_margin"
+                        android:layout_marginBottom="@dimen/cardview_default_margin"
                         android:clickable="true"
                         android:focusable="true"
                         app:flow_horizontalAlign="start"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_input_email"
                         tools:ignore="NestedScrolling" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/create_meeting_validate_button"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/button_default_height"
-                        android:layout_marginTop="@dimen/cardview_default_margin"
-                        android:layout_marginBottom="@dimen/cardview_default_margin"
-                        android:text="@string/add_meeting_validate_button"
-                        android:textSize="@dimen/text_size_normal"
-                        app:cornerRadius="@dimen/button_default_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/detail_guests_email_recyclerview" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_meeting_validate_button"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/button_default_height"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_meeting_validate_button"
+        android:textSize="@dimen/text_size_normal"
+        app:cornerRadius="@dimen/button_default_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

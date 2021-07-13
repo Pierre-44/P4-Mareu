@@ -141,8 +141,6 @@ public class InstrumentedTest {
         onView(withId(R.id.meeting_list_activity)).check(withItemCount(TEST_MEETINGS.size() + 1));
     }
 
-    //TODO : Filtering By Room show the correct meeting
-
     @Test
     public void myMeetingListActivity_ApplyFilterByRoom_DisplaysTheCorrectMeetings() {
 
@@ -158,7 +156,7 @@ public class InstrumentedTest {
         onView(withId(R.id.meeting_list_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(TEST_FIRST_POSITION, click()));
     }
 
-    //TODO : Filtering By Date show the correct meeting
+
     @Test
     public void myMeetingListActivity_ApplyFilterByDate_DisplaysTheCorrectMeetings() {
 

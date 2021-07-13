@@ -15,11 +15,11 @@ import java.util.Date;
 public abstract class UtilsTools {
 
     public static final MeetingRepository mMeetingRepository = DI.getMeetingRepository();
-    public static final Room MEETING_ROOM0 = mMeetingRepository.getRooms().get(0);
+    public static final Room MEETING_ROOM_0 = mMeetingRepository.getRooms().get(0);
 
-    public static final String DATE_FORMAT_EEEE_MMMM_ = "DD/MM/YYYY";
-    public static final String DATE_FORMAT_EEE_MMM_HH_MM = "EEE MMM HH:MM";
-    public static final String TIME_FORMAT_HH_MM = "HH:MM";
+    public static final String DATE_FORMAT_DD_MM_YYYY = "DD/MM/YYYY";
+    public static final String DATE_FORMAT_EEE_MMM_HH_MM = "EEE MMM HH:mm";
+    public static final String TIME_FORMAT_HH_MM = "HH:mm";
     private static SimpleDateFormat format = null;
     private static final DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
 

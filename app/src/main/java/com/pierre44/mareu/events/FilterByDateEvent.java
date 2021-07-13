@@ -1,5 +1,7 @@
 package com.pierre44.mareu.events;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by pmeignen on 10/06/2021.
  */
@@ -7,7 +9,7 @@ public class FilterByDateEvent {
 
     public String date;
 
-    public FilterByDateEvent(String date) {this.date = date;}
+    public FilterByDateEvent(@NonNull String date) {this.date = date;}
 
     public String getDate() {
         return date;

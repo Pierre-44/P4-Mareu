@@ -37,7 +37,6 @@ public class RoomDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -51,7 +50,6 @@ public class RoomDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mMeetingRepository = DI.getMeetingRepository();
         mRooms = mMeetingRepository.getRooms();
         mFilterByRoomAdapter = new FilterByRoomAdapter(mRooms);

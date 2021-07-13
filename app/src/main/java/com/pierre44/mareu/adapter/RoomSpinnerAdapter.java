@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.model.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,13 +25,17 @@ import java.util.List;
 public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAdapter {
 
     Context context;
-    List<Room> roomsList;
+    List<Room> mRooms;
 
     // Constructor accepts Context and a list of rooms
     public RoomSpinnerAdapter(Context context, int room_dropdown_item, List<Room> rooms) {
         super(context, R.layout.create_meeting_activity, rooms);
         this.context = context;
-        this.roomsList = rooms;
+        this.mRooms = new ArrayList<>();
+        // TODO : ajouter un item vide en debut de liste ?
+        // init list after empty item
+        // this.mRooms.add(new Room(0, "", "null"));
+        this.mRooms.addAll(rooms);
     }
 
     // Override these methods and instead return our custom view (with image and text)
@@ -55,13 +60,16 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
 
         // Get room icon from drawables folder
         Resources res = context.getResources();
-        Room mRoom = roomsList.get(position);
+        Room mRoom = mRooms.get(position);
         Drawable drawableIcon = context.getDrawable(mRoom.getRoomImage());
 
         //Set room text and room icon
-        roomText.setText(roomsList.get(position).getRoomName());
+        roomText.setText(mRooms.get(position).getRoomName());
         roomIcon.setImageDrawable(drawableIcon);
 
         return row;
     }
+
+
+
 }

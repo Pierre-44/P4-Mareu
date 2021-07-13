@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,14 +28,17 @@ public class MeetingDetailsRecyclerViewAdapter extends RecyclerView.Adapter<Meet
 
 
     public MeetingDetailsRecyclerViewAdapter(List<User> items) {
-        this.mGuest = items;
+        this.mGuest = new ArrayList<>();
     }
 
     @Override
     public GuestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_detail_guest_fragment, parent, false);
+
         return new GuestsViewHolder(item);
+
+
     }
 
     @Override

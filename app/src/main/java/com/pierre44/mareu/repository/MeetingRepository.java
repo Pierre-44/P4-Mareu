@@ -65,24 +65,6 @@ public interface MeetingRepository {
     Room getRoomById(long id);
 
 
-
-    /**
-     * Gets meetings for filter meeting room.
-     *
-     * @param meetingRoomId the meeting room id
-     * @return a list of meetings
-     */
-    List<Meeting> getMeetingsForFilterMeetingRoom(long meetingRoomId);
-
-
-    /**
-     * Gets meetings for filter meeting date.
-     *
-     * @param dayTimeStamp the day time stamp in ms
-     * @return a list of meetings
-     */
-    List<Meeting> getMeetingsForFilterMeetingDate(long dayTimeStamp);
-
     /**
      * organized meeting
      *

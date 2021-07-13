@@ -1,7 +1,6 @@
 package com.pierre44.mareu.ui_meeting_list;
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,22 +19,22 @@ public class FilterByDatePickerFragment extends DialogFragment {
     private MeetingRepository mMeetingRepository;
     private List<Meeting> mMeetings;
 
-    private static final String ARGUMENT_HOUR = "ARGUMENT_HOUR";
-    private static final String ARGUMENT_MINUTE = "ARGUMENT_MINUTE";
-    private static final String ARGUMENT_IS_24_HOURS = "ARGUMENT_IS_24_HOURS";
-    private TimePickerDialog.OnTimeSetListener listener;
+    private static final String ARGUMENT_YEAR = "ARGUMENT_YEAR";
+    private static final String ARGUMENT_MONTH = "ARGUMENT_MONTH";
+    private static final String ARGUMENT_DAY = "ARGUMENT_DAY";
+    private DatePickerDialog.OnDateSetListener listener;
 
-    private int hourOfDay;
-    private int minute;
-    private boolean is24Hours;
+    private int year;
+    private int dayOfMonth;
+    private int monthOfYear;
 
 
-    public static FilterByDatePickerFragment newInstance(final int hour, final int minute, final boolean is24Hours) {
+    public static FilterByDatePickerFragment newInstance(final int year, final int day, final int month) {
         final FilterByDatePickerFragment df = new FilterByDatePickerFragment();
         final Bundle args = new Bundle();
-        args.putInt(ARGUMENT_HOUR, hour);
-        args.putInt(ARGUMENT_MINUTE, minute);
-        args.putBoolean(ARGUMENT_IS_24_HOURS, is24Hours);
+        args.putInt(ARGUMENT_YEAR, year);
+        args.putInt(ARGUMENT_MONTH, month);
+        args.putInt(ARGUMENT_DAY, day);
         df.setArguments(args);
         return df;
     }
@@ -49,18 +48,18 @@ public class FilterByDatePickerFragment extends DialogFragment {
     private void retrieveArguments() {
         final Bundle args = getArguments();
         if (args != null) {
-            hourOfDay = args.getInt(ARGUMENT_HOUR);
-            minute = args.getInt(ARGUMENT_MINUTE);
-            is24Hours = args.getBoolean(ARGUMENT_IS_24_HOURS);
+            year = args.getInt(ARGUMENT_YEAR);
+            dayOfMonth = args.getInt(ARGUMENT_DAY);
+            monthOfYear = args.getInt(ARGUMENT_MONTH);
         }
     }
 
     @Override
-    public Dialog onCreateDialog(final Bundle savedInstanceState) {
-        return new TimePickerDialog(getContext(), this.listener, this.hourOfDay, this.minute, this.is24Hours);
+    public DatePickerDialog onCreateDialog(final Bundle savedInstanceState) {
+        return new DatePickerDialog(getContext(), this.listener, this.year, this.dayOfMonth, this.monthOfYear);
     }
 
     public void setListener(final ListMeetingActivity listener) {
-        this.listener = (TimePickerDialog.OnTimeSetListener) listener;
+        this.listener = (DatePickerDialog.OnDateSetListener) listener;
     }
 }

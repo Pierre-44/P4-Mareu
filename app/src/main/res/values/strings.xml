@@ -13,8 +13,8 @@
     <string name="add_meeting_room">Salle</string>
     <string name="add_meeting_duration">Durée</string>
     <string name="add_meeting_email">Adresse email participants</string>
-    <string name="add_meeting_date_picker">01/01/2020</string>
-    <string name="add_meeting_timepicker">08:00</string>
+    <string name="add_meeting_date_picker">Date</string>
+    <string name="add_meeting_timepicker">Heure</string>
     <string name="add_meeting_validate_button">Valider</string>
     <string name="add_meeting_time">Heure</string>
     <string name="time_spinner_duration">01:00</string>
@@ -37,5 +37,6 @@
     <string name="filter_reset">Défiltrer</string>
     <string name="Erreur_email">Reseignez un email valide</string>
     <string name="guest_list">Liste des invités :</string>
+    <string name="ok">ok</string>
 
 </resources>

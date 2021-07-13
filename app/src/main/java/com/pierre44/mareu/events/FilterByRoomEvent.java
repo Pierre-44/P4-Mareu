@@ -27,4 +27,3 @@ public class FilterByRoomEvent {
         return room == that.room;
     }
 }
-

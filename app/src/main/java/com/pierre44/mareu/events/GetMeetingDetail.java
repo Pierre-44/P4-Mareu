@@ -13,3 +13,4 @@ public class GetMeetingDetail {
         this.meeting = meeting;
     }
 }
+
