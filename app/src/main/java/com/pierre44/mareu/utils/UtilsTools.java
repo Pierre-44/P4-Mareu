@@ -16,13 +16,11 @@ public abstract class UtilsTools {
 
     public static final MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     public static final Room MEETING_ROOM_0 = mMeetingRepository.getRooms().get(0);
-
-    public static final String DATE_FORMAT_DD_MM_YYYY = "DD/MM/YYYY";
+    public static final String DATE_FORMAT_DD_MM_YYYY = "dd/MM/YYYY";
     public static final String DATE_FORMAT_EEE_MMM_HH_MM = "EEE MMM HH:mm";
     public static final String TIME_FORMAT_HH_MM = "HH:mm";
     private static SimpleDateFormat format = null;
     private static final DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
-
 
     /**
      * Date format string to display.
@@ -45,9 +43,9 @@ public abstract class UtilsTools {
      * @return the string
      */
     public static String dateFormat(long timeMillis) {
-        format = new SimpleDateFormat(DATE_FORMAT_EEE_MMM_HH_MM,dateFormatSymbols);
+        format = new SimpleDateFormat(DATE_FORMAT_EEE_MMM_HH_MM, dateFormatSymbols);
         Date dateTime = new Date(timeMillis);
-        dateFormatSymbols.setShortWeekdays(new String[]{"LUN", "MAR", "MER", "JEU", "VEN", "SAM" ,"DIM"});
+        dateFormatSymbols.setShortWeekdays(new String[]{"LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"});
         dateFormatSymbols.setShortMonths(new String[]{"JAN", "FEV", "MAR", "AVR", "MAI", "JUIN", "JUIL", "AOU", "SEP", "OCT", "NOV", "DEC"});
         return format.format(dateTime);
     }
@@ -58,8 +56,7 @@ public abstract class UtilsTools {
      * @param input the input value HH or MM
      * @return the string
      */
-    public static String timeFormat(int input)
-    {
+    public static String timeFormat(int input) {
         String str = "";
         if (input > 10) {
             str = Integer.toString(input);
@@ -70,6 +67,6 @@ public abstract class UtilsTools {
     }
 
     public enum FilterType {
-        BY_ROOM, BY_DATE , NONE
+        BY_ROOM, BY_DATE, NONE
     }
 }

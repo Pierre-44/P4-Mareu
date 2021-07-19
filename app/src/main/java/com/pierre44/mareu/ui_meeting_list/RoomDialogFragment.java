@@ -18,6 +18,7 @@ import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.MeetingRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by pmeignen on 28/06/2021.
@@ -27,7 +28,6 @@ public class RoomDialogFragment extends DialogFragment {
     private FilterByRoomAdapter mFilterByRoomAdapter;
     private List<Room> mRooms;
     private MeetingRepository mMeetingRepository;
-
     RecyclerView mListRoom;
 
     public static RoomDialogFragment newInstance() {
@@ -42,6 +42,7 @@ public class RoomDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_room_fragment, container);
+        Objects.requireNonNull(getDialog()).setTitle(R.string.room_dialog_title);
         mListRoom = view.findViewById(R.id.list_room);
         mListRoom.setLayoutManager(new LinearLayoutManager(view.getContext()));
         return view;
@@ -52,7 +53,7 @@ public class RoomDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         mMeetingRepository = DI.getMeetingRepository();
         mRooms = mMeetingRepository.getRooms();
-        mFilterByRoomAdapter = new FilterByRoomAdapter(mRooms);
+        mFilterByRoomAdapter = new FilterByRoomAdapter(mRooms, getContext());
         mListRoom.setAdapter(mFilterByRoomAdapter);
     }
 

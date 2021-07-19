@@ -56,14 +56,10 @@ public class MeetingDetailsDialogFragment extends DialogFragment {
 
     // TODO cf  ROOM DIALOG FRAGMENT CLASS pour faire fonctioner le popoup
 
-//   @Override
-//   public void onCreate(@Nullable Bundle savedInstanceState) {
-//       // TODO : Comment retourner l'intent correctement
-//       Intent i = new Intent(getContext(), MeetingRecyclerViewAdapter.class);
-//       super.onCreate(savedInstanceState);
-//       mMeetingRepository = DI.getMeetingRepository();
-//       meeting = (Meeting) i.getSerializableExtra(CLICKED_MEETING);
-//   }
+   //@Override
+   //public DialogFragment onCreateDialog(@Nullable Bundle savedInstanceState) {
+   //
+   //}
 
 
     @Override
@@ -93,6 +89,9 @@ public class MeetingDetailsDialogFragment extends DialogFragment {
         popup.build();
     }
 
+    public void show() {
+    }
+
     private class DetailPopup {
         public void build() {
             detailMeetingTopic.setText(meeting.getMeetingTopic());
@@ -105,97 +104,3 @@ public class MeetingDetailsDialogFragment extends DialogFragment {
         }
     }
 }
-
-
-/**
- * MeetingRepository mMeetingRepository = DI.getMeetingRepository();
- * List<Meeting> mMeetings = new ArrayList<>();
- * Meeting meeting;
- * private MeetingDetailsRecyclerViewAdapter mMeetingDetailsRecyclerViewAdapter;
- * private static final String ARG_TEXT = "argText";
- * private static final String ARG_NUMBER = "argNumber";
- * <p>
- * <p>
- * public static MeetingDetailsDialogFragment newInstance() {
- * return new MeetingDetailsDialogFragment();
- * }
- *
- * @NonNull
- * @Override public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
- * AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
- * <p>
- * LayoutInflater inflater = getActivity().getLayoutInflater();
- * View view = inflater.inflate(R.layout.meeting_details_fragment, null);
- * builder.setView(view);
- * <p>
- * return new AlertDialog.Builder(getActivity())
- * .create();
- * }
- * <p>
- * <p>
- * public MeetingDetailsDialogFragment newInstance(String text, int number) {
- * MeetingDetailsDialogFragment fragment = new MeetingDetailsDialogFragment();
- * Bundle args = new Bundle();
- * args.putString(ARG_TEXT,text);
- * args.putInt(ARG_NUMBER,number);
- * fragment.setArguments(args);
- * return fragment;
- * }
- * @Nullable
- * @Override public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
- * View v = inflater.inflate(R.layout.meeting_details_fragment, container, false);
- * <p>
- * if (getArguments() != null) {
- * detailMeetingTopic.setText(meeting.getMeetingTopic());
- * detailMeetingDate.setText(meeting.getMeetingStartDate());
- * detailMeetingTime.setText(meeting.getMeetingStartDate());
- * detailMeetingRoom.setText(meeting.getMeetingRoom().getRoomName());
- * detailMeetingDuration.setText(meeting.getMeetingDuration());
- * List<User> mGuestList = meeting.getMeetingGuests();
- * detailGuestListRecyclerview.setAdapter(new MeetingDetailsRecyclerViewAdapter(mGuestList));
- * }
- * return v;
- * }
- * @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
- * super.onViewCreated(view, savedInstanceState);
- * }
- * @Subscribe public void onMeetingDetail(GetMeetingDetail event) {
- * meeting = event.meeting;
- * DetailPopup popup = new DetailPopup(getActivity());
- * popup.build();
- * }
- * @BindView(R.id.detail_meeting_topic) TextView detailMeetingTopic;
- * @BindView(R.id.detail_meeting_date) TextView detailMeetingDate;
- * @BindView(R.id.detail_meeting_time) TextView detailMeetingTime;
- * @BindView(R.id.detail_meeting_room) TextView detailMeetingRoom;
- * @BindView(R.id.detail_meeting_duration) TextView detailMeetingDuration;
- * @BindView(R.id.detail_guests_email_recyclerview) RecyclerView detailGuestListRecyclerview;
- * <p>
- * //Class for the Meeting detail popup
- * public class DetailPopup extends DialogFragment {
- * <p>
- * public MeetingDetailsDialogFragment getPopupMeetingDetail() {
- * return popupMeetingDetail;
- * }
- * <p>
- * public DetailPopup(Activity activity) {
- * super(activity, R.style.Theme_AppCompat_DayNight_Dialog);
- * popupMeetingDetail = MeetingDetailsDialogFragment.inflate(getLayoutInflater());
- * setContentView(popupMeetingDetail);
- * }
- * <p>
- * public void build() {
- * detailMeetingTopic.setText(meeting.getMeetingTopic());
- * detailMeetingDate.setText(meeting.getMeetingStartDate());
- * detailMeetingTime.setText(meeting.getMeetingStartDate());
- * detailMeetingRoom.setText(meeting.getMeetingRoom().getRoomName());
- * detailMeetingDuration.setText(meeting.getMeetingDuration());
- * List<User> mGuestList = meeting.getMeetingGuests();
- * detailGuestListRecyclerview.setAdapter(new MeetingDetailsRecyclerViewAdapter(mGuestList));
- * show();
- * }
- * <p>
- * <p>
- * }
- * }
- **/

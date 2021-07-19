@@ -14,7 +14,6 @@ import org.junit.Assert;
  * Created by pmeignen on 03/06/2021.
  */
 
-
 public class RecyclerViewItemCountAssertion implements ViewAssertion {
     private final Matcher<Integer> mMatcher;
 

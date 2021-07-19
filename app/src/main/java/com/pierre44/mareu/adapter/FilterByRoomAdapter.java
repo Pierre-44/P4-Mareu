@@ -1,5 +1,6 @@
 package com.pierre44.mareu.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,11 @@ import butterknife.ButterKnife;
 public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapter.FilterRoomViewHolder> {
 
     private final List<Room> mRooms;
+    private final Context mContext;
 
-    public FilterByRoomAdapter(List<Room> rooms) {
+    public FilterByRoomAdapter(List<Room> rooms, Context context) {
         mRooms = rooms;
+        mContext = context;
     }
 
     @NonNull
@@ -45,13 +48,12 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
 
         holder.mRoom.setText(room.getRoomName());
         holder.mRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(room.getRoomImage()));
+        holder.itemView.setOnClickListener(v -> EventBus.getDefault().post(new FilterByRoomEvent(room)));
+    }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new FilterByRoomEvent(room));
-            }
-        });
+    @Override
+    public long getItemId(int position) {
+        return mRooms.get(position).getRoomId();
     }
 
     @Override
@@ -59,6 +61,7 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
         return mRooms.size();
     }
 
+    // Inner ViewHolder class
     public class FilterRoomViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.meeting_room_text)

@@ -37,6 +37,8 @@
     <string name="filter_reset">Défiltrer</string>
     <string name="Erreur_email">Reseignez un email valide</string>
     <string name="guest_list">Liste des invités :</string>
-    <string name="ok">ok</string>
+    <string name="ok">OK</string>
+    <string name="room_dialog_title">Selection de la salle</string>
+    <string name="google">Google</string>
 
 </resources>

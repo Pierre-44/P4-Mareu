@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     private final MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     private List<Meeting> mMeetings;
+    private List<Room> mRooms;
     public static final String CLICKED_MEETING = "CLICKED_MEETING";
 
     public MeetingRecyclerViewAdapter(List<Meeting> meetings) {
@@ -43,11 +45,29 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @NonNull
     @Override
     public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_meeting_scalable, parent, false);
-        return new MeetingViewHolder(view);
+        final MeetingViewHolder viewHolder = new MeetingViewHolder(v);
 
+        // go to meetingDetailDialogFragment & Dialog init
+        //mDialog = new Dialog(mContext);
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
+                Log.d(TAG,"onClick : opening dialogFragment ");
+                //TODO : doesn't work to open dialogFragment
+                Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
+                //Intent goToDetailMeetingDialogFragment = new Intent(holder.itemView.getContext(), MeetingDetailsDialogFragment.class);
+                //goToDetailMeetingDialogFragment.putExtra(CLICKED_MEETING, mMeetings.get(position));
+                //holder.itemView.getContext().startActivity(goToDetailMeet ingDialogFragment);
+                MeetingDetailsDialogFragment dialog = new MeetingDetailsDialogFragment();
+                dialog.show();
+            }
+        });
+
+        return new MeetingViewHolder(v);
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -56,8 +76,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         Meeting meeting = mMeetings.get(position);
         //meetingTopic
         holder.meetingTopic.setText(meeting.getMeetingTopic());
-        //holder.meetingTopic.setNestedScrollingEnabled(true);
-        //holder.meetingTopic.setSelected(true);
         //meetingRoomImage
         holder.meetingRoomImage.setImageDrawable(holder.itemView.getContext().getDrawable(meeting.getMeetingRoom().getRoomImage()));
         //meetingRoomText
@@ -74,26 +92,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.meetingGuestsList.setText(meetingGuestsList.toString());
         holder.meetingGuestsList.setNestedScrollingEnabled(true);
         holder.meetingGuestsList.setSelected(true);
-
         //meeting Delete & detail event
         holder.meetingDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position))));
 
-        // go to meetingDetailDialogFragment
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
-                Log.d(TAG,"onClick : opening dialogFragment ");
-                //Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
-                //Intent goToDetailMeetingDialogFragment = new Intent(holder.itemView.getContext(), MeetingDetailsDialogFragment.class);
-                //goToDetailMeetingDialogFragment.putExtra(CLICKED_MEETING, mMeetings.get(position));
-                //holder.itemView.getContext().startActivity(goToDetailMeet ingDialogFragment);
-                //holder.itemView.getContext().sendBroadcast(goToDetailMeetingDialogFragment);
-                //TODO : doesn't work to open dialogFragment
-                MeetingDetailsDialogFragment dialog = new MeetingDetailsDialogFragment();
-                dialog.show(dialog.getFragmentManager(), "MeetingDetailsDialogFra");
-            }
-        });
     }
 
     @Override
@@ -116,6 +117,10 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         notifyDataSetChanged();
     }
 
+    public Room getRoom(int position) {
+        return mRooms.get(position);
+    }
+
     @SuppressLint("NonConstantResourceId")
     public static class MeetingViewHolder extends RecyclerView.ViewHolder {
 
@@ -134,10 +139,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         @BindView(R.id.delete_button)
         ImageButton meetingDeleteButton;
 
-        public MeetingViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        public MeetingViewHolder(View itemView) {
+            super(itemView);
+                ButterKnife.bind(this, itemView);
         }
     }
-
 }

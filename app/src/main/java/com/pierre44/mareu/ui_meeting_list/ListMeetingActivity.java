@@ -7,13 +7,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.pierre44.mareu.R;
@@ -23,6 +26,7 @@ import com.pierre44.mareu.events.DeleteMeetingEvent;
 import com.pierre44.mareu.events.FilterByDateEvent;
 import com.pierre44.mareu.events.FilterByRoomEvent;
 import com.pierre44.mareu.model.Meeting;
+import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 import com.pierre44.mareu.utils.UtilsTools;
@@ -37,17 +41,24 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
 
     private static final String SELECT_ROOM = "SELECT_ROOM";
     private MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     private List<Meeting> mMeetings;
+    private DialogFragment datePickerDialogFragment;
+    private RoomDialogFragment filterByRoomFragment;
+    private List<Room> mRooms;
     private MeetingRecyclerViewAdapter meetingRecyclerViewAdapter;
     Toolbar toolbar;
 
-
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.recycler_view_meeting)
     RecyclerView mRecyclerView;
+    @BindView(R.id.create_meeting_button)
+    FloatingActionButton mCreateMeetingButton;
 
     // On create
     @Override
@@ -55,7 +66,9 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_list_activity);
         ButterKnife.bind(this);
+
         this.configureToolbar();
+        setSupportActionBar(mToolbar);
 
         mMeetingRepository = DI.getMeetingRepository();
         mRecyclerView = findViewById(R.id.recycler_view_meeting);
@@ -63,9 +76,6 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         mMeetings = mMeetingRepository.getMeetings();
         meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings);
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
-
-
-
     }
 
     // Configure Toolbar
@@ -103,28 +113,21 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
 
     // Configure filter menu click
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         final FragmentManager fm = getSupportFragmentManager();
         switch (item.getItemId()) {
-            case R.id.filterRoom:
-                //create the dialog fragment of the Room list for the Room filter
-                RoomDialogFragment filterByRoomFragment = RoomDialogFragment.newInstance();
-                filterByRoomFragment.show(fm, SELECT_ROOM);
-
-                break;
             case R.id.filterDate:
-                //create the datePicker dialog fragment for the date filter
-                final Calendar c = Calendar.getInstance();
-                final FilterByDatePickerFragment filterByDateDialogFragment = FilterByDatePickerFragment.newInstance(
-                        c.get(Calendar.YEAR),
-                        c.get(Calendar.MONTH),
-                        c.get(Calendar.DAY_OF_MONTH));
-                filterByDateDialogFragment.setListener(this);
-                filterByDateDialogFragment.showNow(fm, "filterByDatePickerFragment");
+                datePickerDialogFragment = new DatePickerFragment();
+                datePickerDialogFragment.show(getSupportFragmentManager(), "date picker");
+                break;
+            case R.id.filterRoom:
+                filterByRoomFragment = RoomDialogFragment.newInstance();
+                filterByRoomFragment.show(fm, SELECT_ROOM);
                 break;
             case R.id.filterReset:
-                meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.NONE,null);
+                meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.NONE, null);
                 break;
+            default:
         }
         return super.onOptionsItemSelected(item);
     }
@@ -144,9 +147,9 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     // Subscribe filter by room and notifyDataSetChanged
     @Subscribe
     public void filterByRoom(FilterByRoomEvent filterByRoomEvent) {
-     //   meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_ROOM, filterByRoomEvent.room);
+        meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_ROOM, filterByRoomEvent.room);
+        filterByRoomFragment.dismiss();
     }
-
 
     // Subscribe filter by Date and notifyDataSetChanged
     @Subscribe
@@ -174,13 +177,14 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         mMeetingRepository.getMeetings().addAll(DummyGenerator.DUMMY_MEETINGS_LIST);
         meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
+
     // Set and format date to send
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
-        c.get(Calendar.YEAR);
-        c.get(Calendar.MONTH);
-        c.get(Calendar.DAY_OF_MONTH);
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String selectedDateString = UtilsTools.dateFormat(c, UtilsTools.DATE_FORMAT_DD_MM_YYYY);
         meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_DATE, (Object) selectedDateString);
     }
