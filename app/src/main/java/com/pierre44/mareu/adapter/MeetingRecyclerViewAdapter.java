@@ -1,6 +1,7 @@
 package com.pierre44.mareu.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import com.pierre44.mareu.events.DeleteMeetingEvent;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.MeetingRepository;
-import com.pierre44.mareu.ui_meeting_list.MeetingDetailsDialogFragment;
+import com.pierre44.mareu.ui_meeting_list.MeetingDetailsActivity;
 import com.pierre44.mareu.utils.UtilsTools;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,22 +51,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         final MeetingViewHolder viewHolder = new MeetingViewHolder(v);
 
         // go to meetingDetailDialogFragment & Dialog init
-        //mDialog = new Dialog(mContext);
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
-                Log.d(TAG,"onClick : opening dialogFragment ");
-                //TODO : doesn't work to open dialogFragment
-                Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
-                //Intent goToDetailMeetingDialogFragment = new Intent(holder.itemView.getContext(), MeetingDetailsDialogFragment.class);
-                //goToDetailMeetingDialogFragment.putExtra(CLICKED_MEETING, mMeetings.get(position));
-                //holder.itemView.getContext().startActivity(goToDetailMeet ingDialogFragment);
-                MeetingDetailsDialogFragment dialog = new MeetingDetailsDialogFragment();
-                dialog.show();
-            }
-        });
+
 
         return new MeetingViewHolder(v);
     }
@@ -95,6 +82,18 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         //meeting Delete & detail event
         holder.meetingDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position))));
 
+
+        holder.itemView.setOnClickListener(v -> {
+            //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
+            Log.d(TAG,"onClick : opening dialogFragment ");
+            //TODO : doesn't work to open dialogFragment
+            Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
+            Intent goToMeetingDetailActivity = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
+            goToMeetingDetailActivity.putExtra(CLICKED_MEETING, mMeetings.get(position));
+            holder.itemView.getContext().startActivity(goToMeetingDetailActivity);
+            //MeetingDetailsActivity dialog = new MeetingDetailsActivity();
+            //dialog.show();
+        });
     }
 
     @Override

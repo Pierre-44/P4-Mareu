@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Maréu</string>
     <string name="room_image">room_image</string>
-    <string name="title_activity_add_meeting">Ajouter une réunion</string>
-
     <!-- Preference Titles -->
-
+    <string name="title_activity_add_meeting">Ajouter une réunion</string>
+    <string name="title_activity_detail_meeting">Détails de la réunion</string>
     <!-- Messages Preferences -->
-
+    <string name="filter_by_room_message">Filtre par salle activé</string>
+    <string name="filter_by_date_message">Filtre par date activé</string>
+    <string name="filter_disable_message">Filtres désactivés</string>
+    <string name="Erreur_email_message">Reseignez un email valide</string>
     <!-- Sync Preferences -->
     <string name="add_meeting_date">Date</string>
     <string name="add_meeting_topic">Sujet de la réunion</string>
@@ -26,19 +28,24 @@
     <string name="spinner_meeting_room">Konkqueror</string>
     <string name="email">email</string>
     <string name="default_email_list">defaut@lamzone.com - defaut@lamzone.com - defaut@lamzone.com </string>
-    <string name="filter_by_room_message">Filtre par salle activé</string>
-    <string name="filter_by_date_message">Filtre par date activé</string>
-    <string name="filter_disable_message">Filtres désactivés</string>
     <string name="meeting_topic">Reunion 1 sujet</string>
     <string name="hour_item">15h00</string>
     <string name="date_item">30/06/2021</string>
     <string name="hyphen">-</string>
     <string name="delete_button">delete_button</string>
     <string name="filter_reset">Défiltrer</string>
-    <string name="Erreur_email">Reseignez un email valide</string>
     <string name="guest_list">Liste des invités :</string>
     <string name="ok">OK</string>
     <string name="room_dialog_title">Selection de la salle</string>
     <string name="google">Google</string>
+    <string name="meeting_detail">Détails de la réunion</string>
+    <string name="detail_validate">Fermer</string>
+    <string name="detail_sujet">Sujet :</string>
+    <string name="detail_salle">Salle :</string>
+    <string name="detail_date">Date :</string>
+    <string name="detail_heure">Heure :</string>
+    <string name="detail_duree">Durée :</string>
+    <string name="detail_meeting_room_image">meeting_room_image</string>
+
 
 </resources>

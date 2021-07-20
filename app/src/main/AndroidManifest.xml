@@ -20,6 +20,11 @@
             android:name=".ui_meeting_list.CreateMeetingActivity"
             android:label="@string/title_activity_add_meeting"
             android:theme="@style/Theme.Mareu.NoActionBar"/>
+        <activity
+            android:name=".ui_meeting_list.MeetingDetailsActivity"
+            android:parentActivityName=".ui_meeting_list.ListMeetingActivity"
+            android:label="@string/title_activity_detail_meeting"
+            android:theme="@style/Theme.Mareu.NoActionBar"/>
     </application>
 
 </manifest>

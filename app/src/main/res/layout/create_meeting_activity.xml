@@ -160,12 +160,11 @@
                         android:id="@+id/spinner_room_action"
                         android:layout_width="@dimen/button_default_width"
                         android:layout_height="45dp"
-
                         android:layout_marginStart="@dimen/cardview_default_margin"
                         android:layout_marginBottom="32dp"
-                        app:layout_constraintEnd_toStartOf="@+id/detail_meeting_duration"
+                        app:layout_constraintEnd_toStartOf="@+id/spinner_meeting_duration"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/detail_meeting_duration" />
+                        app:layout_constraintTop_toTopOf="@+id/spinner_meeting_duration" />
 
                     <TextView
                         android:id="@+id/info_text_duration"
@@ -174,12 +173,12 @@
                         android:layout_marginBottom="@dimen/margin_default"
                         android:text="@string/add_meeting_duration"
                         android:textSize="@dimen/text_size_normal"
-                        app:layout_constraintBottom_toTopOf="@+id/detail_meeting_duration"
-                        app:layout_constraintEnd_toEndOf="@+id/detail_meeting_duration"
-                        app:layout_constraintStart_toStartOf="@+id/detail_meeting_duration" />
+                        app:layout_constraintBottom_toTopOf="@+id/spinner_meeting_duration"
+                        app:layout_constraintEnd_toEndOf="@+id/spinner_meeting_duration"
+                        app:layout_constraintStart_toStartOf="@+id/spinner_meeting_duration" />
 
                     <Spinner
-                        android:id="@+id/detail_meeting_duration"
+                        android:id="@+id/spinner_meeting_duration"
                         android:layout_width="@dimen/button_default_width"
                         android:layout_height="45dp"
                         android:layout_marginEnd="@dimen/cardview_default_margin"

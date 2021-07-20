@@ -9,8 +9,12 @@
     <dimen name="button_default_radius">20dp</dimen>
     <dimen name="text_size_normal_toolbar">18sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_medium">24sp</dimen>
+    <dimen name="text_size_title">32sp</dimen>
     <dimen name="room_text_size_spinner">14sp</dimen>
     <dimen name="date_text_size_spinner">18sp</dimen>
     <dimen name="spinner_item_height">32dp</dimen>
     <dimen name="spinner_width">120dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+
 </resources>

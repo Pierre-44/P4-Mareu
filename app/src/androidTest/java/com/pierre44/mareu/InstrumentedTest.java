@@ -58,13 +58,14 @@ public class InstrumentedTest {
     public static final String TEST_ROOM_SELECTED_ON_SPINNER = DummyGenerator.DUMMY_ROOMS_LIST.get(0).toString();
     public static final String TEST_HOUR_PICKER_MEETING_13_00 = "13:00";
     public static final Room TEST_ROOM_MEETING_0 = DummyGenerator.DUMMY_ROOMS_LIST.get(0);
-    public static final List<User> TEST_GUESTS_LIST_0 = Arrays.asList();
+    public static final User TEST_MEETING_GUEST_0 = DummyGenerator.DUMMY_USERS_LIST.get(0);
+    public static final User TEST_MEETING_GUEST_1 = DummyGenerator.DUMMY_USERS_LIST.get(1);
+    public static final List<User> TEST_GUESTS_LIST_0 = Arrays.asList(TEST_MEETING_GUEST_0,TEST_MEETING_GUEST_1);
     public static final Meeting TEST_MEETING_1 = new Meeting(0, "TEST", TEST_DATE_PICKER_MEETING, TEST_HOUR_PICKER_MEETING_13_00, TEST_DURATION_SPINNER_1H, TEST_ROOM_MEETING_0, TEST_GUESTS_LIST_0);
     public static final int TEST_EXPECTED_COUNT_FOR_FILTER_BY_ROOM = 2;
     public static final int TEST_EXPECTED_COUNT_FOR_FILTER_BY_DATE = 3;
     public static final String SELECTED_ROOM_NAME = String.valueOf(R.string.google);
-    public static final String TEST_MEETING_GUEST_0 = DummyGenerator.DUMMY_USERS_LIST.get(0).toString();
-    public static final String TEST_MEETING_GUEST_1 = DummyGenerator.DUMMY_USERS_LIST.get(1).toString();
+
     public static final List<Meeting> TEST_MEETINGS = DummyGenerator.DUMMY_MEETINGS_LIST;
     public ActivityScenario mActivity;
     MeetingRepository mMeetingRepository;
@@ -132,14 +133,14 @@ public class InstrumentedTest {
         onView(withText(TEST_ROOM_SELECTED_ON_SPINNER)).perform(click());
         onView(withId(R.id.meeting_room)).check(matches(withText(TEST_ROOM_SELECTED_ON_SPINNER)));
         // When : complete spinner_duration_action
-        onView(withId(R.id.detail_meeting_duration)).perform(click());
+        onView(withId(R.id.spinner_meeting_duration)).perform(click());
         onView(withText(TEST_DURATION_SPINNER_1H)).check(matches(isDisplayed()));
         onView(withText(TEST_DURATION_SPINNER_1H)).perform(click());
-        onView(withId(R.id.detail_meeting_duration)).check(matches(withText(TEST_DURATION_SPINNER_1H)));
+        onView(withId(R.id.spinner_meeting_duration)).check(matches(withText(TEST_DURATION_SPINNER_1H)));
         // When : complete text_input_email with 2 emails
         onView(withId(R.id.text_input_email)).perform(click());
-        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_0), closeSoftKeyboard());
-        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_1), closeSoftKeyboard());
+        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_0.getEmail()), closeSoftKeyboard());
+        onView(withId(R.id.text_input_email)).perform(typeTextIntoFocusedView(TEST_MEETING_GUEST_1.getEmail()), closeSoftKeyboard());
         // When : click on buttonValidate
         onView(withId(R.id.create_meeting_validate_button)).perform(click());
         // Then : On List Meeting Activity the number of element is List size + 1

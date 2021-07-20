@@ -35,10 +35,7 @@ public class MeetingDetailsRecyclerViewAdapter extends RecyclerView.Adapter<Meet
     public GuestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_detail_guest_fragment, parent, false);
-
         return new GuestsViewHolder(item);
-
-
     }
 
     @Override

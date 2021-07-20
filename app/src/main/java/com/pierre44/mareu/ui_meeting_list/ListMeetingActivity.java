@@ -1,5 +1,6 @@
 package com.pierre44.mareu.ui_meeting_list;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,14 +41,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+@SuppressLint("NonConstantResourceId")
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
     private static final String SELECT_ROOM = "SELECT_ROOM";
     private MeetingRepository mMeetingRepository = DI.getMeetingRepository();
-    private List<Meeting> mMeetings;
-    private DialogFragment datePickerDialogFragment;
+    private static  List<Meeting> mMeetings;
     private RoomDialogFragment filterByRoomFragment;
     private List<Room> mRooms;
     private MeetingRecyclerViewAdapter meetingRecyclerViewAdapter;
@@ -76,6 +76,7 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         mMeetings = mMeetingRepository.getMeetings();
         meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings);
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
+        meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     // Configure Toolbar
@@ -99,7 +100,7 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     // onResume to register subscriber
     @Override
     public void onResume() {
-        meetingRecyclerViewAdapter.notifyDataSetChanged();
+        //meetingRecyclerViewAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
         super.onResume();
     }
@@ -112,12 +113,13 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     }
 
     // Configure filter menu click
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         final FragmentManager fm = getSupportFragmentManager();
         switch (item.getItemId()) {
             case R.id.filterDate:
-                datePickerDialogFragment = new DatePickerFragment();
+                DialogFragment datePickerDialogFragment = new DatePickerFragment();
                 datePickerDialogFragment.show(getSupportFragmentManager(), "date picker");
                 break;
             case R.id.filterRoom:
