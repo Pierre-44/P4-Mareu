@@ -13,16 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
-import com.pierre44.mareu.adapter.MeetingDetailsRecyclerViewAdapter;
-import com.pierre44.mareu.di.DI;
-import com.pierre44.mareu.events.GetMeetingDetail;
 import com.pierre44.mareu.model.Meeting;
-import com.pierre44.mareu.model.User;
 import com.pierre44.mareu.repository.MeetingRepository;
-
-import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -61,7 +53,6 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.meeting_details_activity);
-        mMeetingRepository = DI.getMeetingRepository();
         meeting = (Meeting) getIntent().getSerializableExtra(CLICKED_MEETING);
         //widgets connection
         mDetailMeetingTopic = findViewById(R.id.detail_meeting_topic);
@@ -85,28 +76,5 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         mDetailMeetingRoomImage.setImageDrawable(getDrawable(meeting.getMeetingRoom().getRoomImage()));
         mDetailMeetingDuration.setText(meeting.getMeetingDuration());
         mRecyclerView.setAdapter(mRecyclerView.getAdapter());
-    }
-
-
-    @Subscribe
-    public void onMeetingDetail(GetMeetingDetail event) {
-        meeting = event.meeting;
-        DetailPopup popup = new DetailPopup();
-        popup.build();
-    }
-
-    public void show() {
-    }
-
-    private class DetailPopup {
-        public void build() {
-            mDetailMeetingTopic.setText(meeting.getMeetingTopic());
-            mDetailMeetingDate.setText(meeting.getMeetingStartDate());
-            mDetailMeetingTime.setText(meeting.getMeetingStartDate());
-            mDetailMeetingRoom.setText(meeting.getMeetingRoom().getRoomName());
-            mDetailMeetingDuration.setText(meeting.getMeetingDuration());
-            List<User> mGuestList = meeting.getMeetingGuests();
-            mRecyclerView.setAdapter(new MeetingDetailsRecyclerViewAdapter(mGuestList));
-        }
     }
 }

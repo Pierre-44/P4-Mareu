@@ -1,5 +1,7 @@
 package com.pierre44.mareu.utils;
 
+import android.annotation.SuppressLint;
+
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.MeetingRepository;
@@ -42,7 +44,8 @@ public abstract class UtilsTools {
      * @param timeMillis the time millis
      * @return the string
      */
-    public static String dateFormat(long timeMillis) {
+    @SuppressLint("SimpleDateFormat")
+    public static String dateFormat(String timeMillis) {
         format = new SimpleDateFormat(DATE_FORMAT_EEE_MMM_HH_MM, dateFormatSymbols);
         Date dateTime = new Date(timeMillis);
         dateFormatSymbols.setShortWeekdays(new String[]{"LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"});

@@ -38,6 +38,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     private List<Meeting> mMeetings;
     private List<Room> mRooms;
     public static final String CLICKED_MEETING = "CLICKED_MEETING";
+    private UtilsTools.FilterType mFilterType = UtilsTools.FilterType.NONE;
+    private Object mFilterValue;
+
 
     public MeetingRecyclerViewAdapter(List<Meeting> meetings) {
         mMeetings = meetings;
@@ -49,11 +52,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_meeting_scalable, parent, false);
         final MeetingViewHolder viewHolder = new MeetingViewHolder(v);
-
-        // go to meetingDetailDialogFragment & Dialog init
-
-
-
         return new MeetingViewHolder(v);
     }
 
@@ -80,19 +78,26 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.meetingGuestsList.setNestedScrollingEnabled(true);
         holder.meetingGuestsList.setSelected(true);
         //meeting Delete & detail event
-        holder.meetingDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position))));
+        holder.meetingDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position)));
+            }
+        });
 
-
-        holder.itemView.setOnClickListener(v -> {
-            //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
-            Log.d(TAG,"onClick : opening dialogFragment ");
-            //TODO : doesn't work to open dialogFragment
-            Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
-            Intent goToMeetingDetailActivity = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
-            goToMeetingDetailActivity.putExtra(CLICKED_MEETING, mMeetings.get(position));
-            holder.itemView.getContext().startActivity(goToMeetingDetailActivity);
-            //MeetingDetailsActivity dialog = new MeetingDetailsActivity();
-            //dialog.show();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
+                Log.d(TAG, "onClick : opening dialogFragment ");
+                //TODO : doesn't work to open dialogFragment
+                Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
+                Intent goToMeetingDetailActivity = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
+                goToMeetingDetailActivity.putExtra(CLICKED_MEETING, mMeetings.get(position));
+                holder.itemView.getContext().startActivity(goToMeetingDetailActivity);
+                //MeetingDetailsActivity dialog = new MeetingDetailsActivity();
+                //dialog.show();
+            }
         });
     }
 
@@ -102,6 +107,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     }
 
     public void refreshList(UtilsTools.FilterType filterType, Object filterValue) {
+        mFilterType = filterType;
+        mFilterValue = filterValue;
         switch (filterType) {
             case NONE:
                 mMeetings = mMeetingRepository.getMeetings();
@@ -114,6 +121,10 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 break;
         }
         notifyDataSetChanged();
+    }
+
+    public void refreshList() {
+        this.refreshList(mFilterType, mFilterValue);
     }
 
     public Room getRoom(int position) {

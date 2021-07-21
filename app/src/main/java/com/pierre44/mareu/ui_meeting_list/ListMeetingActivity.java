@@ -103,6 +103,7 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         //meetingRecyclerViewAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
         super.onResume();
+        meetingRecyclerViewAdapter.refreshList();
     }
 
     // onStop to unregister subscriber
@@ -146,14 +147,14 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
-    // Subscribe filter by room and notifyDataSetChanged
+    // Subscribe filter by room
     @Subscribe
     public void filterByRoom(FilterByRoomEvent filterByRoomEvent) {
         meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_ROOM, filterByRoomEvent.room);
         filterByRoomFragment.dismiss();
     }
 
-    // Subscribe filter by Date and notifyDataSetChanged
+    // Subscribe filter by Date
     @Subscribe
     public void filterByDate(FilterByDateEvent filterByDateEvent) {
         meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_DATE, filterByDateEvent.date);
@@ -168,6 +169,17 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
                 .show();
     }
 
+    // Set and format date to send
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String selectedDateString = UtilsTools.dateFormat(c, UtilsTools.DATE_FORMAT_DD_MM_YYYY);
+        meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_DATE, (Object) selectedDateString);
+    }
+
     @VisibleForTesting
     public void doMeetingListEmpty() {
         mMeetingRepository.getMeetings().clear();
@@ -180,14 +192,4 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
-    // Set and format date to send
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String selectedDateString = UtilsTools.dateFormat(c, UtilsTools.DATE_FORMAT_DD_MM_YYYY);
-        meetingRecyclerViewAdapter.refreshList(UtilsTools.FilterType.BY_DATE, (Object) selectedDateString);
-    }
 }

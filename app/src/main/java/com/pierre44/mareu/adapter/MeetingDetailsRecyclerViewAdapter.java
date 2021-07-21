@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
@@ -25,12 +26,11 @@ public class MeetingDetailsRecyclerViewAdapter extends RecyclerView.Adapter<Meet
     private final List<User> mGuest;
     ViewGroup parents;
 
-
-
     public MeetingDetailsRecyclerViewAdapter(List<User> items) {
         this.mGuest = new ArrayList<>();
     }
 
+    @NonNull
     @Override
     public GuestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
@@ -58,7 +58,7 @@ public class MeetingDetailsRecyclerViewAdapter extends RecyclerView.Adapter<Meet
         TextView mGuestDetail;
 
         public GuestsViewHolder(View view) {
-            super(view);
+            super(view.getRootView());
             ButterKnife.bind(this, view);
         }
     }

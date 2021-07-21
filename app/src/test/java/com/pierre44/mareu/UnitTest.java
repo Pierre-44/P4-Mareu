@@ -26,6 +26,7 @@ public class UnitTest {
 
     private MeetingRepository mMeetingRepository;
 
+
     @Before
     public void setup() {
         mMeetingRepository = DI.getNewInstanceMeetingRepository();
