@@ -49,6 +49,14 @@ import butterknife.OnClick;
 @SuppressLint("NonConstantResourceId")
 public class CreateMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
+    private MeetingRepository mMeetingRepository;
+    private int idChip;
+    //private Room selectedRoom;
+    //private Meeting meeting;
+    private List<User> mMeetingGuestList;
+    final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
+    final List<String> durationList = Arrays.asList("", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
+
     @BindView(R.id.text_input_meeting_topic)
     TextInputEditText mMeetingTopicInput;
     @BindView(R.id.date_picker_actions)
@@ -66,15 +74,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     @BindView(R.id.create_meeting_validate_button)
     MaterialButton mMeetingValidateButton;
 
-    private MeetingRepository mMeetingRepository;
-    private Calendar mCalendar;
-    private int idChip;
-    private Room selectedRoom;
-    private Meeting meeting;
-    private List<User> mMeetingGuestList;
-    final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
-    final List<String> durationList = Arrays.asList("", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
-
+    // On create
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,16 +84,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     }
 
     /**
-     * Initialize vars and set listeners , TextChanger etc...
+     * Initialize vars
      */
     private void init() {
 
         mMeetingRepository = DI.getMeetingRepository();
-        mCalendar = Calendar.getInstance();
         mMeetingGuestList = new ArrayList<>();
-
+        ////Calendar calendar = Calendar.getInstance();
         initPickersAndSpinners();
-
         onMeetingGuestSet();
     }
 
@@ -132,13 +130,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 break;
             case R.id.create_meeting_validate_button:
                 createMeeting();
+                break;
         }
     }
 
+
     /**
-     * Create meeting.
+     * Create meeting methode.
      */
-// Create meeting methode
     @OnClick(R.id.create_meeting_validate_button)
     public void createMeeting() {
         Meeting meeting = new Meeting(
@@ -151,17 +150,17 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 mMeetingGuestList
         );
         mMeetingRepository.createMeeting(meeting);
-        //Toast.makeText(this, mMeetingDatePicker.getText().toString(), Toast.LENGTH_LONG).show();
         finish();
     }
 
+    // Set meetingDatePicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        // set Date instate of text button
+        // set current date instate of button text
         String currentDateString = UtilsTools.dateFormat(c, UtilsTools.DATE_FORMAT_DD_MM_YYYY);
         mMeetingDatePicker.setText(currentDateString);
         checkIfValidateButtonCanActivated();
@@ -194,13 +193,13 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
             DialogFragment timePicker = new TimePickerFragment();
             timePicker.show(getSupportFragmentManager(), "time picker");
         });
-
         // meetingRoomSpinner
         final Spinner roomSpinner = findViewById(R.id.spinner_room_action);
         RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(getApplicationContext(), R.layout.room_dropdown_item, roomList);
         roomSpinnerAdapter.setDropDownViewResource(R.layout.room_dropdown_item);
         roomSpinner.setAdapter(roomSpinnerAdapter);
         checkIfValidateButtonCanActivated();
+
         // meetingDurationSpinner
         final Spinner durationSpinner = findViewById(R.id.spinner_meeting_duration);
         DurationSpinnerAdapter durationSpinnerAdapter = new DurationSpinnerAdapter(getApplicationContext(), R.layout.time_dropdown_item, durationList);
@@ -209,6 +208,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
         checkIfValidateButtonCanActivated();
     }
 
+    // init chip group and text input field
     private void onMeetingGuestSet() {
         mMeetingEmailInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -230,7 +230,7 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
             }
         });
 
-        // input text email chip builder & test
+        // input text email chip builder custom & test
         mMeetingEmailInput.setOnEditorActionListener((v, actionId, event) -> {
             String EmailInputText = v.getText().toString();
             EmailInputText = EmailInputText.replace(" ", "").replace(";", "").replace(",", "");
@@ -246,13 +246,14 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 chip.setOnCloseIconClickListener(v1 -> {
                     mMeetingGuestChipGroup.removeView(v1);
                     mMeetingGuestList.remove(chip.getText().toString());
-                    CreateMeetingActivity.this.checkIfValidateButtonCanActivated();
+                    checkIfValidateButtonCanActivated();
                 });
                 mMeetingGuestChipGroup.addView(chip);
             } else {
                 Snackbar.make(v, R.string.Erreur_email_message, Snackbar.LENGTH_LONG)
                         .setBackgroundTint(getResources().getColor(R.color.lamzone_500))
                         .setTextColor(getResources().getColor(R.color.primaryTextColor))
+                        .setAnchorView(mMeetingValidateButton)
                         .show();
             }
             checkIfValidateButtonCanActivated();
@@ -274,7 +275,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
 
     /**
      * Navigate.
-     *
      * @param context the context
      */
     public static void navigate(Context context) {

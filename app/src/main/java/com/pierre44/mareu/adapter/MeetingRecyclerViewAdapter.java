@@ -1,15 +1,12 @@
 package com.pierre44.mareu.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.events.DeleteMeetingEvent;
+import com.pierre44.mareu.events.GetMeetingDetail;
 import com.pierre44.mareu.model.Meeting;
 import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.MeetingRepository;
-import com.pierre44.mareu.ui_meeting_list.MeetingDetailsActivity;
 import com.pierre44.mareu.utils.UtilsTools;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,8 +26,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static org.greenrobot.eventbus.EventBus.TAG;
 
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.MeetingViewHolder> {
 
@@ -75,30 +70,17 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             meetingGuestsList.append(meeting.getMeetingGuests().get(i).getEmail()).append(" - ");
         }
         holder.meetingGuestsList.setText(meetingGuestsList.toString());
-        holder.meetingGuestsList.setNestedScrollingEnabled(true);
-        holder.meetingGuestsList.setSelected(true);
-        //meeting Delete & detail event
-        holder.meetingDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position)));
+        //meeting Delete event
+        holder.meetingDeleteButton.setOnClickListener(v -> {
+            EventBus.getDefault().post(new DeleteMeetingEvent(mMeetings.get(position)));
+            notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+            if (mFilterType != UtilsTools.FilterType.NONE) {
+                mMeetings.remove(position);
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position)));
-                Log.d(TAG, "onClick : opening dialogFragment ");
-                //TODO : doesn't work to open dialogFragment
-                Toast.makeText(v.getContext(), "click on meeting item", Toast.LENGTH_SHORT).show();
-                Intent goToMeetingDetailActivity = new Intent(holder.itemView.getContext(), MeetingDetailsActivity.class);
-                goToMeetingDetailActivity.putExtra(CLICKED_MEETING, mMeetings.get(position));
-                holder.itemView.getContext().startActivity(goToMeetingDetailActivity);
-                //MeetingDetailsActivity dialog = new MeetingDetailsActivity();
-                //dialog.show();
-            }
-        });
+        //meeting detail event
+        holder.itemView.setOnClickListener(v -> EventBus.getDefault().post(new GetMeetingDetail(mMeetings.get(position))));
     }
 
     @Override
@@ -121,6 +103,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 break;
         }
         notifyDataSetChanged();
+    }
+
+    public void refreshList(List<Meeting> meetings) {
+        mMeetings = meetings;
+        this.refreshList();
     }
 
     public void refreshList() {
@@ -151,7 +138,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
         public MeetingViewHolder(View itemView) {
             super(itemView);
-                ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -17,7 +17,7 @@ public class UtilsToolsTest {
 
     @Test
     public void formatDateWithSuccess() {
-        mCalendar.set(2021,1,1);
+        mCalendar.set(2021,2 - 1 ,1);
         assertEquals("01/02/2021", UtilsTools.dateFormat(mCalendar, UtilsTools.DATE_FORMAT_DD_MM_YYYY));
     }
 

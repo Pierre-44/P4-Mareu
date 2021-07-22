@@ -23,7 +23,7 @@
     <string name="lamzone_logo">lamzone logo</string>
     <string name="filter_by_room">Filtrer par salle</string>
     <string name="filter_by_date">Filtrer par date</string>
-    <string name="filter_menu">filtre</string>
+    <string name="filter_menu">Menu filtre</string>
     <string name="spinner_meeting_icon">meeting_icon</string>
     <string name="spinner_meeting_room">Konkqueror</string>
     <string name="email">email</string>
@@ -39,7 +39,7 @@
     <string name="room_dialog_title">Selection de la salle</string>
     <string name="google">Google</string>
     <string name="meeting_detail">Détails de la réunion</string>
-    <string name="detail_validate">Fermer</string>
+    <string name="detail_back">Retour</string>
     <string name="detail_sujet">Sujet :</string>
     <string name="detail_salle">Salle :</string>
     <string name="detail_date">Date :</string>

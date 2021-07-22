@@ -1,20 +1,18 @@
 package com.pierre44.mareu.ui_meeting_list;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.model.Meeting;
-import com.pierre44.mareu.repository.MeetingRepository;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -23,13 +21,10 @@ import static com.pierre44.mareu.adapter.MeetingRecyclerViewAdapter.CLICKED_MEET
 /**
  * Created by pmeignen on 05/07/2021.
  */
-@SuppressLint("NonConstantResourceId")
+
 public class MeetingDetailsActivity extends AppCompatActivity {
 
-    private MeetingRepository mMeetingRepository;
     Meeting meeting;
-    private Toolbar mToolbar;
-    private static final String TAG = "MeetingDetailsActivity";
 
     // widget binding
     @BindView(R.id.detail_meeting_topic)
@@ -49,10 +44,13 @@ public class MeetingDetailsActivity extends AppCompatActivity {
     @BindView(R.id.detail_action_close)
     Button mActionClose;
 
+    // On create
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting_details_activity);
+        //ButterKnife.bind(this);
+
         meeting = (Meeting) getIntent().getSerializableExtra(CLICKED_MEETING);
         //widgets connection
         mDetailMeetingTopic = findViewById(R.id.detail_meeting_topic);
@@ -63,7 +61,14 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         mDetailMeetingDuration = findViewById(R.id.detail_meeting_duration);
         mRecyclerView = findViewById(R.id.detail_guests_email_recyclerview);
         mActionClose = findViewById(R.id.detail_action_close);
+        mActionClose.setOnClickListener(v -> backToListMeetingActivity());
         initView();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void backToListMeetingActivity() {
+        Intent intent = new Intent(this, ListMeetingActivity.class);
+        startActivity(intent);
     }
 
     // Initialisation of view
@@ -72,7 +77,6 @@ public class MeetingDetailsActivity extends AppCompatActivity {
         mDetailMeetingDate.setText(meeting.getMeetingStartDate());
         mDetailMeetingTime.setText(meeting.getMeetingStartTime());
         mDetailMeetingRoom.setText(meeting.getMeetingRoom().getRoomName());
-        //TODO : setImageDrawable correct ?
         mDetailMeetingRoomImage.setImageDrawable(getDrawable(meeting.getMeetingRoom().getRoomImage()));
         mDetailMeetingDuration.setText(meeting.getMeetingDuration());
         mRecyclerView.setAdapter(mRecyclerView.getAdapter());

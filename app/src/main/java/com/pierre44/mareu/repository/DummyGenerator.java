@@ -31,47 +31,30 @@ public abstract class DummyGenerator {
             new User(1, "Pierre", "pierre@lamzone.com"),
             new User(2, "Deborah", "deborah@lamzone.com"),
             new User(3, "Agathe", "agathe@lamzone.com")
-            //new User(4, "Marc", "marc@lamzone.com"),
-            //new User(5, "Aurélie", "aurelie@lamzone.com"),
-            //new User(6, "Hélène", "helene@lamzone.com"),
-            //new User(7, "Guillaume", "guillaume@lamzone.com"),
-            //new User(8, "Marine", "marie@lamzone.com"),
-            //new User(9, "Jordan", "jordan@lamzone.com"),
-            //new User(10, "Julie", "julie@lamzone.com")
     );
 
     public static List<Meeting> DUMMY_MEETINGS_LIST = Arrays.asList(
-            new Meeting(1, "Réunion 1", "01/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(0), DUMMY_USERS_LIST),
-            new Meeting(2, "Réunion 2", "01/06/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(1), DUMMY_USERS_LIST),
-            new Meeting(3, "Réunion 3 ", "01/06/2021", " 14:00", "00H45", DUMMY_ROOMS_LIST.get(2), DUMMY_USERS_LIST),
-            new Meeting(4, "Réunion 4 et une longue description", "02/06/2021", " 16:00", "01H00", DUMMY_ROOMS_LIST.get(3), DUMMY_USERS_LIST),
-            new Meeting(5, "Réunion 5 et une longue description", "02/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(4), DUMMY_USERS_LIST),
-            new Meeting(6, "Réunion 6 et une longue description", "02/06/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(5), DUMMY_USERS_LIST),
-            new Meeting(7, "Réunion 7", "02/06/2021", "14:00", "00H45", DUMMY_ROOMS_LIST.get(6), DUMMY_USERS_LIST),
-            new Meeting(8, "Réunion 8", "03/06/2021", "16:00", "01H00", DUMMY_ROOMS_LIST.get(7), DUMMY_USERS_LIST),
-            new Meeting(9, "Réunion 9", "03/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(8), DUMMY_USERS_LIST),
-            new Meeting(10, "Réunion 10 et une longue description", "03/06/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(9), DUMMY_USERS_LIST)
-            //new Meeting(11, "Réunion 11 et une longue description", "04/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(0), DUMMY_USERS_LIST),
-            //new Meeting(12, "Réunion 12 et une longue description", "04/06/2021", "08:00", "01H30", DUMMY_ROOMS_LIST.get(1), DUMMY_USERS_LIST),
-            //new Meeting(13, "Réunion 13", "04/06/2021", "08:00", "01H00", DUMMY_ROOMS_LIST.get(2), DUMMY_USERS_LIST),
-            //new Meeting(14, "Réunion 14", "07/06/2021", "10:00", "02H00", DUMMY_ROOMS_LIST.get(3), DUMMY_USERS_LIST),
-            //new Meeting(15, "Réunion 15", "07/06/2021", "14:00", "00H45", DUMMY_ROOMS_LIST.get(4), DUMMY_USERS_LIST),
-            //new Meeting(16, "Réunion 16 et une longue description", "07/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(5), DUMMY_USERS_LIST),
-            //new Meeting(17, "Réunion 17 et une longue description", "08/06/2021", "10:00", "01H30", DUMMY_ROOMS_LIST.get(6), DUMMY_USERS_LIST),
-            //new Meeting(18, "Réunion 18 et une longue description", "08/06/2021", "16:00", "00H45", DUMMY_ROOMS_LIST.get(7), DUMMY_USERS_LIST),
-            //new Meeting(19, "Réunion 19", "09/06/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(8), DUMMY_USERS_LIST),
-            //new Meeting(20, "Réunion 20", "09/06/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(9), DUMMY_USERS_LIST)
+            new Meeting(1, "Réunion 1", "01/07/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(0), DUMMY_USERS_LIST),
+            new Meeting(2, "Réunion 2", "01/07/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(1), DUMMY_USERS_LIST),
+            new Meeting(3, "Réunion 3 ", "01/07/2021", " 14:00", "00H45", DUMMY_ROOMS_LIST.get(2), DUMMY_USERS_LIST),
+            new Meeting(4, "Réunion 4 et une longue description", "02/07/2021", " 08:00", "01H00", DUMMY_ROOMS_LIST.get(3), DUMMY_USERS_LIST),
+            new Meeting(5, "Réunion 5 et une longue description", "02/07/2021", "10:00", "00H45", DUMMY_ROOMS_LIST.get(4), DUMMY_USERS_LIST),
+            new Meeting(6, "Réunion 6 et une longue description", "02/07/2021", "16:00", "01H00", DUMMY_ROOMS_LIST.get(5), DUMMY_USERS_LIST),
+            new Meeting(7, "Réunion 7", "05/07/2021", "14:00", "00H45", DUMMY_ROOMS_LIST.get(6), DUMMY_USERS_LIST),
+            new Meeting(8, "Réunion 8", "05/07/2021", "16:00", "01H00", DUMMY_ROOMS_LIST.get(7), DUMMY_USERS_LIST),
+            new Meeting(9, "Réunion 9", "06/07/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(8), DUMMY_USERS_LIST),
+            new Meeting(10, "Réunion 10 et une longue description", "06/07/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(9), DUMMY_USERS_LIST)
     );
 
-    static List<Meeting> generateMeetings() {
+    public static List<Meeting> generateMeetings() {
         return new ArrayList<>(DUMMY_MEETINGS_LIST);
     }
 
-    static List<Room> generateRooms() {
+    public static List<Room> generateRooms() {
         return new ArrayList<>(DUMMY_ROOMS_LIST);
     }
 
-    static List<User> generateUsers() {
+    public static List<User> generateUsers() {
         return new ArrayList<>(DUMMY_USERS_LIST);
     }
 }

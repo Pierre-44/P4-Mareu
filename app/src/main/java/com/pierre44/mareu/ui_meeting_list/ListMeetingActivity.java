@@ -2,6 +2,7 @@ package com.pierre44.mareu.ui_meeting_list;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,8 +27,8 @@ import com.pierre44.mareu.di.DI;
 import com.pierre44.mareu.events.DeleteMeetingEvent;
 import com.pierre44.mareu.events.FilterByDateEvent;
 import com.pierre44.mareu.events.FilterByRoomEvent;
+import com.pierre44.mareu.events.GetMeetingDetail;
 import com.pierre44.mareu.model.Meeting;
-import com.pierre44.mareu.model.Room;
 import com.pierre44.mareu.repository.DummyGenerator;
 import com.pierre44.mareu.repository.MeetingRepository;
 import com.pierre44.mareu.utils.UtilsTools;
@@ -41,6 +42,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.pierre44.mareu.adapter.MeetingRecyclerViewAdapter.CLICKED_MEETING;
+
 @SuppressLint("NonConstantResourceId")
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -49,7 +53,6 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     private MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     private static  List<Meeting> mMeetings;
     private RoomDialogFragment filterByRoomFragment;
-    private List<Room> mRooms;
     private MeetingRecyclerViewAdapter meetingRecyclerViewAdapter;
     Toolbar toolbar;
 
@@ -69,14 +72,14 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
 
         this.configureToolbar();
         setSupportActionBar(mToolbar);
-
+        //widgets connection
         mMeetingRepository = DI.getMeetingRepository();
         mRecyclerView = findViewById(R.id.recycler_view_meeting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMeetings = mMeetingRepository.getMeetings();
         meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetings);
         mRecyclerView.setAdapter(meetingRecyclerViewAdapter);
-        meetingRecyclerViewAdapter.notifyDataSetChanged();
+
     }
 
     // Configure Toolbar
@@ -100,7 +103,6 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     // onResume to register subscriber
     @Override
     public void onResume() {
-        //meetingRecyclerViewAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
         super.onResume();
         meetingRecyclerViewAdapter.refreshList();
@@ -140,11 +142,18 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
         CreateMeetingActivity.navigate(this);
     }
 
+    // Subscribe get MeetingDetails
+    @Subscribe
+    public void getMeetingDetails(GetMeetingDetail meetingDetail){
+        Intent goToMeetingDetailActivity = new Intent(this, MeetingDetailsActivity.class);
+        goToMeetingDetailActivity.putExtra(CLICKED_MEETING, meetingDetail.meeting);
+        startActivity(goToMeetingDetailActivity);
+    }
+    
     // Subscribe delete meeting event and notifyDataSetChanged
     @Subscribe
     public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
         mMeetings.remove(deleteMeetingEvent.meeting);
-        meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     // Subscribe filter by room
@@ -169,7 +178,7 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
                 .show();
     }
 
-    // Set and format date to send
+    // Set and format date to send to filter
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -183,13 +192,12 @@ public class ListMeetingActivity extends AppCompatActivity implements DatePicker
     @VisibleForTesting
     public void doMeetingListEmpty() {
         mMeetingRepository.getMeetings().clear();
-        meetingRecyclerViewAdapter.notifyDataSetChanged();
+        meetingRecyclerViewAdapter.refreshList();
     }
 
     @VisibleForTesting
     public void addAllTestMeetings() {
-        mMeetingRepository.getMeetings().addAll(DummyGenerator.DUMMY_MEETINGS_LIST);
-        meetingRecyclerViewAdapter.notifyDataSetChanged();
+        mMeetingRepository.getMeetings().addAll(DummyGenerator.generateMeetings());
+        meetingRecyclerViewAdapter.refreshList(mMeetings);
     }
-
 }
