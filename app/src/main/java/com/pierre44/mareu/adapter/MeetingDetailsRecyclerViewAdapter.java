@@ -12,42 +12,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pierre44.mareu.R;
 import com.pierre44.mareu.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by pmeignen on 05/07/2021.
- */
 public class MeetingDetailsRecyclerViewAdapter extends RecyclerView.Adapter<MeetingDetailsRecyclerViewAdapter.GuestsViewHolder>  {
 
-    private final List<User> mGuest;
+    private final List<User> mUsers;
     ViewGroup parents;
 
-    public MeetingDetailsRecyclerViewAdapter(List<User> items) {
-        this.mGuest = new ArrayList<>();
+    public MeetingDetailsRecyclerViewAdapter(List<User> userList) {
+        this.mUsers = userList ;
     }
 
     @NonNull
     @Override
     public GuestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_detail_guest_fragment, parent, false);
+                .inflate(R.layout.item_detail_guest, parent, false);
         return new GuestsViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(GuestsViewHolder holder, int position) {
-        User user = mGuest.get(position);
+        User user = mUsers.get(position);
         holder.mGuestDetail.setText(user.getEmail());
     }
 
     @Override
     public int getItemCount() {
-        if (mGuest != null)
-            return mGuest.size();
+        if (mUsers != null)
+            return mUsers.size();
         else return 0;
     }
 

@@ -38,7 +38,6 @@ import com.pierre44.mareu.repository.MeetingRepository;
 import com.pierre44.mareu.utils.UtilsTools;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -46,31 +45,60 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 @SuppressLint("NonConstantResourceId")
 public class CreateMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private MeetingRepository mMeetingRepository;
     private int idChip;
-    //private Room selectedRoom;
-    //private Meeting meeting;
     private List<User> mMeetingGuestList;
+    /**
+     * The Room list.
+     */
     final List<Room> roomList = DummyGenerator.DUMMY_ROOMS_LIST;
-    final List<String> durationList = Arrays.asList("", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
+    /**
+     * The Duration list.
+     */
+    final List<String> durationList = DummyGenerator.DURATION_LIST;
 
+    /**
+     * The M meeting topic input.
+     */
     @BindView(R.id.text_input_meeting_topic)
     TextInputEditText mMeetingTopicInput;
+    /**
+     * The M meeting date picker.
+     */
     @BindView(R.id.date_picker_actions)
     Button mMeetingDatePicker;
+    /**
+     * The M meeting time picker.
+     */
     @BindView(R.id.time_picker_action)
     Button mMeetingTimePicker;
+    /**
+     * The M meeting room spinner.
+     */
     @BindView(R.id.spinner_room_action)
     Spinner mMeetingRoomSpinner;
+    /**
+     * The M meeting duration spinner.
+     */
     @BindView(R.id.spinner_meeting_duration)
     Spinner mMeetingDurationSpinner;
+    /**
+     * The M meeting email input.
+     */
     @BindView(R.id.text_input_email)
     TextInputEditText mMeetingEmailInput;
-    @BindView(R.id.detail_guests_email_recyclerview)
+    /**
+     * The M meeting guest chip group.
+     */
+    @BindView(R.id.guests_email_chip_group)
     ChipGroup mMeetingGuestChipGroup;
+    /**
+     * The M meeting validate button.
+     */
     @BindView(R.id.create_meeting_validate_button)
     MaterialButton mMeetingValidateButton;
 
@@ -90,18 +118,15 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
 
         mMeetingRepository = DI.getMeetingRepository();
         mMeetingGuestList = new ArrayList<>();
-        ////Calendar calendar = Calendar.getInstance();
         initPickersAndSpinners();
         onMeetingGuestSet();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                finish();
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -133,7 +158,6 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
                 break;
         }
     }
-
 
     /**
      * Create meeting methode.
@@ -274,7 +298,8 @@ public class CreateMeetingActivity extends AppCompatActivity implements DatePick
     }
 
     /**
-     * Navigate.
+     * Navigate methode
+     *
      * @param context the context
      */
     public static void navigate(Context context) {

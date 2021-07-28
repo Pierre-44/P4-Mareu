@@ -203,7 +203,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/spinner_room_action" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/detail_guests_email_recyclerview"
+                        android:id="@+id/guests_email_chip_group"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/cardview_default_margin"

@@ -8,9 +8,6 @@ import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by pmeignen on 20/07/2021.
- */
 public class UtilsToolsTest {
 
     final Calendar mCalendar = Calendar.getInstance();

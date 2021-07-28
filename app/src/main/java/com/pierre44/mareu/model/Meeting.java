@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by pmeignen on 18/05/2021.
- */
 public class Meeting implements Serializable {
 
 

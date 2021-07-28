@@ -11,9 +11,6 @@ import com.pierre44.mareu.repository.MeetingRepository;
 
 import java.util.List;
 
-/**
- * Created by pmeignen on 28/06/2021.
- */
 public class FilterByDatePickerFragment extends DialogFragment {
 
     private MeetingRepository mMeetingRepository;

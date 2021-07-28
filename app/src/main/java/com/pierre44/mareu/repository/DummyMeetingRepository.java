@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by pmeignen on 19/05/2021.
- */
 public class DummyMeetingRepository implements MeetingRepository {
 
     /**
@@ -19,7 +16,7 @@ public class DummyMeetingRepository implements MeetingRepository {
     long newId;
 
     private final List<Meeting> mMeetings = DummyGenerator.generateMeetings();
-    private final List<User> mUsers = DummyGenerator.generateUsers();
+    private final List<User> mGuests = DummyGenerator.generateUsers();
     private final List<Room> mRooms = DummyGenerator.generateRooms();
 
     @Override
@@ -62,6 +59,9 @@ public class DummyMeetingRepository implements MeetingRepository {
         return null;
     }
 
+
+
+
     @Override
     public List<Meeting> filterByRoom(Room room) {
         List<Meeting> filteredMeetings = new ArrayList<>();
@@ -100,6 +100,11 @@ public class DummyMeetingRepository implements MeetingRepository {
         Room meetingRoom = meeting.getMeetingRoom();
         List<User> guestsList = meeting.getMeetingGuests();
         this.organizeMeeting(meetingId, meetingTopic, meetingStartDate, meetingStartTime, meetingDuration, meetingRoom, guestsList);
+    }
+
+    @Override
+    public List<User> getGuests(String meeting) {
+        return mGuests;
     }
 
     /**

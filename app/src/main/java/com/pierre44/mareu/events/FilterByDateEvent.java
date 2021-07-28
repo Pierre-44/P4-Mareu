@@ -2,9 +2,6 @@ package com.pierre44.mareu.events;
 
 import androidx.annotation.NonNull;
 
-/**
- * Created by pmeignen on 10/06/2021.
- */
 public class FilterByDateEvent {
 
     public String date;

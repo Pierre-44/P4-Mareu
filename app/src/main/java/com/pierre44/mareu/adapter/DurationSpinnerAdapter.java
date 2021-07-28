@@ -14,9 +14,6 @@ import com.pierre44.mareu.R;
 
 import java.util.List;
 
-/**
- * Created by pmeignen on 04/06/2021.
- */
 public class DurationSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
 
     Context context;
@@ -25,7 +22,7 @@ public class DurationSpinnerAdapter extends ArrayAdapter<String> implements Spin
     private View mConvertView;
     private ViewGroup mParent;
 
-    // Constructor accepts Context and a list of rooms
+    // Constructor accepts Context and a list of duration
     public DurationSpinnerAdapter(Context context, int time_dropdown_item, List<String> durations) {
         super(context, R.layout.create_meeting_activity, durations);
         this.context = context;
@@ -33,7 +30,7 @@ public class DurationSpinnerAdapter extends ArrayAdapter<String> implements Spin
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         mPosition = position;
         mConvertView = convertView;
         mParent = parent;

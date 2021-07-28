@@ -19,9 +19,6 @@ import com.pierre44.mareu.model.Room;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by pmeignen on 04/06/2021.
- */
 public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAdapter {
 
     Context context;
@@ -32,9 +29,6 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
         super(context, R.layout.create_meeting_activity, rooms);
         this.context = context;
         this.mRooms = new ArrayList<>();
-        // TODO : ajouter un item vide en debut de liste ?
-        // init list after empty item
-        // this.mRooms.add(new Room(0, "", "null"));
         this.mRooms.addAll(rooms);
     }
 
@@ -69,7 +63,4 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> implements SpinnerAda
 
         return row;
     }
-
-
-
 }

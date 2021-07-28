@@ -3,15 +3,11 @@ package com.pierre44.mareu.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Created by pmeignen on 10/06/2021.
- */
 public class User implements Serializable {
 
     private long userId;
     private String name;
     private String email;
-
 
     /**
      * Instantiates a new User.
@@ -25,7 +21,6 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
     }
-
 
     /**
      * Gets id.

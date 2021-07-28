@@ -20,9 +20,6 @@ import com.pierre44.mareu.repository.MeetingRepository;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by pmeignen on 28/06/2021.
- */
 public class RoomDialogFragment extends DialogFragment {
 
     private FilterByRoomAdapter mFilterByRoomAdapter;

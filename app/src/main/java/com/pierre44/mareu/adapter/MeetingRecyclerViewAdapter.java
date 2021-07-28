@@ -36,7 +36,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     private UtilsTools.FilterType mFilterType = UtilsTools.FilterType.NONE;
     private Object mFilterValue;
 
-
     public MeetingRecyclerViewAdapter(List<Meeting> meetings) {
         mMeetings = meetings;
     }
@@ -116,6 +115,10 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     public Room getRoom(int position) {
         return mRooms.get(position);
+    }
+
+    public void setRooms(List<Room> rooms) {
+        mRooms = rooms;
     }
 
     @SuppressLint("NonConstantResourceId")

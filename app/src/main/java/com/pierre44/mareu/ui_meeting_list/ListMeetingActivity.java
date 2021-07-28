@@ -48,7 +48,6 @@ import static com.pierre44.mareu.adapter.MeetingRecyclerViewAdapter.CLICKED_MEET
 @SuppressLint("NonConstantResourceId")
 public class ListMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-
     private static final String SELECT_ROOM = "SELECT_ROOM";
     private MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     private static  List<Meeting> mMeetings;

@@ -12,14 +12,27 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- THEME TO ENABLE TITLE ON CUSTOM DIALOG -->
+        <item name="android:dialogTheme">@style/CustomDialog</item>
     </style>
     <!-- TOOLBAR THEME -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar  -->
         <item name="android:textColorPrimary">@color/grey</item>
     </style>
+    <!-- THEME TO ENABLE TITLE ON CUSTOM DIALOG -->
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+    </style>
+    <!-- THEME NoActionBar-->
     <style name="Theme.Mareu.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Autoscroll style-->
+    <style name="autoscroll">
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:scrollHorizontally">true</item>
     </style>
 </resources>

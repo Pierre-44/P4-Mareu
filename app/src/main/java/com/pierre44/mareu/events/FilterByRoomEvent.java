@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.pierre44.mareu.model.Room;
 
-/**
- * Created by pmeignen on 10/06/2021.
- */
 public class FilterByRoomEvent {
 
     public Room room;

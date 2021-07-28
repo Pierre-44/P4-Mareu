@@ -3,9 +3,6 @@ package com.pierre44.mareu.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Created by pmeignen on 18/05/2021.
- */
 public class Room implements Serializable {
 
     private long roomId;
@@ -26,7 +23,6 @@ public class Room implements Serializable {
         this.roomImage = roomImage;
     }
 
-
     /**
      * Gets room id.
      *
@@ -35,7 +31,6 @@ public class Room implements Serializable {
     public long getRoomId() {
         return roomId;
     }
-
 
     /**
      * Sets room id.
@@ -81,10 +76,6 @@ public class Room implements Serializable {
     public void setRoomImage(int roomImage) {
         this.roomImage = roomImage;
     }
-
-
-
-
 
     @Override
     public boolean equals(Object o) {

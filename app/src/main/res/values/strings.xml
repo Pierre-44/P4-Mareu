@@ -46,6 +46,7 @@
     <string name="detail_heure">Heure :</string>
     <string name="detail_duree">Durée :</string>
     <string name="detail_meeting_room_image">meeting_room_image</string>
+    <string name="guest_email_com">guest_email_com</string>
 
 
 </resources>

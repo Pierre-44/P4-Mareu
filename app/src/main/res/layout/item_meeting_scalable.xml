@@ -55,15 +55,14 @@
 
             <TextView
                 android:id="@+id/meeting_topic"
-                android:layout_width="0dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:ellipsize="marquee"
-                android:gravity="center_horizontal"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="false"
                 android:singleLine="true"
+                android:scrollHorizontally="true"
                 android:text="@string/meeting_topic"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -98,15 +97,14 @@
 
             <TextView
                 android:id="@+id/guests_email_group"
-                android:layout_width="0dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:ellipsize="marquee"
-
                 android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:scrollHorizontally="true"
                 android:text="@string/default_email_list"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

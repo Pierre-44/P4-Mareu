@@ -11,9 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by pmeignen on 01/07/2021.
- */
+
 public abstract class UtilsTools {
 
     public static final MeetingRepository mMeetingRepository = DI.getMeetingRepository();

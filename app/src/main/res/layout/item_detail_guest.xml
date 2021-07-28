@@ -9,19 +9,19 @@
         android:id="@+id/guest_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="guest_email.com"
-        android:textSize="16sp"
+        android:text="@string/guest_email_com"
+        android:textSize="@dimen/text_size_normal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp" />
+        android:layout_marginVertical="@dimen/margin_default" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="@dimen/margin_default"
         android:layout_marginHorizontal="@dimen/margin_default"
         app:layout_constraintTop_toBottomOf="@id/guest_detail"
         app:layout_constraintLeft_toLeftOf="parent"

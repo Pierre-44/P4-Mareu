@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by pmeignen on 19/05/21.
- */
 public abstract class DummyGenerator {
 
     public static List<Room> DUMMY_ROOMS_LIST = Arrays.asList(
@@ -43,8 +40,12 @@ public abstract class DummyGenerator {
             new Meeting(7, "Réunion 7", "05/07/2021", "14:00", "00H45", DUMMY_ROOMS_LIST.get(6), DUMMY_USERS_LIST),
             new Meeting(8, "Réunion 8", "05/07/2021", "16:00", "01H00", DUMMY_ROOMS_LIST.get(7), DUMMY_USERS_LIST),
             new Meeting(9, "Réunion 9", "06/07/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(8), DUMMY_USERS_LIST),
-            new Meeting(10, "Réunion 10 et une longue description", "06/07/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(9), DUMMY_USERS_LIST)
+            new Meeting(10, "Réunion 10 et une longue description", "06/07/2021", "10:00", "01H00", DUMMY_ROOMS_LIST.get(9), DUMMY_USERS_LIST),
+            new Meeting(11, "Réunion 11 et une longue description", "07/07/2021", "08:00", "00H45", DUMMY_ROOMS_LIST.get(0), DUMMY_USERS_LIST),
+            new Meeting(12, "Réunion 12 et une longue description", "07/07/2021", "10:00", "01H30", DUMMY_ROOMS_LIST.get(1), DUMMY_USERS_LIST)
     );
+
+    public static final List<String> DURATION_LIST = Arrays.asList("", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
 
     public static List<Meeting> generateMeetings() {
         return new ArrayList<>(DUMMY_MEETINGS_LIST);

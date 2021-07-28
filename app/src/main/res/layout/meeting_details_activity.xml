@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/meeting_details_activity"
@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context=".ui_meeting_list.ListMeetingActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/detail_title"
@@ -35,22 +39,22 @@
 
         <TextView
             android:id="@+id/detail_meeting_topic"
-            android:layout_width="0dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="24dp"
             android:ellipsize="marquee"
-            android:freezesText="true"
-            android:gravity="center_horizontal"
             android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="false"
+            android:singleLine="true"
+            android:scrollHorizontally="true"
             android:text="@string/meeting_topic"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintBottom_toBottomOf="@+id/info_detail_meeting_topic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toTopOf="@+id/info_detail_meeting_topic" />
+            app:layout_constraintTop_toTopOf="@+id/info_detail_meeting_topic"
+            />
 
         <TextView
             android:id="@+id/info_detail_meeting_room"
@@ -81,8 +85,8 @@
 
         <ImageView
             android:id="@+id/detail_meeting_room_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:contentDescription="@string/detail_meeting_room_image"
             app:layout_constraintBottom_toBottomOf="@+id/detail_meeting_room"
@@ -170,29 +174,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/guest_list"
             android:textSize="@dimen/text_size_normal"
-            app:layout_constraintBottom_toTopOf="@+id/detail_guests_email_recyclerview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/detail_guests_recycler_view_email_list"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/info_detail_meeting_duration" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detail_guests_email_recyclerview"
+            android:id="@+id/detail_guests_recycler_view_email_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
-            android:textSize="@dimen/text_size_normal"
+            android:textSize="@dimen/text_size_medium"
             app:chipSpacingVertical="2dp"
             app:layout_constraintBottom_toTopOf="@+id/detail_action_close"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_list_title" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_list_title"
+            tools:listitem="@layout/item_detail_guest" />
 
         <Button
             android:id="@+id/detail_action_close"
@@ -207,13 +212,14 @@
             android:textColor="@color/lamzone_200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_guests_email_recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_guests_recycler_view_email_list" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.33" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

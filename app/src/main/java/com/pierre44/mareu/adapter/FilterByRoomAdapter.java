@@ -1,5 +1,6 @@
 package com.pierre44.mareu.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by pmeignen on 28/06/2021.
- */
 public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapter.FilterRoomViewHolder> {
 
     private final List<Room> mRooms;
@@ -39,9 +37,10 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
     public FilterRoomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.room_dropdown_item, parent, false);
-        return new FilterByRoomAdapter.FilterRoomViewHolder(view);
+        return new FilterRoomViewHolder(view);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(FilterRoomViewHolder holder, int position) {
         Room room = mRooms.get(position);
@@ -62,7 +61,9 @@ public class FilterByRoomAdapter extends RecyclerView.Adapter<FilterByRoomAdapte
     }
 
     // Inner ViewHolder class
-    public class FilterRoomViewHolder extends RecyclerView.ViewHolder {
+    @SuppressLint("NonConstantResourceId")
+    public static class FilterRoomViewHolder extends RecyclerView.ViewHolder {
+
 
         @BindView(R.id.meeting_room_text)
         TextView mRoom;
